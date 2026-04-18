@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEIOF IMPEX | The Earth Is One Family - Indian Spices & Agro Products Exporter</title>
+    <meta name="description" content="TEIOF IMPEX exports India's finest spices, pulses, and agro products worldwide. ISO certified, direct from farms, family values.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --ocean-blue: #1E6BB8;
+            --ocean-dark: #165A9C;
+            --golden-harvest: #D4A843;
+            --golden-light: #E5B95A;
+            --spice-green: #5B8C5A;
+            --earth-brown: #8B6F47;
+            --pure-white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --text-dark: #2C3E50;
+            --text-gray: #6C757D;
+            --light-gray: #F5F7FA;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--golden-harvest) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 0L12 8L20 10L12 12L10 20L8 12L0 10L8 8L10 0Z' fill='rgba(255,255,255,0.2)'/%3E%3C/svg%3E");
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--ocean-blue);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.7rem;
+            color: var(--golden-harvest);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--golden-harvest);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--ocean-blue);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--golden-harvest);
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: var(--golden-light);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 168, 67, 0.4);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--ocean-blue);
+            transition: var(--transition);
+            border-radius: 3px;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--light-gray) 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(30, 107, 184, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(30, 107, 184, 0.1);
+            color: var(--ocean-blue);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--ocean-blue);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--ocean-blue);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(212, 168, 67, 0.3);
+            z-index: -1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--golden-harvest);
+            color: white;
+            box-shadow: 0 5px 20px rgba(212, 168, 67, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--golden-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 168, 67, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--ocean-blue);
+            color: white;
+            box-shadow: 0 5px 20px rgba(30, 107, 184, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ocean-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(30, 107, 184, 0.4);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ocean-blue);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .globe-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .globe-container img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 60px rgba(30, 107, 184, 0.2));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .floating-spice {
+            position: absolute;
+            animation: floatSpice 8s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.15));
+        }
+
+        .floating-spice:nth-child(1) {
+            top: 10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .floating-spice:nth-child(2) {
+            top: 20%;
+            right: -5%;
+            animation-delay: 2s;
+        }
+
+        .floating-spice:nth-child(3) {
+            bottom: 15%;
+            left: -5%;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatSpice {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(15px) rotate(-5deg); }
+        }
+
+        /* Trust Badges */
+        .trust-section {
+            background: var(--pure-white);
+            padding: 3rem 2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .trust-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-gray);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .trust-item:hover {
+            color: var(--ocean-blue);
+            transform: translateY(-2px);
+        }
+
+        .trust-item i {
+            font-size: 1.5rem;
+            color: var(--golden-harvest);
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--pure-white);
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--golden-harvest);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(212, 168, 67, 0.4);
+        }
+
+        .experience-badge .years {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1;
+        }
+
+        .experience-badge .text {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .about-content h2 span {
+            color: var(--ocean-blue);
+        }
+
+        .about-content > p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .features-list li i {
+            color: var(--spice-green);
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--off-white) 0%, var(--light-gray) 100%);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(212, 168, 67, 0.15);
+            color: var(--golden-harvest);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--golden-harvest);
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-header h2 span {
+            color: var(--ocean-blue);
+        }
+
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        .products-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--ocean-blue), var(--golden-harvest));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--off-white) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image i {
+            font-size: 5rem;
+            color: var(--golden-harvest);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--spice-green);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .product-content p {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-items {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-items li {
+            padding: 0.4rem 0;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-items li::before {
+            content: '✓';
+            color: var(--spice-green);
+            font-weight: 700;
+        }
+
+        .product-link {
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .product-link:hover {
+            color: var(--golden-harvest);
+            gap: 0.75rem;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 6rem 2rem;
+            background: var(--pure-white);
+        }
+
+        .why-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .why-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            background: var(--off-white);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--golden-harvest) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .why-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(30, 107, 184, 0.2);
+        }
+
+        .why-card:hover::before {
+            opacity: 1;
+        }
+
+        .why-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .why-card:hover h3,
+        .why-card:hover p,
+        .why-card:hover .why-icon {
+            color: white;
+        }
+
+        .why-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--ocean-blue);
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .why-card:hover .why-icon {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .why-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .why-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        /* Global Reach */
+        .global-reach {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-dark) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .global-reach::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .global-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .global-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .global-content > p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .global-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .global-stat {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
+        }
+
+        .global-stat:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .global-stat .number {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--golden-harvest);
+        }
+
+        .global-stat .label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .global-map {
+            position: relative;
+        }
+
+        .map-placeholder {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .map-placeholder i {
+            font-size: 8rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .map-placeholder p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Certifications */
+        .certifications {
+            padding: 4rem 2rem;
+            background: var(--off-white);
+        }
+
+        .cert-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cert-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cert-badge {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            font-size: 3rem;
+            color: var(--ocean-blue);
+        }
+
+        .cert-badge:hover {
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--golden-harvest) 0%, var(--golden-light) 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--golden-harvest);
+            font-size: 1.1rem;
+            padding: 1.2rem 3rem;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo-text {
+            color: white;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--golden-harvest);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--golden-harvest);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul li a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--golden-harvest);
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-contact i {
+            color: var(--golden-harvest);
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container,
+            .about-container,
+            .global-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .products-grid,
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .global-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-header h2,
+            .about-content h2,
+            .global-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--light-gray);
+            border-top-color: var(--ocean-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            color: var(--ocean-blue);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">TEIOF IMPEX</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">T</div>
+                <div>
+                    <div class="logo-text">TEIOF IMPEX</div>
+                    <div class="logo-tagline">The Earth Is One Family</div>
+                </div>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#global">Global Reach</a></li>
+                <li><a href="#contact" class="nav-cta">Request Quote</a></li>
+            </ul>
+
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-check-circle"></i> ISO 22000:2018 Certified Exporter
+                </div>
+                <h1>
+                    The Earth Is<br>
+                    <span>One Family</span>
+                </h1>
+                <p class="hero-subtitle">
+                    India's Finest Spices, Pulses & Agro Products — Exported with Pride, Delivered with Care. Connecting traditional agricultural excellence with global markets.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Explore Products
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-file-invoice"></i> Request Quote
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Countries Served</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Global Partners</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Quality Guarantee</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="globe-container">
+                    <img src="https://images.unsplash.com/photo-1614730341194-75c60740a073?w=800&h=800&fit=crop" alt="TEIOF IMPEX Global Reach">
+                    <div class="floating-spice">
+                        <i class="fas fa-pepper-hot" style="font-size: 3rem; color: #C73E1D;"></i>
+                    </div>
+                    <div class="floating-spice">
+                        <i class="fas fa-wheat-awn" style="font-size: 3rem; color: var(--golden-harvest);"></i>
+                    </div>
+                    <div class="floating-spice">
+                        <i class="fas fa-seedling" style="font-size: 3rem; color: var(--spice-green);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <div class="trust-item">
+                <i class="fas fa-certificate"></i>
+                <span>ISO 22000:2018 Certified</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>FSSAI Approved</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-leaf"></i>
+                <span>Organic Options Available</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-globe"></i>
+                <span>Export Inspection Passed</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-clock"></i>
+                <span>On-Time Delivery Guarantee</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-image fade-in">
+                <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&h=600&fit=crop" alt="Indian Spices">
+                <div class="experience-badge">
+                    <span class="years">10+</span>
+                    <span class="text">Years of<br>Excellence</span>
+                </div>
+            </div>
+            
+            <div class="about-content slide-in-right">
+                <h2>Connecting Indian <span>Agricultural Heritage</span> with Global Markets</h2>
+                <p>
+                    TEIOF IMPEX was founded on a simple belief: The Earth Is One Family. We work directly with farmers who've perfected their craft over generations, applying rigorous international quality standards without losing the soul of traditional methods.
+                </p>
+                <ul class="features-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Direct sourcing from traditional farms across India
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Rigorous quality testing at every stage
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Transparent communication from farm to port
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Reliable delivery with secure packaging
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Family-first approach to every partnership
+                    </li>
+                </ul>
+                <a href="#contact" class="btn btn-secondary">
+                    Learn More About Us <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header fade-in">
+            <div class="section-tag">Our Products</div>
+            <h2>India's Finest <span>Natural Goods</span></h2>
+            <p>From hand-selected spices to premium pulses and agro products — every item carries the authenticity of Indian soil and generations of agricultural wisdom.</p>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card scale-in">
+                <div class="product-image">
+                    <i class="fas fa-mortar-pestle"></i>
+                    <span class="product-badge">Bestseller</span>
+                </div>
+                <div class="product-content">
+                    <h3>Premium Spices</h3>
+                    <p>Hand-ground and whole spices with exceptional aroma, color, and potency. Sourced from India's most renowned spice regions.</p>
+                    <ul class="product-items">
+                        <li>Turmeric (3-5% Curcumin)</li>
+                        <li>Cumin Seeds & Powder</li>
+                        <li>Coriander Seeds & Powder</li>
+                        <li>Cardamom, Cinnamon, Cloves</li>
+                        <li>Chili Powder & Whole Chilies</li>
+                    </ul>
+                    <a href="#" class="product-link">
+                        View Full Catalog <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="product-card scale-in">
+                <div class="product-image">
+                    <i class="fas fa-seedling"></i>
+                    <span class="product-badge">High Demand</span>
+                </div>
+                <div class="product-content">
+                    <h3>Quality Pulses</h3>
+                    <p>Nutrient-rich lentils, chickpeas, and beans — carefully sorted, consistently sized, and packed with protein for global markets.</p>
+                    <ul class="product-items">
+                        <li>Red Lentils (Masoor Dal)</li>
+                        <li>Chickpeas (Kabuli & Desi)</li>
+                        <li>Pigeon Peas (Toor/Arhar Dal)</li>
+                        <li>Green Mung Beans</li>
+                        <li>Black Gram (Urad Dal)</li>
+                    </ul>
+                    <a href="#" class="product-link">
+                        View Full Catalog <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="product-card scale-in">
+                <div class="product-image">
+                    <i class="fas fa-wheat-awn"></i>
+                    <span class="product-badge">Organic</span>
+                </div>
+                <div class="product-content">
+                    <h3>Agro Products</h3>
+                    <p>Traditional grains, seeds, and dried herbs from Indian soil — combining time-honored varieties with modern quality control.</p>
+                    <ul class="product-items">
+                        <li>Basmati & Non-Basmati Rice</li>
+                        <li>Sesame Seeds</li>
+                        <li>Fenugreek Seeds</li>
+                        <li>Dried Herbs & Leaves</li>
+                        <li>Custom Blends Available</li>
+                    </ul>
+                    <a href="#" class="product-link">
+                        View Full Catalog <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us" id="why-us">
+        <div class="why-container">
+            <div class="section-header fade-in">
+                <div class="section-tag">Why TEIOF</div>
+                <h2>The <span>TEIOF Difference</span></h2>
+                <p>We don't just export products — we build lasting partnerships rooted in quality, trust, and family values.</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-card fade-in">
+                    <div class="why-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Direct Sourcing</h3>
+                    <p>We work directly with farmers, ensuring fair prices and authentic quality without middlemen markups.</p>
+                </div>
+
+                <div class="why-card fade-in">
+                    <div class="why-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Rigorous Testing</h3>
+                    <p>Every batch tested for purity, potency, and international compliance before it leaves our facility.</p>
+                </div>
+
+                <div class="why-card fade-in">
+                    <div class="why-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Reliable Delivery</h3>
+                    <p>On-time, every time, with secure packaging that preserves freshness throughout the journey.</p>
+                </div>
+
+                <div class="why-card fade-in">
+                    <div class="why-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Family Values</h3>
+                    <p>Every partner is treated like family — with transparency, care, and long-term commitment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Reach -->
+    <section class="global-reach" id="global">
+        <div class="global-container">
+            <div class="global-content fade-in">
+                <h2>Serving the World, Rooted in India</h2>
+                <p>From our base in India, we've built a global network spanning continents — connecting traditional farmers with international markets while maintaining the highest quality standards.</p>
+                
+                <div class="global-stats">
+                    <div class="global-stat">
+                        <span class="number">50+</span>
+                        <span class="label">Countries Worldwide</span>
+                    </div>
+                    <div class="global-stat">
+                        <span class="number">500+</span>
+                        <span class="label">Trusted Partners</span>
+                    </div>
+                    <div class="global-stat">
+                        <span class="number">10K+</span>
+                        <span class="label">Tonnes Exported</span>
+                    </div>
+                    <div class="global-stat">
+                        <span class="number">98%</span>
+                        <span class="label">Client Retention</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="global-map slide-in-right">
+                <div class="map-placeholder">
+                    <i class="fas fa-globe-asia"></i>
+                    <p>Global Distribution Network<br>Europe • Middle East • Asia • Americas • Africa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="certifications">
+        <div class="cert-container">
+            <div class="section-tag fade-in">Certifications</div>
+            <h2 class="fade-in" style="margin-top: 1rem; font-size: 2rem;">Trusted Quality Standards</h2>
+            <div class="cert-grid fade-in">
+                <div class="cert-badge">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="cert-badge">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="cert-badge">
+                    <i class="fas fa-check-double"></i>
+                </div>
+                <div class="cert-badge">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="cert-badge">
+                    <i class="fas fa-globe"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="cta-container fade-in">
+            <h2>Ready to Source India's Finest?</h2>
+            <p>Join 500+ global partners who trust TEIOF IMPEX for authentic spices, pulses, and agro products. Let's discuss your requirements.</p>
+            <a href="mailto:info@teiofimpex.com" class="btn">
+                <i class="fas fa-envelope"></i> Get Your Custom Quote
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="logo-text">TEIOF IMPEX</span>
+                <p>The Earth Is One Family. We connect global markets with India's authentic spices, pulses, and agro products — delivering quality that honors tradition and treats every customer as family.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#why-us">Why Choose Us</a></li>
+                    <li><a href="#global">Global Reach</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Spices</a></li>
+                    <li><a href="#">Pulses</a></li>
+                    <li><a href="#">Agro Products</a></li>
+                    <li><a href="#">Organic Range</a></li>
+                    <li><a href="#">Custom Blends</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Hebbal, Bangalore, India</p>
+                <p><i class="fas fa-envelope"></i> info@teiofimpex.com</p>
+                <p><i class="fas fa-phone"></i> +91 XXXXX XXXXX</p>
+                <p><i class="fas fa-globe"></i> www.teiofimpex.com</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 TEIOF IMPEX. All Rights Reserved. | The Earth Is One Family</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach((el) => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Counter Animation for Stats
+        const animateCounter = (el) => {
+            const target = parseInt(el.textContent);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    el.textContent = target + (el.textContent.includes('+') ? '+' : '');
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current) + (el.textContent.includes('+') ? '+' : '');
+                }
+            }, 16);
+        };
+
+        // Observe stat numbers
+        const statObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    animateCounter(entry.target);
+                    entry.target.classList.add('counted');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-number, .number').forEach((el) => {
+            statObserver.observe(el);
+        });
+
+        // Parallax Effect for Hero Globe
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const globe = document.querySelector('.globe-container img');
+            if (globe) {
+                globe.style.transform = `translateY(${scrolled * 0.1}px) rotate(${scrolled * 0.02}deg)`;
+            }
+        });
+
+        // Mobile Menu Toggle (Basic)
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.background = 'white';
+            navLinks.style.padding = '2rem';
+            navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+        });
+
+        // Add hover effect to product cards
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        console.log('TEIOF IMPEX - The Earth Is One Family');
+        console.log('Website loaded successfully!');
+    </script>
+</body>
+</html>
