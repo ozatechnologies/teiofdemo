@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEIOF International</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+:root {
+  --cream: #F8F6F3;
+  --white: #FFFFFF;
+  --charcoal: #2C2C2C;
+  --slate: #7A8B9A;
+  --slate-lt: #A8B8C8;
+  --beige: #D4C4B4;
+  --blue: #2472C8;
+  --navy: #1a3a6b;
+  --dark: #0a0f1a;
+  --body: #555550;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); overflow-x: hidden; cursor: none; }
+
+/* ─── CUSTOM CURSOR ─── */
+#cur { position: fixed; width: 8px; height: 8px; background: var(--blue); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.08s; }
+#cur2 { position: fixed; width: 28px; height: 28px; border: 1px solid rgba(36,114,200,0.4); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all 0.25s ease; }
+
+/* ─── LOADER ─── */
+#loader {
+  position: fixed; inset: 0; z-index: 9000;
+  background: var(--dark);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+#loader-bg-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(36,114,200,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(36,114,200,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.loader-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 32px;
+}
+
+/* SVG Logo */
+#loaderLogo {
+  width: 260px;
+  height: 180px;
+  overflow: visible;
+}
+
+.l-bar { fill: var(--blue); opacity: 0; }
+.l-stem { fill: var(--blue); opacity: 0; }
+.l-sw { fill: none; stroke: #1a3a6b; stroke-linecap: round; stroke-dasharray: 400; stroke-dashoffset: 400; opacity: 0; }
+#l-globe { opacity: 0; }
+.l-gc { fill: none; stroke: var(--blue); stroke-width: 1.8; }
+.l-gl { fill: none; stroke: #2472C8; stroke-width: 1.2; stroke-dasharray: 160; stroke-dashoffset: 160; }
+
+.loader-brand {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0;
+}
+.loader-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 400;
+  letter-spacing: 0.4em;
+  color: #e8edf5;
+  text-transform: uppercase;
+}
+.loader-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.35em;
+  color: var(--slate); text-transform: uppercase;
+}
+
+.loader-progress {
+  width: 180px; height: 1px;
+  background: rgba(255,255,255,0.06);
+  position: relative; overflow: hidden;
+}
+.loader-bar-fill {
+  position: absolute; top: 0; left: 0;
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+}
+
+/* Wipe transition */
+#wipe {
+  position: fixed; inset: 0; z-index: 8999;
+  background: var(--cream);
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+/* ─── WEBSITE ─── */
+#website { opacity: 0; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 4rem;
+  background: rgba(248,246,243,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212,196,180,0.3);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600; font-size: 1.05rem;
+  letter-spacing: 0.12em; color: var(--charcoal);
+}
+.nav-logo svg { width: 28px; height: 20px; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.82rem; color: var(--body); text-decoration: none;
+  font-weight: 400; letter-spacing: 0.04em;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 1px; background: var(--slate);
+  transition: width 0.3s;
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem; letter-spacing: 0.1em;
+  border: 1px solid var(--slate); color: var(--slate);
+  background: transparent; padding: 0.55rem 1.3rem;
+  cursor: none; text-transform: uppercase;
+  transition: all 0.25s;
+}
+.nav-cta:hover { background: var(--slate); color: white; }
+
+/* HERO */
+.hero {
+  height: 100vh; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end;
+  padding: 0 5rem 8rem;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #1a2e1a 0%, #2d4a1e 40%, #4a6830 100%);
+}
+.hero-bg-pattern {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(36,114,200,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212,196,180,0.06) 0%, transparent 40%);
+}
+.hero-img-placeholder {
+  position: absolute; inset: 0;
+  background: 
+    linear-gradient(180deg, rgba(10,15,26,0.2) 0%, rgba(10,15,26,0.6) 100%),
+    repeating-linear-gradient(
+      45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px,
+      transparent 1px, transparent 60px
+    );
+}
+
+/* Animated grain overlay */
+.hero-grain {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4; pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+.hero-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem; letter-spacing: 0.22em;
+  color: var(--slate-lt); text-transform: uppercase;
+  margin-bottom: 1.8rem;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0;
+}
+.hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--slate-lt); display: block; }
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-style: italic;
+  font-size: clamp(3.5rem, 6vw, 6rem);
+  line-height: 1.0; color: white;
+  margin-bottom: 2rem;
+}
+.hero-h1 .line { overflow: hidden; display: block; }
+.hero-h1 .inner { display: block; transform: translateY(110%); }
+.hero-p {
+  font-size: 0.95rem; color: rgba(255,255,255,0.55);
+  max-width: 400px; line-height: 1.85;
+  font-weight: 300; opacity: 0;
+  margin-bottom: 2.5rem;
+}
+.hero-btns { display: flex; gap: 1.2rem; opacity: 0; }
+.btn-light {
+  background: var(--cream); color: var(--charcoal);
+  border: none; padding: 0.9rem 2rem;
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+  cursor: none; transition: transform 0.2s, background 0.2s;
+}
+.btn-light:hover { background: white; transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent; color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0.9rem 2rem;
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+  cursor: none; transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.6); color: white; }
+
+/* TICKER */
+.ticker {
+  background: var(--cream);
+  border-top: 1px solid var(--beige);
+  border-bottom: 1px solid var(--beige);
+  padding: 0.9rem 0; overflow: hidden;
+}
+.ticker-track {
+  display: flex; gap: 3.5rem;
+  animation: ticker 22s linear infinite; white-space: nowrap;
+}
+.ticker-item {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.18em; color: var(--slate);
+  text-transform: uppercase; flex-shrink: 0;
+}
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ABOUT SPLIT */
+.about {
+  display: grid; grid-template-columns: 55% 45%;
+  min-height: 85vh;
+}
+.about-left {
+  background: var(--cream); padding: 7rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.section-tag {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.18em; color: var(--slate);
+  text-transform: uppercase; margin-bottom: 2rem;
+  opacity: 0;
+}
+.s2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400; font-size: clamp(2.2rem,3.5vw,3.2rem);
+  line-height: 1.1; color: var(--charcoal);
+  margin-bottom: 1.5rem;
+}
+.s2 .sline { overflow: hidden; display: block; }
+.s2 .sin { display: block; transform: translateY(110%); }
+.s2 em { font-style: italic; color: var(--slate); }
+.divline { width: 0; height: 1px; background: var(--beige); margin: 1.5rem 0; }
+.body-p {
+  font-size: 0.93rem; color: var(--body); line-height: 1.85;
+  font-weight: 300; max-width: 460px; opacity: 0;
+}
+.stats-row {
+  display: flex; gap: 0; margin-top: 2.5rem;
+  border-top: 1px solid var(--beige);
+  opacity: 0;
+}
+.stat-item {
+  padding: 1.5rem 2rem 0.5rem 0; margin-right: 2rem;
+  border-right: 1px solid var(--beige);
+}
+.stat-item:last-child { border-right: none; }
+.stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem; color: var(--charcoal); display: block; line-height: 1;
+}
+.stat-n em { color: var(--blue); font-style: normal; }
+.stat-l {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  color: var(--slate); letter-spacing: 0.1em; text-transform: uppercase;
+  margin-top: 4px; display: block;
+}
+.about-right {
+  background: var(--charcoal);
+  position: relative; overflow: hidden;
+}
+.about-img {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #2d3a2d 0%, #1a2a1a 60%, #0f1a0f 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.about-img-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem; font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,0.06); text-align: center; line-height: 1.2;
+  user-select: none;
+}
+
+/* PRODUCTS */
+.products { background: var(--cream); padding: 7rem 5rem; }
+.products-header { text-align: center; margin-bottom: 4rem; }
+.products-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--beige);
+}
+.prod-card {
+  background: var(--white); padding: 2.5rem 2rem;
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(24px);
+  transition: box-shadow 0.3s;
+  cursor: none;
+}
+.prod-card:hover { box-shadow: 0 12px 40px rgba(44,44,44,0.08); }
+.prod-icon {
+  width: 48px; height: 48px; margin-bottom: 1.5rem;
+  background: var(--cream); display: flex; align-items: center;
+  justify-content: center; font-size: 1.5rem;
+}
+.prod-num {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  color: var(--beige); letter-spacing: 0.1em;
+  margin-bottom: 0.8rem; display: block;
+}
+.prod-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-style: italic; color: var(--charcoal);
+  margin-bottom: 0.5rem;
+}
+.prod-sub { font-size: 0.78rem; color: var(--slate); line-height: 1.6; }
+.prod-arrow {
+  position: absolute; bottom: 1.5rem; right: 2rem;
+  font-size: 1rem; color: var(--beige);
+  transition: color 0.2s, transform 0.2s;
+}
+.prod-card:hover .prod-arrow { color: var(--slate); transform: translateX(4px); }
+
+/* DARK BAR */
+.dark-bar {
+  background: #1A2530; padding: 5rem;
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; position: relative;
+}
+.dark-bar::before {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    90deg, rgba(36,114,200,0.03) 0px, rgba(36,114,200,0.03) 1px,
+    transparent 1px, transparent 80px
+  );
+}
+.dark-stat { padding: 1rem 2rem; position: relative; z-index: 1; opacity: 0; }
+.dark-stat + .dark-stat { border-left: 1px solid rgba(168,184,200,0.12); }
+.dark-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem; color: white; line-height: 1; display: block;
+}
+.dark-n em { color: var(--slate-lt); font-style: normal; font-size: 2.5rem; }
+.dark-l {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  color: var(--slate); letter-spacing: 0.14em; text-transform: uppercase;
+  margin-top: 0.5rem; display: block;
+}
+
+/* CTA SECTION */
+.cta-sec {
+  height: 60vh; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.cta-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #0a1a0a 0%, #1a3010 50%, #0a1208 100%);
+}
+.cta-content {
+  position: relative; z-index: 2; text-align: center;
+  opacity: 0; transform: translateY(30px);
+}
+.cta-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem,4.5vw,4.2rem);
+  font-style: italic; color: white; line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.cta-sub {
+  font-size: 0.9rem; color: rgba(255,255,255,0.45);
+  margin-bottom: 2.5rem; font-weight: 300;
+}
+.cta-btns { display: flex; gap: 1rem; justify-content: center; }
+
+/* FOOTER */
+footer {
+  background: #0f1a0f; padding: 4rem 5rem 2rem;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 3rem;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; letter-spacing: 0.2em; color: white;
+  margin-bottom: 1rem;
+}
+.footer-tagline {
+  font-family: 'DM Sans', sans-serif; font-size: 0.82rem;
+  color: rgba(255,255,255,0.3); line-height: 1.7; font-weight: 300;
+}
+.footer-col-title {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  letter-spacing: 0.18em; color: var(--slate);
+  text-transform: uppercase; margin-bottom: 1.2rem; display: block;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.footer-links a {
+  font-size: 0.82rem; color: rgba(255,255,255,0.35);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy {
+  font-family: 'DM Mono', monospace; font-size: 0.58rem;
+  color: rgba(255,255,255,0.18); letter-spacing: 0.08em;
+}
+
+/* WA float */
+.wa-float {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+  width: 48px; height: 48px; background: #25D366;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: none; opacity: 0;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+}
+.wa-float svg { width: 22px; height: 22px; }
+.wa-ring {
+  position: absolute; inset: -4px;
+  border: 1px solid rgba(37,211,102,0.4); border-radius: 50%;
+  animation: waPulse 2s ease infinite;
+}
+@keyframes waPulse {
+  0%,100%{transform:scale(1);opacity:0.5}
+  50%{transform:scale(1.2);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- ═══ LOADER ═══ -->
+<div id="loader">
+  <div id="loader-bg-lines"></div>
+  <div class="loader-content">
+
+    <svg id="loaderLogo" viewBox="0 0 260 170" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+      <defs>
+        <filter id="lg">
+          <feGaussianBlur stdDeviation="6" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <radialGradient id="gg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#2472C8" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#2472C8" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Glow behind T -->
+      <ellipse id="lGlowBg" cx="105" cy="80" rx="55" ry="60"
+        fill="#2472C8" opacity="0" filter="url(#lg)"/>
+
+      <!-- T crossbar -->
+      <rect class="l-bar" id="lBar" x="60" y="14" width="90" height="24" rx="2"/>
+      <!-- T stem -->
+      <rect class="l-stem" id="lStem" x="92" y="14" width="26" height="100" rx="2"/>
+
+      <!-- 3 swoosh paths -->
+      <path class="l-sw" id="lsw1" d="M 10,90 Q 55,78 100,88 Q 140,96 175,86 Q 200,78 218,82"
+        stroke="#1d4a8a" stroke-width="3"/>
+      <path class="l-sw" id="lsw2" d="M 4,100 Q 52,89 98,99 Q 138,108 175,98 Q 200,90 218,94"
+        stroke="#162e58" stroke-width="2.2"/>
+      <path class="l-sw" id="lsw3" d="M 14,110 Q 58,100 102,109 Q 140,118 175,109 Q 200,101 218,105"
+        stroke="#0f2040" stroke-width="1.5"/>
+
+      <!-- Globe -->
+      <g id="l-globe" transform="translate(218,92)">
+        <circle id="lGlobeGlow" cx="0" cy="0" r="32" fill="url(#gg)" opacity="0"/>
+        <circle class="l-gc" cx="0" cy="0" r="24" stroke="#2472C8" stroke-width="2"/>
+        <ellipse class="l-gl" cx="0" cy="0" rx="24" ry="9"/>
+        <ellipse class="l-gl" cx="0" cy="0" rx="24" ry="18"/>
+        <line class="l-gl" x1="0" y1="-24" x2="0" y2="24"/>
+        <line class="l-gl" x1="-24" y1="0" x2="24" y2="0"/>
+        <!-- Orbit dot -->
+        <circle id="lOrbit" cx="0" cy="-24" r="4" fill="#2472C8" opacity="0"/>
+      </g>
+    </svg>
+
+    <div class="loader-brand" id="loaderBrand">
+      <span class="loader-name">TEIOF</span>
+      <span class="loader-sub">International · Est. 2003</span>
+    </div>
+
+    <div class="loader-progress">
+      <div class="loader-bar-fill" id="loaderFill"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Wipe panel -->
+<div id="wipe"></div>
+
+<!-- ═══ WEBSITE ═══ -->
+<div id="website">
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <div class="nav-logo">
+      <svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="28" height="6" rx="1" fill="#2472C8"/>
+        <rect x="9" y="0" width="10" height="20" rx="1" fill="#2472C8"/>
+        <path d="M 0,13 Q 8,10 14,12 Q 20,14 26,12" stroke="#1a3a6b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <circle cx="26" cy="12" r="3" fill="none" stroke="#2472C8" stroke-width="1.2"/>
+      </svg>
+      TEIOF INTERNATIONAL
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Export</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Quality</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button class="nav-cta">Request a Quote</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-img-placeholder"></div>
+    <div class="hero-grain"></div>
+
+    <div class="hero-content">
+      <p class="hero-tag" id="htag">Global Agri Commodity Exporters · Est. 2003</p>
+      <h1 class="hero-h1">
+        <span class="line"><span class="inner" id="hl1">Where the Earth</span></span>
+        <span class="line"><span class="inner" id="hl2">Meets the</span></span>
+        <span class="line"><span class="inner" id="hl3">World.</span></span>
+      </h1>
+      <p class="hero-p" id="hp">
+        Premium agri-commodities sourced from Indian farms, delivered to 12+ countries across the Gulf, Europe, and Southeast Asia.
+      </p>
+      <div class="hero-btns" id="hbtns">
+        <button class="btn-light">Explore Products</button>
+        <button class="btn-ghost">Download Catalogue →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Spices ·</span>
+      <span class="ticker-item">Pulses ·</span>
+      <span class="ticker-item">Dry Fruits ·</span>
+      <span class="ticker-item">Rice ·</span>
+      <span class="ticker-item">Cereals ·</span>
+      <span class="ticker-item">Oilseeds ·</span>
+      <span class="ticker-item">Turmeric ·</span>
+      <span class="ticker-item">Cumin ·</span>
+      <span class="ticker-item">Coriander ·</span>
+      <span class="ticker-item">Sesame ·</span>
+      <span class="ticker-item">Spices ·</span>
+      <span class="ticker-item">Pulses ·</span>
+      <span class="ticker-item">Dry Fruits ·</span>
+      <span class="ticker-item">Rice ·</span>
+      <span class="ticker-item">Cereals ·</span>
+      <span class="ticker-item">Oilseeds ·</span>
+      <span class="ticker-item">Turmeric ·</span>
+      <span class="ticker-item">Cumin ·</span>
+      <span class="ticker-item">Coriander ·</span>
+      <span class="ticker-item">Sesame ·</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-left">
+      <p class="section-tag" id="at">// About Teiof International</p>
+      <h2 class="s2">
+        <span class="sline"><span class="sin" id="ah1">A trusted bridge</span></span>
+        <span class="sline"><span class="sin" id="ah2">between <em>Indian farms</em></span></span>
+        <span class="sline"><span class="sin" id="ah3">and global tables.</span></span>
+      </h2>
+      <div class="divline" id="adl"></div>
+      <p class="body-p" id="abp">
+        Since 2003, TEIOF International has been sourcing and supplying premium agri-commodities directly from farms and cooperatives across India — ensuring quality at origin, not just at destination. We serve importers, distributors, and food processors across 12+ countries.
+      </p>
+      <div class="stats-row" id="astats">
+        <div class="stat-item">
+          <span class="stat-n">25<em>+</em></span>
+          <span class="stat-l">Years Active</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-n">12<em>+</em></span>
+          <span class="stat-l">Countries</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-n">200<em>+</em></span>
+          <span class="stat-l">Products</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="about-img">
+        <div class="about-img-text">Farm<br>to<br>Port.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products">
+    <div class="products-header">
+      <p class="section-tag" style="display:block;text-align:center" id="pt">// Our Commodities</p>
+      <h2 class="s2" style="font-size:clamp(2rem,3.5vw,3rem);text-align:center;margin-top:0.5rem">
+        <span class="sline" style="display:block"><span class="sin" id="ph1">What We Trade.</span></span>
+      </h2>
+    </div>
+    <div class="products-grid" id="pgrid">
+      <div class="prod-card">
+        <div class="prod-icon">🌶</div>
+        <span class="prod-num">01</span>
+        <h3 class="prod-title">Spices</h3>
+        <p class="prod-sub">Turmeric · Cumin · Coriander · Chilli · Pepper</p>
+        <span class="prod-arrow">→</span>
+      </div>
+      <div class="prod-card">
+        <div class="prod-icon">🌾</div>
+        <span class="prod-num">02</span>
+        <h3 class="prod-title">Pulses</h3>
+        <p class="prod-sub">Chana Dal · Toor Dal · Masoor · Urad · Moong</p>
+        <span class="prod-arrow">→</span>
+      </div>
+      <div class="prod-card">
+        <div class="prod-icon">🫘</div>
+        <span class="prod-num">03</span>
+        <h3 class="prod-title">Dry Fruits</h3>
+        <p class="prod-sub">Cashews · Raisins · Walnuts · Almonds · Dates</p>
+        <span class="prod-arrow">→</span>
+      </div>
+      <div class="prod-card">
+        <div class="prod-icon">🌿</div>
+        <span class="prod-num">04</span>
+        <h3 class="prod-title">Oilseeds</h3>
+        <p class="prod-sub">Sesame · Mustard · Groundnut · Flaxseed</p>
+        <span class="prod-arrow">→</span>
+      </div>
+      <div class="prod-card">
+        <div class="prod-icon">🍚</div>
+        <span class="prod-num">05</span>
+        <h3 class="prod-title">Rice & Cereals</h3>
+        <p class="prod-sub">Basmati · Non-Basmati · Wheat · Corn · Sorghum</p>
+        <span class="prod-arrow">→</span>
+      </div>
+      <div class="prod-card">
+        <div class="prod-icon">🌱</div>
+        <span class="prod-num">06</span>
+        <h3 class="prod-title">Herbs & Seeds</h3>
+        <p class="prod-sub">Fenugreek · Ajwain · Fennel · Dill · Psyllium</p>
+        <span class="prod-arrow">→</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DARK STATS -->
+  <div class="dark-bar" id="dbar">
+    <div class="dark-stat">
+      <span class="dark-n">25<em>+</em></span>
+      <span class="dark-l">Years in Business</span>
+    </div>
+    <div class="dark-stat">
+      <span class="dark-n">12<em>+</em></span>
+      <span class="dark-l">Countries Served</span>
+    </div>
+    <div class="dark-stat">
+      <span class="dark-n">200<em>+</em></span>
+      <span class="dark-l">Product Varieties</span>
+    </div>
+    <div class="dark-stat">
+      <span class="dark-n">50K<em>+</em></span>
+      <span class="dark-l">MT Exported Annually</span>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-sec">
+    <div class="cta-bg"></div>
+    <div class="cta-content" id="ctac">
+      <h2 class="cta-h">Ready to source from India?</h2>
+      <p class="cta-sub">Our team responds within 24 hours. Let's talk.</p>
+      <div class="cta-btns">
+        <button class="btn-light">Request a Quote</button>
+        <button class="btn-ghost">Download Product List →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">TEIOF INTERNATIONAL</div>
+        <p class="footer-tagline">From Indian farms to global tables.<br>Quality at origin. Delivery on time.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Navigation</span>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Export Process</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Products</span>
+        <ul class="footer-links">
+          <li><a href="#">Spices</a></li>
+          <li><a href="#">Pulses</a></li>
+          <li><a href="#">Dry Fruits</a></li>
+          <li><a href="#">Rice & Cereals</a></li>
+          <li><a href="#">Oilseeds</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="footer-col-title">Contact</span>
+        <ul class="footer-links">
+          <li><a href="#">info@teiof.com</a></li>
+          <li><a href="#">+91 98765 43210</a></li>
+          <li><a href="#">India · UAE · UK</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 TEIOF International. All rights reserved.</span>
+      <span class="footer-copy">Crafted by Aprameya Co.</span>
+    </div>
+  </footer>
+
+  <!-- WhatsApp float -->
+  <div class="wa-float" id="waFloat">
+    <div class="wa-ring"></div>
+    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.112 1.522 5.836L.054 23.5l5.822-1.527A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.516-5.228-1.414l-.374-.222-3.882 1.019 1.033-3.788-.243-.387A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+  </div>
+
+</div><!-- end #website -->
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// ── CURSOR
+const c1 = document.getElementById('cur');
+const c2 = document.getElementById('cur2');
+document.addEventListener('mousemove', e => {
+  gsap.to(c1, { x: e.clientX, y: e.clientY, duration: 0.08 });
+  gsap.to(c2, { x: e.clientX, y: e.clientY, duration: 0.3, ease: 'power2.out' });
+});
+document.querySelectorAll('button, a, .prod-card').forEach(el => {
+  el.addEventListener('mouseenter', () => gsap.to(c2, { scale: 1.8, duration: 0.2 }));
+  el.addEventListener('mouseleave', () => gsap.to(c2, { scale: 1, duration: 0.2 }));
+});
+
+// ── ORBIT DOT
+let orbitAngle = -Math.PI / 2;
+let orbitOn = false;
+const lOrbit = document.getElementById('lOrbit');
+function runOrbit() {
+  if (!orbitOn) return;
+  orbitAngle += 0.03;
+  lOrbit.setAttribute('cx', Math.cos(orbitAngle) * 24);
+  lOrbit.setAttribute('cy', Math.sin(orbitAngle) * 24 * 0.36);
+  requestAnimationFrame(runOrbit);
+}
+
+// ── LOADER ANIMATION
+function runLoader() {
+  const tl = gsap.timeline({
+    onComplete: () => revealWebsite()
+  });
+
+  // Progress bar fill
+  tl.to('#loaderFill', { width: '100%', duration: 3.2, ease: 'power1.inOut' }, 0)
+
+  // Glow bg
+  .to('#lGlowBg', { opacity: 0.2, duration: 0.7, ease: 'power2.out' }, 0.2)
+
+  // T crossbar drops
+  .fromTo('#lBar',
+    { opacity: 0, y: -25, scaleX: 0.3, transformOrigin: 'center' },
+    { opacity: 1, y: 0, scaleX: 1, duration: 0.6, ease: 'back.out(1.8)' },
+    0.4
+  )
+
+  // T stem grows
+  .fromTo('#lStem',
+    { opacity: 0, scaleY: 0, transformOrigin: 'top center' },
+    { opacity: 1, scaleY: 1, duration: 0.5, ease: 'power3.out' },
+    0.85
+  )
+
+  // Glow fades
+  .to('#lGlowBg', { opacity: 0, duration: 0.6 }, 1.1)
+
+  // Swooshes draw
+  .to('#lsw1', { opacity: 1, strokeDashoffset: 0, duration: 0.65, ease: 'power2.inOut' }, 1.0)
+  .to('#lsw2', { opacity: 1, strokeDashoffset: 0, duration: 0.75, ease: 'power2.inOut' }, 1.12)
+  .to('#lsw3', { opacity: 1, strokeDashoffset: 0, duration: 0.85, ease: 'power2.inOut' }, 1.24)
+
+  // Globe bounces in
+  .fromTo('#l-globe',
+    { opacity: 0, scale: 0.1, transformOrigin: '218px 92px' },
+    { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2.2)' },
+    1.55
+  )
+
+  // Globe glow
+  .to('#lGlobeGlow', { opacity: 1, duration: 0.4 }, 1.8)
+  .to('#lGlobeGlow', { opacity: 0.2, duration: 0.4 }, 2.2)
+
+  // Globe lines draw
+  .to('.l-gl', {
+    strokeDashoffset: 0, duration: 0.5, stagger: 0.08, ease: 'power2.inOut'
+  }, 1.75)
+
+  // Orbit
+  .to('#lOrbit', { opacity: 1, duration: 0.2 }, 2.1)
+  .add(() => { orbitOn = true; runOrbit(); }, 2.1)
+
+  // Brand name
+  .to('#loaderBrand', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 2.0)
+
+  // Brief pause then exit
+  .to({}, { duration: 0.5 }, 3.0);
+}
+
+// ── REVEAL WEBSITE
+function revealWebsite() {
+  orbitOn = false;
+
+  // Wipe up — cream panel covers loader
+  gsap.timeline()
+    .to('#wipe', {
+      scaleY: 1, transformOrigin: 'bottom',
+      duration: 0.65, ease: 'power4.inOut'
+    })
+    .to('#loader', { opacity: 0, duration: 0.2 }, '-=0.2')
+    .add(() => {
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('website').style.opacity = '1';
+    })
+    // Wipe retracts upward
+    .to('#wipe', {
+      scaleY: 0, transformOrigin: 'top',
+      duration: 0.7, ease: 'power4.inOut'
+    }, '+=0.05')
+    .add(() => heroEntrance(), '-=0.4');
+}
+
+// ── HERO ENTRANCE
+function heroEntrance() {
+  const tl = gsap.timeline();
+
+  tl.to('#mainNav', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0)
+    .to('#htag', { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, 0.15)
+    .to('#hl1', { yPercent: 0, duration: 0.9, ease: 'power4.out' }, 0.25)
+    .to('#hl2', { yPercent: 0, duration: 0.9, ease: 'power4.out' }, 0.36)
+    .to('#hl3', { yPercent: 0, duration: 0.9, ease: 'power4.out' }, 0.47)
+    .to('#hp', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.65)
+    .to('#hbtns', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 0.8)
+    .to('#waFloat', { opacity: 1, duration: 0.5 }, 1.2);
+}
+
+// ── SCROLL REVEALS
+function setupScrollAnimations() {
+
+  // About section
+  ScrollTrigger.create({ trigger: '.about', start: 'top 80%', onEnter: () => {
+    gsap.to('#at', { opacity: 1, y: 0, duration: 0.5 });
+    gsap.to('#ah1', { yPercent: 0, duration: 0.8, ease: 'power4.out', delay: 0.1 });
+    gsap.to('#ah2', { yPercent: 0, duration: 0.8, ease: 'power4.out', delay: 0.2 });
+    gsap.to('#ah3', { yPercent: 0, duration: 0.8, ease: 'power4.out', delay: 0.3 });
+    gsap.to('#adl', { width: '40px', duration: 0.8, delay: 0.5, ease: 'power2.inOut' });
+    gsap.to('#abp', { opacity: 1, y: 0, duration: 0.7, delay: 0.6 });
+    gsap.to('#astats', { opacity: 1, y: 0, duration: 0.6, delay: 0.8 });
+  }});
+
+  // Products
+  ScrollTrigger.create({ trigger: '.products', start: 'top 75%', onEnter: () => {
+    gsap.to('#pt', { opacity: 1, duration: 0.5 });
+    gsap.to('#ph1', { yPercent: 0, duration: 0.8, ease: 'power4.out', delay: 0.1 });
+    gsap.to('.prod-card', {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+      stagger: 0.1, delay: 0.2
+    });
+  }});
+
+  // Dark stats
+  ScrollTrigger.create({ trigger: '.dark-bar', start: 'top 80%', onEnter: () => {
+    gsap.to('.dark-stat', {
+      opacity: 1, y: 0, duration: 0.6, stagger: 0.12, ease: 'power3.out'
+    });
+  }});
+
+  // CTA
+  ScrollTrigger.create({ trigger: '.cta-sec', start: 'top 75%', onEnter: () => {
+    gsap.to('#ctac', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+  }});
+}
+
+// ── INIT
+gsap.set('#mainNav', { opacity: 0, y: -10 });
+gsap.set('#website', { opacity: 0 });
+
+window.addEventListener('load', () => {
+  setupScrollAnimations();
+  setTimeout(runLoader, 200);
+});
+</script>
+</body>
+</html>
