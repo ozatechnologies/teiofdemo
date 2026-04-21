@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEIOF International — Quality Beyond Borders</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+:root{
+  --cream:#F8F6F3;
+  --cream2:#F5F3F0;
+  --white:#FFFFFF;
+  --charcoal:#2C2C2C;
+  --char2:#333333;
+  --slate:#7A8B9A;
+  --slate2:#6B7B8A;
+  --slate-lt:#A8B8C8;
+  --beige:#D4C4B4;
+  --body:#555550;
+  --blue:#2472C8;
+  --navy:#1a3a6b;
+  --dark:#1C1C1E;
+  --gold:#C8962A;
+  --gold-lt:#E6B84A;
+  /* NO dark green vars — replaced with neutrals */
+  --panel-dk:#2C2C2C;
+  --panel-md:#3A3A3A;
+  --panel-deep:#161C22;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Poppins',sans-serif;font-weight:600;background:var(--cream);overflow-x:hidden;cursor:none;}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:8px;height:8px;background:var(--blue);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur2{position:fixed;width:30px;height:30px;border:1.5px solid rgba(36,114,200,0.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.28s ease;}
+
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;z-index:9000;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+#lbg{position:absolute;inset:0;background-image:linear-gradient(rgba(36,114,200,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(36,114,200,0.04)1px,transparent 1px);background-size:50px 50px;}
+.lc{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:32px;}
+#lLogo{width:260px;height:180px;overflow:visible;}
+.lb{fill:var(--blue);opacity:0;}.ls{fill:var(--blue);opacity:0;}
+.lw{fill:none;stroke:#1a3a6b;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400;opacity:0;}
+#lg{opacity:0;}.lc1{fill:none;stroke:var(--blue);stroke-width:1.8;}.ll{fill:none;stroke:#2472C8;stroke-width:1.2;stroke-dasharray:160;stroke-dashoffset:160;}
+.lbr{display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;}
+.lnm{font-family:'Poppins',sans-serif;font-size:2.4rem;font-weight:700;letter-spacing:0.4em;color:#e8edf5;text-transform:uppercase;}
+.lsb{font-family:'Poppins',sans-serif;font-size:0.6rem;font-weight:500;letter-spacing:0.35em;color:var(--slate);text-transform:uppercase;}
+.lpr{width:180px;height:1px;background:rgba(255,255,255,0.06);position:relative;overflow:hidden;}
+.lfi{position:absolute;top:0;left:0;height:100%;width:0%;background:linear-gradient(90deg,var(--navy),var(--blue));}
+#wipe{position:fixed;inset:0;z-index:8999;background:var(--cream);transform:scaleY(0);transform-origin:bottom;}
+#site{opacity:0;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:transparent;backdrop-filter:blur(0px);border-bottom:1px solid rgba(212,196,180,0);transition:all 0.3s ease;}
+nav.scrolled{background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,196,180,0.35);box-shadow:0 2px 20px rgba(44,44,44,0.08);}
+.nlogo{display:flex;align-items:center;gap:10px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.12em;color:var(--charcoal);text-decoration:none;}
+.nlogo svg{width:28px;height:20px;}
+.nlinks{display:flex;gap:2rem;list-style:none;}
+.nlinks a{font-family:'Poppins',sans-serif;font-size:0.82rem;color:white;text-decoration:none;font-weight:600;letter-spacing:0.04em;position:relative;transition:color 0.3s;}
+.nlinks a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:rgba(255,255,255,0.7);transition:width 0.3s;}
+.nlinks a:hover::after{width:100%;}
+nav.scrolled .nlinks a{color:var(--body);}
+nav.scrolled .nlinks a::after{background:var(--slate);}
+.ncta{font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:0.04em;color:white;background:transparent;border:none;padding:0;cursor:none;text-decoration:none;position:relative;}
+.ncta::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:rgba(255,255,255,0.7);transition:width 0.3s;}
+.ncta:hover::after{width:100%;}
+nav.scrolled .ncta{color:var(--body);}
+nav.scrolled .ncta::after{background:var(--slate);}
+
+/* ══════════════════════════════
+   HERO — video bg + text carousel
+══════════════════════════════ */
+.hero{position:relative;height:100vh;overflow:hidden;}
+
+/* Single video background — always visible */
+.hero-bg-video{position:absolute;inset:0;z-index:1;overflow:hidden;}
+.hero-bg-video video{
+  position:absolute;top:50%;left:50%;
+  min-width:100%;min-height:100%;
+  transform:translate(-50%,-50%);
+  object-fit:cover;z-index:1;
+  pointer-events:none;
+  animation:none !important;
+  transition:none !important;
+  opacity:1 !important;
+}
+/* Warm-neutral overlay — slate-tinted, not green */
+.hero-bg-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    180deg,
+    rgba(28,28,30,0.30) 0%,
+    rgba(28,28,30,0.52) 50%,
+    rgba(28,28,30,0.72) 100%
+  );
+  z-index:2;
+}
+
+/* Slide tint layers — sit on top, transparent BGs */
+.hslides{position:absolute;inset:0;z-index:3;}
+.hs{position:absolute;inset:0;opacity:0;background:transparent;}
+.hs.act{opacity:1;}
+/* Slide overlay tints — warm/cool/neutral only, no green */
+.hs-ov{position:absolute;inset:0;z-index:4;}
+.hs1 .hs-ov{background:rgba(200,150,42,0.05);}   /* slide 1 — warm amber whisper */
+.hs2 .hs-ov{background:rgba(122,139,154,0.07);}  /* slide 2 — cool slate whisper */
+.hs3 .hs-ov{background:rgba(44,44,44,0.04);}     /* slide 3 — neutral */
+
+/* Art layers */
+.s1art{position:absolute;inset:0;}
+.s1c{position:absolute;border-radius:50%;border:1px solid rgba(212,196,180,0.12);}
+.s2d{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(168,184,200,0.12)1px,transparent 1px);background-size:40px 40px;}
+.s3l{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(212,196,180,0.04)0,rgba(212,196,180,0.04)1px,transparent 1px,transparent 40px);}
+
+.hgrain{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.45;pointer-events:none;z-index:5;}
+
+.hcwrap{position:relative;z-index:10;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 2rem;}
+.sc{position:absolute;opacity:0;transform:translateY(20px);transition:opacity 0.9s ease,transform 0.9s ease;pointer-events:none;text-align:center;width:100%;}
+.sc.act{opacity:1;transform:translateY(0);pointer-events:auto;}
+.htag{font-family:'Poppins',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.25em;color:var(--slate-lt);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:14px;}
+.htag::before,.htag::after{content:'';width:28px;height:1px;background:var(--slate-lt);display:block;}
+.hh{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(3.2rem,7vw,6.5rem);line-height:0.95;color:white;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:1.2rem;}
+.hh .gold{color:var(--gold-lt);}
+.hh .out{color:transparent;-webkit-text-stroke:2px rgba(255,255,255,0.55);}
+.bt{display:inline-block;animation:none;}
+@keyframes bIn{0%{filter:blur(18px);opacity:0;transform:scale(1.04)}100%{filter:blur(0);opacity:1;transform:scale(1)}}
+@keyframes bOut{0%{filter:blur(0);opacity:1}100%{filter:blur(18px);opacity:0}}
+.sc.ent .bt{animation:bIn 0.9s ease forwards;}
+.sc.lv .bt{animation:bOut 0.5s ease forwards;}
+.hsub{font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:500;color:rgba(255,255,255,0.58);line-height:1.8;max-width:520px;margin:0 auto 2.5rem;}
+.hbtns{display:flex;gap:1rem;justify-content:center;}
+.bg{background:var(--gold);color:white;border:none;padding:0.95rem 2.2rem;font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;cursor:none;transition:background 0.25s,transform 0.2s;letter-spacing:0.04em;}
+.bg:hover{background:var(--gold-lt);transform:translateY(-2px);}
+.bo{background:transparent;color:rgba(255,255,255,0.8);border:1.5px solid rgba(255,255,255,0.35);padding:0.95rem 2.2rem;font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:500;cursor:none;transition:border-color 0.25s,color 0.25s;}
+.bo:hover{border-color:rgba(255,255,255,0.75);color:white;}
+.hdots{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:10px;}
+.hd{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,0.3);cursor:none;transition:all 0.4s;border:none;}
+.hd.act{width:28px;background:var(--gold);}
+.hprog{position:absolute;bottom:0;left:0;height:2px;background:var(--gold);width:0%;z-index:10;}
+
+/* ── TICKER ── */
+.ticker{background:var(--cream);border-top:1px solid var(--beige);border-bottom:1px solid var(--beige);padding:0.9rem 0;overflow:hidden;}
+.tt{display:flex;gap:0;animation:tkr 35s linear infinite;white-space:nowrap;width:max-content;}
+.ti{font-family:'Poppins',sans-serif;font-size:0.62rem;font-weight:500;letter-spacing:0.18em;color:var(--slate);text-transform:uppercase;flex-shrink:0;padding:0 1.5rem;}
+.tsep{color:var(--gold);}
+@keyframes tkr{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── WELCOME ── */
+.welcome{display:grid;grid-template-columns:36% 1fr 260px;padding:7rem 5rem;gap:4rem;align-items:center;background:var(--cream);}
+.wimg-wrap{position:relative;}
+.wimg{width:100%;aspect-ratio:3/4;border-radius:2px;overflow:hidden;position:relative;background:var(--beige);}
+.wimg img{width:100%;height:100%;object-fit:cover;display:block;}
+.wimg-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(44,44,44,0.4)100%);}
+.wbadge{position:absolute;bottom:-12px;right:-12px;background:var(--gold);color:white;padding:0.8rem 1.2rem;font-family:'Poppins',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;}
+.wright{opacity:0;transform:translateY(30px);}
+.stag{font-family:'Poppins',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.18em;color:var(--slate);text-transform:uppercase;margin-bottom:1rem;}
+.sh{font-family:'Poppins',sans-serif;font-weight:700;font-size:clamp(2rem,3vw,3rem);line-height:1.1;color:var(--charcoal);margin-bottom:1.2rem;}
+.sh em{font-style:italic;color:var(--gold);}
+.dl{width:0;height:2px;background:var(--gold);margin:1.2rem 0;}
+.bp{font-family:'Poppins',sans-serif;font-size:0.92rem;font-weight:500;color:var(--body);line-height:1.85;}
+.bp+.bp{margin-top:0.8rem;}
+.bfill{display:inline-block;margin-top:1.8rem;background:var(--gold);color:white;border:none;padding:0.85rem 2rem;font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:600;cursor:none;transition:background 0.25s,transform 0.2s;letter-spacing:0.04em;}
+.bfill:hover{background:var(--gold-lt);transform:translateY(-2px);}
+.sbl{display:flex;flex-direction:column;gap:0;}
+.si{display:flex;align-items:center;gap:12px;padding:0.85rem 1rem;border-bottom:1px solid rgba(212,196,180,0.4);cursor:none;transition:background 0.2s;opacity:0;transform:translateX(20px);}
+.si:first-child{border-top:1px solid rgba(212,196,180,0.4);}
+.si:hover{background:rgba(200,150,42,0.05);}
+.si-ic{font-size:1.2rem;width:32px;text-align:center;}
+.si-lb{font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:500;color:var(--body);}
+.si-ar{margin-left:auto;color:var(--beige);font-size:0.75rem;transition:transform 0.2s,color 0.2s;}
+.si:hover .si-ar{transform:translateX(4px);color:var(--gold);}
+
+/* ── EXPORT HOUSE ── */
+.export{padding:6rem 5rem;background:var(--cream2);border-top:1px solid var(--beige);}
+.etag{font-family:'Poppins',sans-serif;font-size:0.6rem;font-weight:600;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem;}
+.eh{font-family:'Poppins',sans-serif;font-size:clamp(2rem,3vw,2.8rem);font-style:italic;font-weight:700;color:var(--charcoal);margin-bottom:1rem;opacity:0;transform:translateY(20px);}
+.ep{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:500;color:var(--body);line-height:1.85;max-width:620px;opacity:0;transform:translateY(20px);}
+.eimg{margin-top:3rem;width:100%;height:380px;border-radius:2px;overflow:hidden;position:relative;opacity:0;transform:translateY(30px);}
+.eimg img{width:100%;height:100%;object-fit:cover;display:block;}
+/* neutral dark overlay — not green */
+.eimg-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,28,30,0.1)0%,rgba(28,28,30,0.55)100%);}
+.eimg-cap{position:absolute;bottom:2.5rem;left:5rem;font-family:'Poppins',sans-serif;font-size:3.5rem;font-weight:300;font-style:italic;color:rgba(255,255,255,0.12);user-select:none;}
+
+/* ── QUALITY SPLIT ── */
+/* Left panel: charcoal instead of forest-green */
+.qsplit{display:grid;grid-template-columns:45% 55%;min-height:65vh;}
+.ql{background:var(--panel-dk);padding:5rem;display:flex;flex-direction:column;justify-content:center;gap:2.5rem;}
+.qi{display:flex;gap:1.2rem;align-items:flex-start;opacity:0;transform:translateX(-24px);}
+.qi-ic{font-size:1.3rem;margin-top:2px;flex-shrink:0;width:32px;}
+.qi-t{font-family:'Poppins',sans-serif;font-size:1.1rem;font-weight:600;color:white;margin-bottom:0.4rem;}
+.qi-d{font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:500;color:rgba(255,255,255,0.45);line-height:1.7;}
+.qr{background:var(--cream);padding:5rem;display:flex;flex-direction:column;justify-content:center;}
+.wtag{font-family:'Poppins',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;opacity:0;}
+/* .wh em was forest-green → now dusty slate */
+.wh{font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,2.8vw,2.8rem);font-weight:700;line-height:1.1;color:var(--charcoal);margin-bottom:2rem;opacity:0;transform:translateY(20px);}
+.wh em{font-style:italic;color:var(--slate2);}
+.mets{display:flex;gap:0;opacity:0;transform:translateY(20px);}
+.met{padding:1.5rem 2.5rem 1rem 0;margin-right:2.5rem;border-right:1px solid var(--beige);}
+.met:last-child{border-right:none;}
+.met-n{font-family:'Poppins',sans-serif;font-size:3.5rem;font-weight:800;color:var(--charcoal);line-height:1;display:block;}
+.met-n em{color:var(--gold);font-style:normal;}
+.met-l{font-family:'Poppins',sans-serif;font-size:0.58rem;font-weight:500;letter-spacing:0.1em;color:var(--slate);text-transform:uppercase;margin-top:4px;display:block;}
+
+/* ── PRODUCTS MARQUEE ── */
+.psec{background:var(--cream);padding:7rem 0;}
+.phdr{text-align:center;padding:0 5rem;margin-bottom:4rem;}
+.phdr .stag{display:block;text-align:center;}
+.mwrap{overflow:hidden;width:100%;position:relative;padding:1rem 0;}
+.mwrap::before,.mwrap::after{content:'';position:absolute;top:0;width:180px;height:100%;z-index:10;}
+.mwrap::before{left:0;background:linear-gradient(90deg,var(--cream),transparent);}
+.mwrap::after{right:0;background:linear-gradient(-90deg,var(--cream),transparent);}
+.mtrack{display:flex;gap:1.5rem;width:max-content;animation:mq 36s linear infinite;}
+.mtrack:hover{animation-play-state:paused;}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.pc{flex-shrink:0;width:280px;border-radius:2px;overflow:hidden;background:var(--white);border:1px solid rgba(212,196,180,0.4);cursor:none;transition:transform 0.35s,box-shadow 0.35s;position:relative;}
+.pc:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(44,44,44,0.1);}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.35s;}
+.pc:hover::before{transform:scaleX(1);}
+.pc-iw{position:relative;height:200px;background:var(--cream2);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.pc-circ{width:150px;height:150px;border-radius:50%;overflow:hidden;border:3px solid rgba(212,196,180,0.5);transition:border-color 0.3s;display:flex;align-items:center;justify-content:center;background:var(--cream);}
+.pc:hover .pc-circ{border-color:var(--gold);}
+.pc-circ img{width:100%;height:100%;object-fit:cover;display:block;}
+.pc-fb{font-size:3.5rem;}
+.pc-b{padding:1.5rem;}
+.pc-n{font-family:'Poppins',sans-serif;font-size:0.58rem;font-weight:500;color:var(--beige);letter-spacing:0.1em;display:block;margin-bottom:0.5rem;}
+.pc-t{font-family:'Poppins',sans-serif;font-size:1.35rem;font-weight:600;font-style:italic;color:var(--charcoal);margin-bottom:0.4rem;}
+.pc-s{font-family:'Poppins',sans-serif;font-size:0.76rem;font-weight:500;color:var(--slate);line-height:1.6;}
+.pc-ar{position:absolute;bottom:1.2rem;right:1.5rem;color:var(--beige);transition:color 0.2s,transform 0.2s;font-size:0.9rem;}
+.pc:hover .pc-ar{color:var(--gold);transform:translateX(4px);}
+
+/* ── DARK STATS — slate-navy, not dark-green ── */
+.dbar{background:#1A2530;padding:5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;position:relative;}
+.dbar::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(200,150,42,0.03)0,rgba(200,150,42,0.03)1px,transparent 1px,transparent 80px);}
+.ds{padding:1rem 2rem;position:relative;z-index:1;opacity:0;transform:translateY(20px);}
+.ds+.ds{border-left:1px solid rgba(168,184,200,0.12);}
+.ds-n{font-family:'Poppins',sans-serif;font-size:4rem;font-weight:800;color:white;line-height:1;display:block;}
+.ds-n em{color:var(--gold-lt);font-style:normal;font-size:2.5rem;}
+.ds-l{font-family:'Poppins',sans-serif;font-size:0.58rem;font-weight:500;letter-spacing:0.14em;color:var(--slate-lt);text-transform:uppercase;margin-top:0.5rem;display:block;}
+
+/* ── EXCELLENCE — charcoal left, cream2 right ── */
+.exc{display:grid;grid-template-columns:50% 50%;min-height:52vh;}
+/* Left image col: charcoal bg, not dark-green */
+.exi{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--panel-dk);}
+.exi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+/* Overlay: neutral dark, not green */
+.exi-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(28,28,30,0.48)0%,rgba(28,28,30,0.28)100%);}
+.exi-gr{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(212,196,180,0.03)0,rgba(212,196,180,0.03)1px,transparent 1px,transparent 50px),repeating-linear-gradient(90deg,rgba(212,196,180,0.03)0,rgba(212,196,180,0.03)1px,transparent 1px,transparent 50px);}
+.exi-cap{position:relative;z-index:2;font-family:'Poppins',sans-serif;font-size:4.5rem;font-weight:300;font-style:italic;color:rgba(255,255,255,0.1);text-align:center;line-height:1.2;user-select:none;}
+/* Right col: warm cream2 — replaces dark-green */
+.exct{background:var(--cream2);padding:5rem;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(20px);}
+.exct .stag{color:var(--gold);}
+.exh{font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,2.5vw,2.4rem);font-weight:600;color:var(--charcoal);line-height:1.2;margin-bottom:1.5rem;}
+.exp{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:500;color:var(--body);line-height:1.85;}
+.excl{list-style:none;margin-top:1.8rem;display:flex;flex-direction:column;gap:0.7rem;}
+.excl li{font-family:'Poppins',sans-serif;font-size:0.84rem;font-weight:500;color:var(--body);display:flex;align-items:center;gap:10px;}
+.excl li::before{content:'✓';color:var(--gold);font-size:0.65rem;width:18px;height:18px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+/* ── CERTS ── */
+.certs{padding:6rem 5rem;background:var(--white);text-align:center;border-top:1px solid var(--beige);}
+.cbadges{display:flex;gap:2.5rem;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:3rem;opacity:0;}
+.cb{width:100px;height:100px;border:1px solid var(--beige);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:var(--white);font-family:'Poppins',sans-serif;font-size:0.58rem;font-weight:500;letter-spacing:0.06em;color:var(--slate);text-transform:uppercase;cursor:none;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;}
+.cb:hover{border-color:var(--gold);transform:scale(1.06);box-shadow:0 8px 24px rgba(200,150,42,0.12);}
+.cb-ic{font-size:1.5rem;}
+
+/* ── GLOBAL PARTNER ── */
+.glob{display:grid;grid-template-columns:55% 45%;min-height:62vh;}
+/* Image col: neutral dark, not green-navy */
+.gi{background:linear-gradient(135deg,#1C1C1E,#2C2C2C);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:3rem;}
+.gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.gi-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,28,30,0.25)0%,rgba(28,28,30,0.82)100%);}
+.gi-tx{position:relative;z-index:2;font-family:'Poppins',sans-serif;font-size:5rem;font-weight:300;font-style:italic;color:rgba(255,255,255,0.08);user-select:none;}
+.gc{background:var(--charcoal);padding:5rem;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(20px);}
+.gh{font-family:'Poppins',sans-serif;font-size:clamp(1.8rem,2.5vw,2.4rem);font-weight:600;font-style:italic;color:white;line-height:1.2;margin-bottom:1.5rem;}
+.gp{font-family:'Poppins',sans-serif;font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.45);line-height:1.85;margin-bottom:0.8rem;}
+
+/* ── CTA — neutral dark, not green ── */
+.cta{height:60vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.cta-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1C1C1E,#2C2C2C,#1A2530);}
+.cta-gr{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");opacity:0.5;}
+.ctac{position:relative;z-index:2;text-align:center;opacity:0;transform:translateY(30px);}
+.ctah{font-family:'Poppins',sans-serif;font-size:clamp(2.5rem,4.5vw,4.2rem);font-weight:700;font-style:italic;color:white;line-height:1.1;margin-bottom:1.2rem;}
+.ctas{font-family:'Poppins',sans-serif;font-size:0.9rem;font-weight:500;color:rgba(255,255,255,0.45);margin-bottom:2.5rem;}
+.ctabt{display:flex;gap:1rem;justify-content:center;}
+
+/* ── FOOTER — deep slate, not dark-green ── */
+footer{background:var(--panel-deep);padding:5rem 5rem 2rem;position:relative;overflow:hidden;}
+#fg{position:absolute;right:-60px;top:50%;transform:translateY(-50%);opacity:0.1;pointer-events:none;}
+.ft{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem;position:relative;z-index:2;}
+.flm{display:flex;align-items:center;gap:10px;margin-bottom:1.2rem;}
+.flm svg{width:28px;height:20px;}
+.fln{font-family:'Poppins',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:0.2em;color:white;}
+.ftag{font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:500;color:rgba(255,255,255,0.28);line-height:1.75;max-width:280px;margin-bottom:1.2rem;}
+.fyr{font-family:'Poppins',sans-serif;font-size:5rem;font-weight:700;color:rgba(255,255,255,0.04);line-height:1;letter-spacing:-0.02em;margin-top:0.5rem;}
+.fct{font-family:'Poppins',sans-serif;font-size:0.58rem;font-weight:500;letter-spacing:0.18em;color:var(--slate);text-transform:uppercase;margin-bottom:1.2rem;display:block;}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+.flinks a{font-family:'Poppins',sans-serif;font-size:0.82rem;font-weight:500;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;}
+.flinks a:hover{color:rgba(255,255,255,0.7);}
+.finq{display:inline-block;background:var(--gold);color:white;border:none;padding:0.7rem 1.6rem;font-family:'Poppins',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.1em;cursor:none;text-transform:uppercase;transition:background 0.2s;margin-top:1.5rem;}
+.finq:hover{background:var(--gold-lt);}
+.fdiv{height:1px;background:rgba(255,255,255,0.06);margin-bottom:1.5rem;position:relative;z-index:2;}
+.fbot{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2;}
+.fcp{font-family:'Poppins',sans-serif;font-size:0.58rem;color:rgba(255,255,255,0.16);letter-spacing:0.08em;}
+
+/* ── WA ── */
+.wa{position:fixed;bottom:2rem;right:2rem;z-index:500;width:48px;height:48px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:none;opacity:0;box-shadow:0 4px 20px rgba(37,211,102,0.3);}
+.wa svg{width:22px;height:22px;}
+.waring{position:absolute;inset:-4px;border:1px solid rgba(37,211,102,0.4);border-radius:50%;animation:wap 2s ease infinite;}
+@keyframes wap{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.22);opacity:0}}
+</style>
+</head>
+<body>
+<div id="cur"></div><div id="cur2"></div>
+
+<!-- LOADER — unchanged -->
+<div id="loader">
+<div id="lbg"></div>
+<div class="lc">
+  <svg id="lLogo" viewBox="0 0 260 170" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+    <defs>
+      <filter id="lf"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <radialGradient id="rg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#2472C8" stop-opacity="0.3"/><stop offset="100%" stop-color="#2472C8" stop-opacity="0"/></radialGradient>
+    </defs>
+    <ellipse id="lGlw" cx="105" cy="80" rx="55" ry="60" fill="#2472C8" opacity="0" filter="url(#lf)"/>
+    <rect class="lb" id="lB" x="60" y="14" width="90" height="24" rx="2"/>
+    <rect class="ls" id="lS" x="92" y="14" width="26" height="100" rx="2"/>
+    <path class="lw" id="lw1" d="M 10,90 Q 55,78 100,88 Q 140,96 175,86 Q 200,78 218,82" stroke="#1d4a8a" stroke-width="3"/>
+    <path class="lw" id="lw2" d="M 4,100 Q 52,89 98,99 Q 138,108 175,98 Q 200,90 218,94" stroke="#162e58" stroke-width="2.2"/>
+    <path class="lw" id="lw3" d="M 14,110 Q 58,100 102,109 Q 140,118 175,109 Q 200,101 218,105" stroke="#0f2040" stroke-width="1.5"/>
+    <g id="lg" transform="translate(218,92)">
+      <circle id="lGG" cx="0" cy="0" r="32" fill="url(#rg)" opacity="0"/>
+      <circle class="lc1" cx="0" cy="0" r="24" stroke="#2472C8" stroke-width="2"/>
+      <ellipse class="ll" cx="0" cy="0" rx="24" ry="9"/>
+      <ellipse class="ll" cx="0" cy="0" rx="24" ry="18"/>
+      <line class="ll" x1="0" y1="-24" x2="0" y2="24"/>
+      <line class="ll" x1="-24" y1="0" x2="24" y2="0"/>
+      <circle id="lOrb" cx="0" cy="-24" r="4" fill="#2472C8" opacity="0"/>
+    </g>
+  </svg>
+  <div class="lbr" id="lBr"><span class="lnm">TEIOF</span><span class="lsb">International · Est. 2003</span></div>
+  <div class="lpr"><div class="lfi" id="lFi"></div></div>
+</div>
+</div>
+<div id="wipe"></div>
+
+<!-- SITE -->
+<div id="site">
+
+<!-- NAV — unchanged structure -->
+<nav id="mnav">
+  <ul class="nlinks">
+    <li><a href="#">Home</a></li><li><a href="#">About Us</a></li>
+    <li><a href="#">Products</a></li><li><a href="#">Export</a></li>
+    <li><a href="#">Quality</a></li><li><a href="#">Certifications</a></li>
+    <li><a href="#">Contact Us</a></li>
+  </ul>
+  <a class="nlogo" href="#" style="margin-left:auto;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);padding:0.5rem 1rem;border-radius:0.5rem;">
+    <svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="28" height="6" rx="1" fill="#2472C8"/><rect x="9" y="0" width="10" height="20" rx="1" fill="#2472C8"/><path d="M 0,13 Q 8,10 14,12 Q 20,14 26,12" stroke="#1a3a6b" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="26" cy="12" r="3" fill="none" stroke="#2472C8" stroke-width="1.2"/></svg>
+    TEIOF INTERNATIONAL
+  </a>
+  <button class="ncta" style="margin-left:1.5rem;">Inquiry Now</button>
+</nav>
+
+<!-- HERO — video bg + text carousel unchanged -->
+<section class="hero">
+  <div class="hero-bg-video">
+    <video autoplay muted loop playsinline style="animation:none !important;transition:none !important;opacity:1 !important;">
+      <source src="https://www.shutterstock.com/shutterstock/videos/3782738129/preview/stock-footage-groundnut-or-peanut-arachis-hypogaea-field-weeding-by-farmer-bangladesh.mp4" type="video/mp4">
+    </video>
+    <div class="hero-bg-overlay"></div>
+  </div>
+  <div class="hslides">
+    <div class="hs act" id="hs1">
+      <div class="s1art"><div class="s1c" style="width:600px;height:600px;top:-100px;right:-150px;opacity:0.4;"></div><div class="s1c" style="width:280px;height:280px;bottom:12%;left:4%;opacity:0.22;"></div></div>
+      <div class="hs-ov"></div>
+    </div>
+    <div class="hs" id="hs2"><div class="s1art"><div class="s2d"></div></div><div class="hs-ov"></div></div>
+    <div class="hs" id="hs3"><div class="s1art"><div class="s3l"></div></div><div class="hs-ov"></div></div>
+  </div>
+  <div class="hgrain"></div>
+  <div class="hcwrap">
+    <div class="sc act ent" id="hc1">
+      <p class="htag"><span class="bt">Global Agri Commodity Exporters · Est. 2003</span></p>
+      <h1 class="hh"><span class="bt">QUALITY</span><br><span class="bt gold">BEYOND</span><br><span class="bt out">BORDERS</span></h1>
+      <p class="hsub bt">From Indian farms to global tables — premium agri-commodities delivered to 12+ countries with consistency and care.</p>
+      <div class="hbtns"><button class="bg">Explore Products →</button><button class="bo">Download Catalogue</button></div>
+    </div>
+    <div class="sc" id="hc2">
+      <p class="htag"><span class="bt">Trusted Export Partner · 25+ Years</span></p>
+      <h1 class="hh"><span class="bt">INDIA'S</span><br><span class="bt gold">FINEST</span><br><span class="bt out">HARVESTS</span></h1>
+      <p class="hsub bt">Spices, pulses, oilseeds and dry fruits — sourced directly from farms across Gujarat, Rajasthan and beyond.</p>
+      <div class="hbtns"><button class="bg">View Products →</button><button class="bo">Contact Us</button></div>
+    </div>
+    <div class="sc" id="hc3">
+      <p class="htag"><span class="bt">ISO 22000 · FSSAI · APEDA Certified</span></p>
+      <h1 class="hh"><span class="bt">FARM</span><br><span class="bt gold">TO</span><br><span class="bt out">PORT.</span></h1>
+      <p class="hsub bt">Internationally certified quality at every stage — from sourcing to packaging, in every shipment we send worldwide.</p>
+      <div class="hbtns"><button class="bg">Our Certifications →</button><button class="bo">Request a Quote</button></div>
+    </div>
+  </div>
+  <div class="hdots" id="hdots">
+    <button class="hd act" data-i="0"></button>
+    <button class="hd" data-i="1"></button>
+    <button class="hd" data-i="2"></button>
+  </div>
+  <div class="hprog" id="hprog"></div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="tt" id="tt"></div></div>
+
+<!-- WELCOME -->
+<section class="welcome" id="wsec">
+  <div class="wimg-wrap" id="wiwrap">
+    <div class="wimg">
+      <img src="https://www.nuturally.com/1550-medium_default/raw-peeled-peanuts.jpg" alt="Raw peanuts — TEIOF International" crossorigin="anonymous" onerror="this.outerHTML='<div style=\'width:100%;height:100%;background:radial-gradient(ellipse at 40% 40%,#c4a882,#d4c4b4);display:flex;align-items:center;justify-content:center;font-size:5rem;\'>🥜</div>'" />
+      <div class="wimg-ov"></div>
+    </div>
+    <div class="wbadge">ISO 22000:2018</div>
+  </div>
+  <div class="wright" id="wr">
+    <p class="stag">// Welcome to Teiof International</p>
+    <h2 class="sh">A trusted name in<br><em>Indian Agri Exports</em></h2>
+    <div class="dl" id="wdl"></div>
+    <p class="bp">At TEIOF, we offer a diverse selection of quality agri-commodities that cater to emerging world needs. Our extensive product range is exported to nearly every corner of the globe, demonstrating our commitment to global reach and customer satisfaction.</p>
+    <p class="bp">We prioritise delivering the best quality products at highly competitive prices, ensuring that our clients receive exceptional value. Our streamlined processes enable us to meet delivery schedules reliably.</p>
+    <button class="bfill">Explore More</button>
+  </div>
+  <div class="sbl" id="sbl">
+    <div class="si"><div class="si-ic">🌶</div><span class="si-lb">Spices</span><span class="si-ar">→</span></div>
+    <div class="si"><div class="si-ic">🌿</div><span class="si-lb">Oil &amp; Oil Seeds</span><span class="si-ar">→</span></div>
+    <div class="si"><div class="si-ic">🫘</div><span class="si-lb">Raisins</span><span class="si-ar">→</span></div>
+    <div class="si"><div class="si-ic">🌾</div><span class="si-lb">Roasted Grains</span><span class="si-ar">→</span></div>
+    <div class="si"><div class="si-ic">🌽</div><span class="si-lb">Corn Starch</span><span class="si-ar">→</span></div>
+    <div class="si"><div class="si-ic">🐾</div><span class="si-lb">Animal Feeds</span><span class="si-ar">→</span></div>
+    <div class="si"><div class="si-ic">🥬</div><span class="si-lb">Dehydrated</span><span class="si-ar">→</span></div>
+  </div>
+</section>
+
+<!-- EXPORT HOUSE -->
+<section class="export" id="esec">
+  <p class="etag">We Are…</p>
+  <h2 class="eh" id="eh">Star Export House</h2>
+  <p class="ep" id="ep">We provide quality and safety at every stage of our operations. Our ISO 22000:2018 GFCI and FSSAI certification endorses the products with the highest standards of food safety and adheres to the strictest of quality requirements.</p>
+  <div class="eimg" id="eimg">
+    <img src="https://thumbs.dreamstime.com/b/container-ship-loading-unloading-deep-sea-port-aerial-top-view-business-logistic-import-export-freight-container-157245309.jpg" alt="Container ship — TEIOF International" crossorigin="anonymous" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#2C2C2C,#3A3A3A)'" />
+    <div class="eimg-ov"></div>
+    <div class="eimg-cap">Farm to Port.</div>
+  </div>
+</section>
+
+<!-- QUALITY SPLIT -->
+<section class="qsplit" id="qsec">
+  <div class="ql">
+    <div class="qi" id="qi1"><div class="qi-ic">🛡</div><div><p class="qi-t">Quality Assurance</p><p class="qi-d">We prioritise quality at every step, from seeding to packaging. Our products undergo rigorous quality checks to ensure they meet international standards, giving you confidence in every purchase.</p></div></div>
+    <div class="qi" id="qi2"><div class="qi-ic">🌐</div><div><p class="qi-t">Global Reach</p><p class="qi-d">We have established a robust global network to seamlessly deliver our agri-products to your doorstep. Our team assures timely and secure shipments, making us your trusted international partner.</p></div></div>
+    <div class="qi" id="qi3"><div class="qi-ic">🤝</div><div><p class="qi-t">Customer-Centric Approach</p><p class="qi-d">Your satisfaction is our priority. Our dedicated team is always ready to assist you with any inquiries or concerns, providing a personalised and responsive service experience.</p></div></div>
+  </div>
+  <div class="qr">
+    <p class="wtag" id="wtg">Why Choose Us?</p>
+    <h2 class="wh" id="wwh">Leading the Industry with<br><em>Sustainable Growth</em></h2>
+    <div class="mets" id="mets">
+      <div class="met"><span class="met-n" data-v="25">0<em>+</em></span><span class="met-l">Years of Expertise</span></div>
+      <div class="met"><span class="met-n" data-v="200">0<em>+</em></span><span class="met-l">Product Range</span></div>
+      <div class="met"><span class="met-n" data-v="12">0<em>+</em></span><span class="met-l">Countries Served</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS MARQUEE -->
+<section class="psec" id="psec">
+  <div class="phdr">
+    <p class="stag" id="ptg">// Our Products</p>
+    <h2 class="sh" style="font-size:clamp(2rem,3.5vw,3rem);margin-top:0.5rem" id="phd">Healthy Life With <em>Fresh Products</em></h2>
+  </div>
+  <div class="mwrap" id="mwrap">
+    <div class="mtrack" id="mt"></div>
+  </div>
+</section>
+
+<!-- DARK STATS -->
+<div class="dbar" id="dbar">
+  <div class="ds"><span class="ds-n">25<em>+</em></span><span class="ds-l">Years in Business</span></div>
+  <div class="ds"><span class="ds-n">12<em>+</em></span><span class="ds-l">Countries Served</span></div>
+  <div class="ds"><span class="ds-n">200<em>+</em></span><span class="ds-l">Product Varieties</span></div>
+  <div class="ds"><span class="ds-n">50K<em>+</em></span><span class="ds-l">MT Exported Annually</span></div>
+</div>
+
+<!-- EXCELLENCE -->
+<section class="exc" id="exsec">
+  <div class="exi">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPjo6LV0h83hGWAwiieT8U65LoNrpxeeccQg&s" alt="Farm to port" crossorigin="anonymous" onerror="this.style.display='none'" />
+    <div class="exi-ov"></div><div class="exi-gr"></div>
+    <div class="exi-cap">Farm<br>to<br>Port.</div>
+  </div>
+  <div class="exct" id="exct">
+    <p class="stag">Excellence in Every Product</p>
+    <h2 class="exh">Quality consciousness is the foundation of our operations.</h2>
+    <p class="exp">We put the finest at the forefront of every process — sourcing and controlling quality from the choice of seeds best suited to the climate and soil, to prompt accurate delivery of every order.</p>
+    <ul class="excl">
+      <li>Internationally recognised quality certifications</li>
+      <li>Continuous quality adherence at every stage</li>
+      <li>Transparent and certified agricultural partner</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section class="certs" id="csec">
+  <p class="stag" style="display:block;text-align:center" id="ctg">// Licenses &amp; Certifications</p>
+  <h2 class="sh" style="text-align:center;margin-top:0.5rem">Trusted by global <em>standards</em></h2>
+  <div class="cbadges" id="cbadges">
+    <div class="cb"><div class="cb-ic">🏆</div>ISO 22000</div>
+    <div class="cb"><div class="cb-ic">✅</div>FSSAI</div>
+    <div class="cb"><div class="cb-ic">🌱</div>APEDA</div>
+    <div class="cb"><div class="cb-ic">⭐</div>Star Export</div>
+    <div class="cb"><div class="cb-ic">🔬</div>GFCI</div>
+    <div class="cb"><div class="cb-ic">🌍</div>Spices Board</div>
+  </div>
+</section>
+
+<!-- GLOBAL PARTNER -->
+<section class="glob" id="gsec">
+  <div class="gi">
+    <img src="https://thumbs.dreamstime.com/b/container-ship-loading-unloading-deep-sea-port-aerial-top-view-business-logistic-import-export-freight-container-157245309.jpg" alt="Shipping — TEIOF International" crossorigin="anonymous" onerror="this.style.display='none'" />
+    <div class="gi-ov"></div>
+    <div class="gi-tx">Exporting<br>India's<br>Finest.</div>
+  </div>
+  <div class="gc" id="gcnt">
+    <p class="stag" style="color:rgba(255,255,255,0.4)">// Your Global Agriculture Partner</p>
+    <h2 class="gh">From Indian farms<br>to global tables.</h2>
+    <p class="gp">At TEIOF, we represent brilliance, offering a spectrum of premium agri-products to the world. Our export prowess stands as a testament to our commitment to excellence and adherence to international standards.</p>
+    <p class="gp">Backed by 25+ years of expertise, we represent a dedication to sustainability, reliability, and sincere satisfaction — a trusted partner from field to freight.</p>
+    <button class="bfill" style="margin-top:1.5rem">Explore More</button>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-bg"></div><div class="cta-gr"></div>
+  <div class="ctac" id="ctac">
+    <h2 class="ctah">Ready to source from India?</h2>
+    <p class="ctas">Our team responds within 24 hours. Let's build something lasting together.</p>
+    <div class="ctabt"><button class="bg">Request a Quote</button><button class="bo">Download Product List →</button></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <svg id="fg" width="520" height="520" viewBox="-260 -260 520 520" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="0" cy="0" r="230" fill="none" stroke="rgba(164,196,228,0.14)" stroke-width="1.5"/>
+    <ellipse cx="0" cy="0" rx="230" ry="65" fill="none" stroke="rgba(164,196,228,0.1)" stroke-width="1"/>
+    <ellipse cx="0" cy="0" rx="230" ry="130" fill="none" stroke="rgba(164,196,228,0.09)" stroke-width="1"/>
+    <ellipse cx="0" cy="0" rx="230" ry="190" fill="none" stroke="rgba(164,196,228,0.07)" stroke-width="0.8"/>
+    <line x1="0" y1="-230" x2="0" y2="230" stroke="rgba(164,196,228,0.09)" stroke-width="1"/>
+    <line x1="-230" y1="0" x2="230" y2="0" stroke="rgba(164,196,228,0.09)" stroke-width="1"/>
+    <ellipse cx="0" cy="0" rx="115" ry="230" fill="none" stroke="rgba(164,196,228,0.07)" stroke-width="0.8"/>
+    <ellipse cx="0" cy="0" rx="200" ry="230" fill="none" stroke="rgba(164,196,228,0.07)" stroke-width="0.8" transform="rotate(60)"/>
+    <ellipse cx="0" cy="0" rx="200" ry="230" fill="none" stroke="rgba(164,196,228,0.07)" stroke-width="0.8" transform="rotate(-60)"/>
+    <ellipse cx="0" cy="0" rx="255" ry="85" fill="none" stroke="rgba(200,150,42,0.18)" stroke-width="1" stroke-dasharray="7 5"/>
+    <ellipse cx="0" cy="0" rx="275" ry="105" fill="none" stroke="rgba(36,114,200,0.14)" stroke-width="1" stroke-dasharray="5 7" transform="rotate(40)"/>
+    <circle id="fo1" cx="255" cy="0" r="5.5" fill="#C8962A" opacity="0.75"/>
+    <circle id="fo2" cx="275" cy="0" r="4" fill="#2472C8" opacity="0.65"/>
+    <circle cx="45" cy="-85" r="3.5" fill="#C8962A" opacity="0.65"/>
+    <circle cx="-65" cy="-42" r="2.5" fill="#A8B8C8" opacity="0.5"/>
+    <circle cx="85" cy="65" r="3" fill="#C8962A" opacity="0.55"/>
+    <circle cx="-125" cy="22" r="2.5" fill="#A8B8C8" opacity="0.42"/>
+    <circle cx="155" cy="-35" r="2" fill="#C8962A" opacity="0.45"/>
+    <circle cx="-35" cy="105" r="2.5" fill="#A8B8C8" opacity="0.4"/>
+    <path d="M45,-85 Q 100,-65 155,-35" stroke="rgba(200,150,42,0.18)" stroke-width="0.8" fill="none"/>
+    <path d="M-65,-42 Q -20,-62 45,-85" stroke="rgba(164,196,228,0.14)" stroke-width="0.8" fill="none"/>
+    <path d="M85,65 Q 115,42 155,-35" stroke="rgba(164,196,228,0.14)" stroke-width="0.8" fill="none"/>
+    <path d="M-65,-42 Q -90,30 -35,105" stroke="rgba(164,196,228,0.1)" stroke-width="0.8" fill="none"/>
+  </svg>
+  <div class="ft">
+    <div>
+      <div class="flm">
+        <svg viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="28" height="6" rx="1" fill="#2472C8"/><rect x="9" y="0" width="10" height="20" rx="1" fill="#2472C8"/><path d="M 0,13 Q 8,10 14,12 Q 20,14 26,12" stroke="#1a3a6b" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="26" cy="12" r="3" fill="none" stroke="#2472C8" stroke-width="1.2"/></svg>
+        <span class="fln">TEIOF INTERNATIONAL</span>
+      </div>
+      <p class="ftag">From Indian farms to global tables.<br>Quality at origin. Delivery on time.<br>Established 2003.</p>
+      <div class="fyr">2026</div>
+      <button class="finq">Inquiry Now</button>
+    </div>
+    <div>
+      <span class="fct">Quick Links</span>
+      <ul class="flinks"><li><a href="#">Home</a></li><li><a href="#">About Us</a></li><li><a href="#">Export Process</a></li><li><a href="#">Quality</a></li><li><a href="#">Certifications</a></li><li><a href="#">Contact Us</a></li></ul>
+    </div>
+    <div>
+      <span class="fct">Our Products</span>
+      <ul class="flinks"><li><a href="#">Spices</a></li><li><a href="#">Pulses</a></li><li><a href="#">Dry Fruits</a></li><li><a href="#">Rice &amp; Cereals</a></li><li><a href="#">Oilseeds</a></li><li><a href="#">Dehydrated</a></li></ul>
+    </div>
+    <div>
+      <span class="fct">Contact Info</span>
+      <ul class="flinks"><li><a href="#">info@teiof.com</a></li><li><a href="#">+91 98765 43210</a></li><li><a href="#">Mandvi, Gujarat, India</a></li><li><a href="#">UAE · UK · Europe</a></li></ul>
+    </div>
+  </div>
+  <div class="fdiv"></div>
+  <div class="fbot">
+    <span class="fcp">© 2026 TEIOF International. All rights reserved.</span>
+    <span class="fcp">Powered by Aprameya Co.</span>
+  </div>
+</footer>
+
+<!-- WA -->
+<div class="wa" id="wa">
+  <div class="waring"></div>
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.112 1.522 5.836L.054 23.5l5.822-1.527A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.516-5.228-1.414l-.374-.222-3.882 1.019 1.033-3.788-.243-.387A9.937 9.937 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</div>
+
+</div><!-- /site -->
+
+<!-- ALL JS UNCHANGED -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* CURSOR */
+const c1=document.getElementById('cur'),c2=document.getElementById('cur2');
+document.addEventListener('mousemove',e=>{
+  gsap.to(c1,{x:e.clientX,y:e.clientY,duration:0.08});
+  gsap.to(c2,{x:e.clientX,y:e.clientY,duration:0.28,ease:'power2.out'});
+});
+document.querySelectorAll('button,a,.pc,.si,.cb').forEach(el=>{
+  el.addEventListener('mouseenter',()=>gsap.to(c2,{scale:1.9,duration:0.2}));
+  el.addEventListener('mouseleave',()=>gsap.to(c2,{scale:1,duration:0.2}));
+});
+
+/* TICKER */
+const TITEMS=['Spices','Pulses','Dry Fruits','Rice','Cereals','Oilseeds','Turmeric','Cumin','Coriander','Sesame','Dehydrated','Roasted Grains','Fenugreek','Fennel','Psyllium','Groundnuts'];
+const tt=document.getElementById('tt');
+[...TITEMS,...TITEMS,...TITEMS,...TITEMS].forEach(t=>{
+  const s=document.createElement('span');s.className='ti';s.textContent=t;tt.appendChild(s);
+  const d=document.createElement('span');d.className='ti tsep';d.textContent='·';tt.appendChild(d);
+});
+
+/* PRODUCTS MARQUEE */
+const PRODS=[
+  {n:'01',ic:'🥬',t:'Dehydrated',s:'Onion · Garlic · Ginger · Tomato · Spinach',img:'https://www.nuturally.com/1550-medium_default/raw-peeled-peanuts.jpg'},
+  {n:'02',ic:'🌶',t:'Spices',s:'Turmeric · Cumin · Coriander · Chilli · Pepper',img:null},
+  {n:'03',ic:'🌿',t:'Oil & Oil Seeds',s:'Sesame · Mustard · Groundnut · Castor · Flax',img:null},
+  {n:'04',ic:'🌾',t:'Pulses',s:'Chana Dal · Toor Dal · Masoor · Urad · Moong',img:null},
+  {n:'05',ic:'🍚',t:'Rice & Cereals',s:'Basmati · Non-Basmati · Wheat · Corn · Sorghum',img:null},
+  {n:'06',ic:'🫘',t:'Dry Fruits',s:'Cashews · Raisins · Walnuts · Almonds · Dates',img:null},
+  {n:'07',ic:'🌱',t:'Herbs & Seeds',s:'Fenugreek · Ajwain · Fennel · Dill · Psyllium',img:null},
+  {n:'08',ic:'🥜',t:'Groundnuts',s:'Bold · Java · TJ · Red Skin · Blanched',img:'https://www.nuturally.com/1550-medium_default/raw-peeled-peanuts.jpg'},
+];
+function mkCard(p){
+  const imgHtml=p.img
+    ?`<img src="${p.img}" alt="${p.t}" crossorigin="anonymous" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class='pc-fb' style='display:none'>${p.ic}</div>`
+    :`<div class='pc-fb'>${p.ic}</div>`;
+  return `<div class="pc"><div class="pc-iw"><div class="pc-circ">${imgHtml}</div></div><div class="pc-b"><span class="pc-n">${p.n}</span><h3 class="pc-t">${p.t}</h3><p class="pc-s">${p.s}</p></div><span class="pc-ar">→</span></div>`;
+}
+const mt=document.getElementById('mt');
+mt.innerHTML=[...PRODS,...PRODS].map(mkCard).join('');
+
+/* HERO CAROUSEL */
+const slides=[
+  {s:document.getElementById('hs1'),c:document.getElementById('hc1')},
+  {s:document.getElementById('hs2'),c:document.getElementById('hc2')},
+  {s:document.getElementById('hs3'),c:document.getElementById('hc3')},
+];
+const dots=document.querySelectorAll('.hd');
+const prog=document.getElementById('hprog');
+let cur=0,timer=null,ptw=null;
+const DUR=5000;
+
+function goTo(i){
+  const pv=cur; cur=i;
+  slides[pv].c.classList.remove('act','ent');
+  slides[pv].c.classList.add('lv');
+  slides[pv].s.style.cssText='transition:opacity 1.2s ease;opacity:0;';
+  setTimeout(()=>{slides[pv].c.classList.remove('lv');slides[pv].s.style.cssText='';slides[pv].s.classList.remove('act');},650);
+  slides[cur].s.classList.add('act');
+  slides[cur].s.style.cssText='opacity:0;transition:opacity 1.2s ease;';
+  setTimeout(()=>slides[cur].s.style.opacity='1',20);
+  slides[cur].c.classList.add('act','ent');
+  setTimeout(()=>slides[cur].c.classList.remove('ent'),1050);
+  dots.forEach((d,j)=>d.classList.toggle('act',j===cur));
+  if(ptw)ptw.kill();
+  gsap.set(prog,{width:'0%'});
+  ptw=gsap.to(prog,{width:'100%',duration:DUR/1000,ease:'none'});
+}
+function next(){goTo((cur+1)%3);}
+function startC(){
+  if(timer)clearInterval(timer);
+  timer=setInterval(next,DUR);
+  if(ptw)ptw.kill();
+  gsap.set(prog,{width:'0%'});
+  ptw=gsap.to(prog,{width:'100%',duration:DUR/1000,ease:'none'});
+}
+dots.forEach(d=>d.addEventListener('click',()=>{goTo(parseInt(d.dataset.i));startC();}));
+
+/* FOOTER GLOBE */
+let a1=0,a2=0;
+const fo1=document.getElementById('fo1'),fo2=document.getElementById('fo2');
+const fgEl=document.getElementById('fg');
+let gAng=0;
+function animGlobe(){
+  requestAnimationFrame(animGlobe);
+  a1+=0.008; a2-=0.006;
+  fo1.setAttribute('cx',255*Math.cos(a1));
+  fo1.setAttribute('cy',85*Math.sin(a1));
+  const r=40*Math.PI/180;
+  const xr=275*Math.cos(a2),yr=105*Math.sin(a2);
+  fo2.setAttribute('cx',xr*Math.cos(r)-yr*Math.sin(r));
+  fo2.setAttribute('cy',xr*Math.sin(r)+yr*Math.cos(r));
+  gAng+=0.04;
+  fgEl.style.transform=`translateY(-50%) rotate(${gAng}deg)`;
+}
+animGlobe();
+
+/* LOADER */
+let orbOn=false,orbAng=-Math.PI/2;
+const lOrb=document.getElementById('lOrb');
+function runOrb(){
+  if(!orbOn)return;
+  orbAng+=0.03;
+  lOrb.setAttribute('cx',Math.cos(orbAng)*24);
+  lOrb.setAttribute('cy',Math.sin(orbAng)*24*0.36);
+  requestAnimationFrame(runOrb);
+}
+function runLoader(){
+  const tl=gsap.timeline({onComplete:reveal});
+  tl.to('#lFi',{width:'100%',duration:3.2,ease:'power1.inOut'},0)
+    .to('#lGlw',{opacity:0.2,duration:0.7,ease:'power2.out'},0.2)
+    .fromTo('#lB',{opacity:0,y:-25,scaleX:0.3,transformOrigin:'center'},{opacity:1,y:0,scaleX:1,duration:0.6,ease:'back.out(1.8)'},0.4)
+    .fromTo('#lS',{opacity:0,scaleY:0,transformOrigin:'top center'},{opacity:1,scaleY:1,duration:0.5,ease:'power3.out'},0.85)
+    .to('#lGlw',{opacity:0,duration:0.6},1.1)
+    .to('#lw1',{opacity:1,strokeDashoffset:0,duration:0.65,ease:'power2.inOut'},1.0)
+    .to('#lw2',{opacity:1,strokeDashoffset:0,duration:0.75,ease:'power2.inOut'},1.12)
+    .to('#lw3',{opacity:1,strokeDashoffset:0,duration:0.85,ease:'power2.inOut'},1.24)
+    .fromTo('#lg',{opacity:0,scale:0.1,transformOrigin:'218px 92px'},{opacity:1,scale:1,duration:0.6,ease:'back.out(2.2)'},1.55)
+    .to('#lGG',{opacity:1,duration:0.4},1.8)
+    .to('#lGG',{opacity:0.2,duration:0.4},2.2)
+    .to('.ll',{strokeDashoffset:0,duration:0.5,stagger:0.08,ease:'power2.inOut'},1.75)
+    .to('#lOrb',{opacity:1,duration:0.2},2.1)
+    .add(()=>{orbOn=true;runOrb();},2.1)
+    .to('#lBr',{opacity:1,duration:0.6,ease:'power3.out'},2.0)
+    .to({},{ duration:0.5},3.0);
+}
+function reveal(){
+  orbOn=false;
+  gsap.timeline()
+    .to('#wipe',{scaleY:1,transformOrigin:'bottom',duration:0.65,ease:'power4.inOut'})
+    .to('#loader',{opacity:0,duration:0.2},'-=0.2')
+    .add(()=>{document.getElementById('loader').style.display='none';document.getElementById('site').style.opacity='1';})
+    .to('#wipe',{scaleY:0,transformOrigin:'top',duration:0.7,ease:'power4.inOut'},'+=0.05')
+    .add(()=>heroIn(),'-=0.4');
+}
+function heroIn(){
+  gsap.timeline()
+    .to('#mnav',{opacity:1,y:0,duration:0.5,ease:'power2.out'},0)
+    .to('#wa',{opacity:1,duration:0.5},1.0);
+  startC();
+}
+
+/* NAV SCROLL */
+window.addEventListener('scroll',()=>document.getElementById('mnav').classList.toggle('scrolled',scrollY>60));
+
+/* SCROLL ANIMATIONS */
+function setupST(){
+  gsap.to('#wiwrap',{yPercent:-8,ease:'none',scrollTrigger:{trigger:'#wsec',start:'top bottom',end:'bottom top',scrub:true}});
+  ScrollTrigger.create({trigger:'#wsec',start:'top 75%',onEnter:()=>{
+    gsap.to('#wr',{opacity:1,y:0,duration:0.9,ease:'power3.out'});
+    gsap.to('#wdl',{width:'48px',duration:0.8,delay:0.3,ease:'power2.inOut'});
+    gsap.to('.si',{opacity:1,x:0,duration:0.55,stagger:0.09,delay:0.2,ease:'power3.out'});
+  }});
+  ScrollTrigger.create({trigger:'#esec',start:'top 78%',onEnter:()=>{
+    gsap.to('#eh',{opacity:1,y:0,duration:0.7,ease:'power3.out'});
+    gsap.to('#ep',{opacity:1,y:0,duration:0.7,delay:0.15,ease:'power3.out'});
+    gsap.to('#eimg',{opacity:1,y:0,duration:0.9,delay:0.3,ease:'power3.out'});
+  }});
+  gsap.to('#eimg img',{yPercent:14,ease:'none',scrollTrigger:{trigger:'#eimg',start:'top bottom',end:'bottom top',scrub:true}});
+  ScrollTrigger.create({trigger:'#qsec',start:'top 76%',onEnter:()=>{
+    gsap.to('#qi1',{opacity:1,x:0,duration:0.6,ease:'power3.out',delay:0.1});
+    gsap.to('#qi2',{opacity:1,x:0,duration:0.6,ease:'power3.out',delay:0.25});
+    gsap.to('#qi3',{opacity:1,x:0,duration:0.6,ease:'power3.out',delay:0.4});
+    gsap.to('#wtg',{opacity:1,duration:0.5,delay:0.1});
+    gsap.to('#wwh',{opacity:1,y:0,duration:0.7,delay:0.2});
+    gsap.to('#mets',{opacity:1,y:0,duration:0.6,delay:0.4,onComplete:countUp});
+  }});
+  ScrollTrigger.create({trigger:'#psec',start:'top 80%',onEnter:()=>{
+    gsap.to('#ptg',{opacity:1,duration:0.5});
+    gsap.to('#phd',{opacity:1,y:0,duration:0.7,delay:0.1});
+    gsap.fromTo('#mwrap',{opacity:0,y:24},{opacity:1,y:0,duration:0.7,delay:0.2,ease:'power3.out'});
+  }});
+  ScrollTrigger.create({trigger:'#dbar',start:'top 80%',onEnter:()=>{
+    gsap.to('.ds',{opacity:1,y:0,duration:0.65,stagger:0.12,ease:'power3.out'});
+  }});
+  gsap.to('.exi img',{yPercent:14,ease:'none',scrollTrigger:{trigger:'#exsec',start:'top bottom',end:'bottom top',scrub:true}});
+  ScrollTrigger.create({trigger:'#exsec',start:'top 76%',onEnter:()=>{
+    gsap.to('#exct',{opacity:1,y:0,duration:0.85,ease:'power3.out'});
+  }});
+  ScrollTrigger.create({trigger:'#csec',start:'top 78%',onEnter:()=>{
+    gsap.to('#cbadges',{opacity:1,duration:0.5,delay:0.2});
+    gsap.fromTo('.cb',{scale:0.7,rotation:-8},{scale:1,rotation:0,stagger:0.09,duration:0.55,ease:'back.out(1.6)',delay:0.2});
+  }});
+  gsap.to('.gi img',{yPercent:10,ease:'none',scrollTrigger:{trigger:'#gsec',start:'top bottom',end:'bottom top',scrub:true}});
+  ScrollTrigger.create({trigger:'#gsec',start:'top 75%',onEnter:()=>{
+    gsap.to('#gcnt',{opacity:1,y:0,duration:0.85,ease:'power3.out'});
+  }});
+  ScrollTrigger.create({trigger:'.cta',start:'top 75%',onEnter:()=>{
+    gsap.to('#ctac',{opacity:1,y:0,duration:0.8,ease:'power3.out'});
+  }});
+}
+
+/* COUNTUP */
+function countUp(){
+  document.querySelectorAll('.met-n').forEach(el=>{
+    const v=parseInt(el.dataset.v)||0;
+    const em=el.querySelector('em');
+    const emTxt=em?em.outerHTML:'';
+    gsap.fromTo({n:0},{n:v,duration:1.8,ease:'power2.out',onUpdate:function(){
+      el.innerHTML=Math.floor(this.targets()[0].n)+emTxt;
+    }});
+  });
+}
+
+/* INIT */
+gsap.set('#mnav',{opacity:0,y:-10});
+gsap.set('#site',{opacity:0});
+gsap.set('.si',{opacity:0,x:20});
+gsap.set('#wr',{opacity:0,y:30});
+gsap.set('#wdl',{width:0});
+gsap.set('#eh',{opacity:0,y:20});
+gsap.set('#ep',{opacity:0,y:20});
+gsap.set('#eimg',{opacity:0,y:30});
+gsap.set('#qi1,#qi2,#qi3',{opacity:0,x:-24});
+gsap.set('#wtg',{opacity:0});
+gsap.set('#wwh',{opacity:0,y:20});
+gsap.set('#mets',{opacity:0,y:20});
+gsap.set('#ptg',{opacity:0});
+gsap.set('#phd',{opacity:0,y:20});
+gsap.set('.ds',{opacity:0,y:20});
+gsap.set('#exct',{opacity:0,y:20});
+gsap.set('#cbadges',{opacity:0});
+gsap.set('#gcnt',{opacity:0,y:20});
+gsap.set('#ctac',{opacity:0,y:30});
+
+window.addEventListener('load',()=>{setupST();setTimeout(runLoader,200);});
+</script>
+</body>
+</html>
