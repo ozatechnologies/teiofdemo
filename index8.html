@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TEIOF International Trade Pvt. Ltd.</title>
+    <link rel="shortcut icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --bg: #fafafa;
+            --white: #fff;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --accent: #2563eb;
+            --font: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            font-weight: bold;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .loader-logo {
+            width: 100px;
+            height: 100px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            background: transparent;
+            transition: all 0.3s;
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--text) !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-link {
+            color: var(--text) !important;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 8px 20px !important;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: var(--text);
+            transform: scaleX(0);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 120px 20px 80px;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -3;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -2;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+        }
+
+        .hero-subtitle {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            color: #fff;
+        }
+
+        .hero-desc {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-marquee {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            font-size: 20vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.05);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateY(-50%) translateX(0);
+            }
+
+            100% {
+                transform: translateY(-50%) translateX(-50%);
+            }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: #fff;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 100px;
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Marquee Section */
+        .marquee-section {
+            padding: 60px 0;
+            background: var(--white);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 80px;
+            animation: scroll-left 20s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .marquee-item i {
+            color: var(--accent);
+        }
+
+        /* About */
+        .about-section {
+            padding: 120px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            padding: 25px;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* Products Marquee */
+        .products-section {
+            padding: 120px 0;
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .products-cards-marquee {
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .products-cards-track {
+            display: flex;
+            gap: 30px;
+            animation: cards-scroll 30s linear infinite;
+        }
+
+        @keyframes cards-scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .product-card-circle {
+            flex-shrink: 0;
+            width: 180px;
+            text-align: center;
+        }
+
+        .product-circle-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+
+        .product-circle-img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-circle-name {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        /* Bento Gallery */
+        .bento-section {
+            padding: 120px 0;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 300px;
+            gap: 20px;
+        }
+
+        .bento-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bento-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bento-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-item.wide {
+            grid-column: span 2;
+        }
+
+        .bento-item.tall {
+            grid-row: span 2;
+        }
+
+        .bento-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: #fff;
+        }
+
+        .bento-overlay h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .bento-overlay span {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Parallax */
+        .parallax-container {
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .parallax-img {
+            width: 100%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Features */
+        .features-section {
+            padding: 120px 0;
+            background: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: var(--bg);
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .site-footer {
+            position: relative;
+            background-color: var(--white);
+            border-top: 4px solid #0052FF;
+            padding: 6rem 2rem 2rem;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 100% 100%, rgba(0, 82, 255, 0.05) 0%, transparent 60%),
+                radial-gradient(circle at 0% 0%, rgba(10, 37, 64, 0.03) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0A2540;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo span {
+            color: #0052FF;
+        }
+
+        .about-text {
+            color: #64748B;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .inquiry-btn {
+            background: linear-gradient(135deg, #0052FF, #003ECC);
+            color: #fff;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 20px -10px #0052FF;
+            text-decoration: none;
+        }
+
+        .inquiry-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -10px #0052FF;
+        }
+
+        .col-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0A2540;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .col-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #0052FF;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-links a {
+            color: #64748B;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a i {
+            font-size: 0.75rem;
+            color: #0052FF;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .footer-links a:hover {
+            color: #0052FF;
+            transform: translateX(5px);
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0052FF;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 82, 255, 0.08);
+            flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 82, 255, 0.1);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: #0052FF;
+            color: #fff;
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .contact-text strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #0A2540;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-text p,
+        .contact-text a {
+            color: #64748B;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-text a:hover {
+            color: #0052FF;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 5rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #E2E8F0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: #64748B;
+            font-size: 1rem;
+        }
+
+        .footer-bottom strong {
+            color: #0A2540;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            color: #0A2540;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #E2E8F0;
+            font-size: 1rem;
+        }
+
+        .social-links a:hover {
+            background: #0052FF;
+            color: #fff;
+            border-color: #0052FF;
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0, 82, 255, 0.2);
+        }
+
+        #globe-container {
+            position: absolute;
+            bottom: -50px;
+            right: -80px;
+            width: 450px;
+            height: 450px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 1200px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem 2rem;
+            }
+
+            #globe-container {
+                width: 350px;
+                height: 350px;
+                right: -50px;
+                bottom: -50px;
+            }
+        }
+
+        @media (max-width: 991px) {
+
+            .about-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            #globe-container {
+                bottom: auto;
+                top: 0;
+                right: -100px;
+                width: 350px;
+                height: 350px;
+                opacity: 0.15;
+            }
+
+            .site-footer {
+                padding: 4rem 1.5rem 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-item.large,
+            .bento-item.wide,
+            .bento-item.tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <svg class="loader-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect x="25" y="20" width="30" height="80" fill="#2563eb" />
+            <path d="M 20 60 Q 50 50 80 60" stroke="#2563eb" stroke-width="8" fill="none" />
+            <circle cx="80" cy="60" r="15" stroke="#2563eb" stroke-width="3" fill="none" />
+        </svg>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container d-flex justify-content-between align-items-center">
+            <button class="navbar-toggler order-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-start order-3 order-lg-1" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item dropdown ms-lg-3 mt-3 mt-lg-0">
+                        <a class="btn btn-primary text-white dropdown-toggle" href="#" id="inquiryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 20px; padding: 8px 20px; background-color: var(--accent); border: none;">
+                            Inquiry
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="inquiryDropdown">
+                            <li><a class="dropdown-item" href="mailto:export@teiof.com"><i class="fas fa-envelope text-primary me-2"></i>Email</a></li>
+                            <li><a class="dropdown-item" href="https://wa.me/919820589131"><i class="fab fa-whatsapp text-success me-2"></i>WhatsApp</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <a class="navbar-brand ms-auto order-2 order-lg-3" href="https://imgbb.com/">
+                <img src="https://i.ibb.co/rGtfQs5T/Whats-App-Image-2026-04-18-at-6-46-36-PM-2-1-removebg-preview.png" alt="TEIOF Logo" border="0" style="height: 50px; width: auto;">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source
+                src="https://www.shutterstock.com/shutterstock/videos/3782738129/preview/stock-footage-groundnut-or-peanut-arachis-hypogaea-field-weeding-by-farmer-bangladesh.mp4"
+                type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Premium Quality Food Products</p>
+            <h1 class="hero-title">Your Gateway to <span>Global Trade</span></h1>
+            <p class="hero-desc">Premium agro-based products delivered worldwide. Quality, affordability, and expertise
+                define our commitment to excellence.</p>
+            <a href="#products" class="hero-btn">Explore Products <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <section class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-item"><i class="fas fa-leaf"></i> Sustainable Sourcing</div>
+            <div class="marquee-item"><i class="fas fa-globe"></i> Global Export</div>
+            <div class="marquee-item"><i class="fas fa-award"></i> Premium Quality</div>
+            <div class="marquee-item"><i class="fas fa-handshake"></i> Trusted Partners</div>
+            <div class="marquee-item"><i class="fas fa-shipping-fast"></i> Timely Delivery</div>
+            <div class="marquee-item"><i class="fas fa-leaf"></i> Sustainable Sourcing</div>
+            <div class="marquee-item"><i class="fas fa-globe"></i> Global Export</div>
+            <div class="marquee-item"><i class="fas fa-award"></i> Premium Quality</div>
+            <div class="marquee-item"><i class="fas fa-handshake"></i> Trusted Partners</div>
+            <div class="marquee-item"><i class="fas fa-shipping-fast"></i> Timely Delivery</div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label gs-reveal">About Us</p>
+                <h2 class="section-title gs-reveal">Four Decades of Excellence in Agro Trade</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-image gs-reveal">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80"
+                        alt="About TEIOF">
+                </div>
+                <div class="about-content gs-reveal">
+                    <h3>Building Trust Since 1984</h3>
+                    <p>TEIOF International Trade Private Limited has established itself as a trusted name in the global
+                        agro-based product industry. With over four decades of experience, we have built a reputation
+                        for delivering premium quality products at competitive prices.</p>
+                    <p>We prioritize delivering the best quality products at highly competitive prices, ensuring that
+                        our clients receive exceptional value.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="40">40+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="8">8+</div>
+                            <div class="stat-label">Product Categories</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="50">50+</div>
+                            <div class="stat-label">Countries Served</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="1000">1000+</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label gs-reveal">Our Products</p>
+                <h2 class="section-title gs-reveal">Premium Quality Products</h2>
+            </div>
+        </div>
+
+        <!-- Products Circular Cards Marquee -->
+        <div class="products-cards-marquee">
+            <div class="products-cards-track">
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Spices">
+                    <span class="product-circle-name">Spices</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Oil & Seeds">
+                    <span class="product-circle-name">Oil & Seeds</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Raisins">
+                    <span class="product-circle-name">Raisins</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Roasted Grams">
+                    <span class="product-circle-name">Roasted Grams</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Corn Starch">
+                    <span class="product-circle-name">Corn Starch</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Animal Feeds">
+                    <span class="product-circle-name">Animal Feeds</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Pulses">
+                    <span class="product-circle-name">Pulses</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Dehydrated">
+                    <span class="product-circle-name">Dehydrated</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Peanuts">
+                    <span class="product-circle-name">Peanuts</span>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Spices">
+                    <span class="product-circle-name">Spices</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Oil & Seeds">
+                    <span class="product-circle-name">Oil & Seeds</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Raisins">
+                    <span class="product-circle-name">Raisins</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Roasted Grams">
+                    <span class="product-circle-name">Roasted Grams</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Corn Starch">
+                    <span class="product-circle-name">Corn Starch</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Animal Feeds">
+                    <span class="product-circle-name">Animal Feeds</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Pulses">
+                    <span class="product-circle-name">Pulses</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Dehydrated">
+                    <span class="product-circle-name">Dehydrated</span>
+                </div>
+                <div class="product-card-circle gs-reveal">
+                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                        class="product-circle-img" alt="Peanuts">
+                    <span class="product-circle-name">Peanuts</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Gallery -->
+    <section class="bento-section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label gs-reveal">Gallery</p>
+                <h2 class="section-title gs-reveal">Explore Our World</h2>
+            </div>
+            <div class="bento-grid">
+                <div class="bento-item large gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1500937386664-56b1bdf947c6?w=800&q=80">
+                    <div class="bento-overlay">
+                        <h4>Sustainable Farming</h4><span>Quality from the source</span>
+                    </div>
+                </div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80"></div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=400&q=80"></div>
+                <div class="bento-item wide gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80">
+                    <div class="bento-overlay">
+                        <h4>Premium Harvest</h4><span>Handpicked with care</span>
+                    </div>
+                </div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80"></div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?w=400&q=80"></div>
+                <div class="bento-item tall gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=600&q=80">
+                    <div class="bento-overlay">
+                        <h4>Global Export</h4><span>Worldwide delivery</span>
+                    </div>
+                </div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=400&q=80"></div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&q=80"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax -->
+    <section class="parallax-container">
+        <div class="parallax-img" id="parallaxBg"
+            style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80');">
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label gs-reveal">Why Choose Us</p>
+                <h2 class="section-title gs-reveal">Excellence in Every Detail</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card gs-reveal">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Quality Assurance</h3>
+                    <p>We prioritize quality at every step, from sourcing to packaging. Our products undergo rigorous
+                        quality checks to meet international standards.</p>
+                </div>
+                <div class="feature-card gs-reveal">
+                    <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
+                    <h3>Global Reach</h3>
+                    <p>We have established a robust global network to seamlessly deliver our agriculture products to
+                        your doorstep across continents.</p>
+                </div>
+                <div class="feature-card gs-reveal">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>Customer First</h3>
+                    <p>Your satisfaction is our priority. Our dedicated team is always ready to assist you with
+                        personalized service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="contact">
+        <div id="globe-container"></div>
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <svg width="40" height="40" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="25" y="20" width="30" height="80" fill="#0052FF" />
+                        <path d="M 20 60 Q 50 50 80 60" stroke="#0052FF" stroke-width="8" fill="none" />
+                        <circle cx="80" cy="60" r="15" stroke="#0052FF" stroke-width="3" fill="none" />
+                    </svg>
+                    TEIOF <span>International</span>
+                </div>
+                <p class="about-text">TEIOF International is a global source of premium agro-based products. Quality,
+                    affordability, and expertise define our commitment to excellence.</p>
+                <a href="#" class="inquiry-btn">Send Inquiry <i class="fas fa-paper-plane"></i></a>
+            </div>
+            <div class="footer-col">
+                <h4 class="col-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#products"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="col-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Spices</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Oil & Seeds</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Raisins</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Pulses</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Animal Feeds</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="col-title">Contact Us</h4>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-text">
+                        <strong>Address</strong>
+                        <p>Survey No 207, Behind Sathanuman Temple, Rajkot 360 001, Gujarat, India</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-text">
+                        <strong>Email</strong>
+                        <a href="mailto:export@teiof.com">export@teiof.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <div class="contact-text">
+                        <strong>Phone</strong>
+                        <a href="tel:+919820589131">+91 98205 89131</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>© 2024 <strong>TEIOF International Trade Pvt. Ltd.</strong> All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Three.js from Cloudflare CDN for the 3D rotating dotted globe -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                const progress = document.querySelector('.loader-progress');
+                if (progress) progress.style.width = '100%';
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.remove(), 500);
+                }, 500);
+            }
+        });
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                if (window.scrollY > 100) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            }
+        });
+
+        // GSAP
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.gs-reveal').forEach(elem => {
+                gsap.from(elem, {
+                    scrollTrigger: { trigger: elem, start: 'top 80%', toggleActions: 'play none none reverse' },
+                    y: 30, opacity: 0, duration: 0.8, ease: 'power2.out'
+                });
+            });
+        }
+
+        // 3D Globe Animation Logic for Footer
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById('globe-container');
+            // Check if container exists and Three.js is loaded
+            if (!container || typeof THREE === 'undefined') return;
+
+            // Setup Scene
+            const scene = new THREE.Scene();
+
+            // Setup Camera
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 16;
+
+            // Setup Renderer
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // optimize pixel ratio
+            container.appendChild(renderer.domElement);
+
+            // Create Globe Geometry (Points/Dots)
+            const pointsData = [];
+            const samples = 1200; // Number of dots for higher fidelity
+            const radius = 6;
+            const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle pattern
+
+            // Modern colors for the dots
+            const colors = [];
+            const color1 = new THREE.Color(0x0052FF); // Bright primary blue
+            const color2 = new THREE.Color(0x0A2540); // Deep navy blue
+            const color3 = new THREE.Color(0x00F0FF); // Cyber neon blue for accents
+
+            for (let i = 0; i < samples; i++) {
+                // Distribute points evenly on a sphere using Fibonacci spiral
+                const y = 1 - (i / (samples - 1)) * 2;
+                const r = Math.sqrt(1 - y * y);
+                const theta = phi * i;
+
+                const x = Math.cos(theta) * r;
+                const z = Math.sin(theta) * r;
+
+                pointsData.push(x * radius, y * radius, z * radius);
+
+                // Randomly assign colors to create texture
+                const rand = Math.random();
+                if (rand > 0.85) {
+                    colors.push(color3.r, color3.g, color3.b);
+                } else if (rand > 0.4) {
+                    colors.push(color1.r, color1.g, color1.b);
+                } else {
+                    colors.push(color2.r, color2.g, color2.b);
+                }
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(pointsData, 3));
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+            // Point Material
+            const material = new THREE.PointsMaterial({
+                size: 0.12,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.85,
+                sizeAttenuation: true
+            });
+
+            const globe = new THREE.Points(geometry, material);
+
+            // Add realistic tilt (Earth's axis is ~23.5 degrees)
+            globe.rotation.x = 0.41;
+            scene.add(globe);
+
+            // Optional: Add inner glowing sphere
+            const innerGeo = new THREE.IcosahedronGeometry(radius * 0.95, 2);
+            const innerMat = new THREE.MeshBasicMaterial({
+                color: 0x0A2540,
+                transparent: true,
+                opacity: 0.05,
+                wireframe: true
+            });
+            const innerSphere = new THREE.Mesh(innerGeo, innerMat);
+            globe.add(innerSphere);
+
+            // Animation Loop Variables
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                const delta = clock.getDelta();
+                const time = clock.getElapsedTime();
+
+                // Rotate globe continuously
+                globe.rotation.y += 0.2 * delta;
+
+                // Add subtle floating effect mapping to time
+                globe.position.y = Math.sin(time * 0.8) * 0.15;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle Window Resize to keep aspect ratio perfect
+            window.addEventListener('resize', () => {
+                if (!container || container.clientWidth === 0) return;
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+
+            // --- Scroll Triggered Number Counting Animation ---
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const statsContainer = document.querySelector('.about-stats');
+            
+            if (statsContainer && statNumbers.length > 0) {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.2 // Trigger when at least 20% visible
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Start counting for each stat number
+                            statNumbers.forEach(stat => {
+                                const target = +stat.getAttribute('data-count');
+                                const duration = 2000; // Animation duration in ms
+                                const startTime = performance.now();
+                                
+                                // Clear initial text to 0
+                                stat.innerText = '0+';
+                                
+                                const updateNumber = (currentTime) => {
+                                    const elapsedTime = currentTime - startTime;
+                                    const progress = Math.min(elapsedTime / duration, 1);
+                                    
+                                    // Use easeOutQuart easing for smooth deceleration
+                                    const easeProgress = 1 - Math.pow(1 - progress, 4);
+                                    const currentVal = Math.floor(easeProgress * target);
+                                    
+                                    stat.innerText = currentVal + '+';
+                                    
+                                    if (progress < 1) {
+                                        requestAnimationFrame(updateNumber);
+                                    } else {
+                                        stat.innerText = target + '+'; // Ensure it ends exactly on target
+                                    }
+                                };
+                                
+                                requestAnimationFrame(updateNumber);
+                            });
+                            
+                            // Stop observing once animated
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                observer.observe(statsContainer);
+            }
+        });
+    </script>
+</body>
+
+</html>
