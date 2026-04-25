@@ -1226,6 +1226,21 @@
         }
 
         @media (max-width: 991px) {
+            /* Navbar & Banner scroll away on mobile */
+            .navbar {
+                position: absolute !important;
+            }
+
+            /* Faster product marquee on mobile */
+            .products-cards-track {
+                animation: cards-scroll 15s linear infinite !important;
+            }
+
+            /* Prevent footer image zooming on mobile */
+            .site-footer::after {
+                background-size: contain !important;
+                background-position: center bottom !important;
+            }
 
             .about-grid,
             .features-grid {
