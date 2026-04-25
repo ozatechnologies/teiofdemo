@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TEIOF International Trade Pvt. Ltd.</title>
+    <title>TEIOF Impex Trade Pvt. Ltd.</title>
     <link rel="shortcut icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
@@ -226,18 +226,28 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 20px 0;
-            background: transparent;
+            padding: 8px 0;
+            /* Thinner padding */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar .container {
+            position: relative;
+            /* Base for absolute brand banner */
         }
 
         .navbar.scrolled {
-            padding: 12px 0;
-            background: rgba(255, 255, 255, 0.5);
+            padding: 4px 0;
+            /* Even thinner on scroll */
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(25px) saturate(200%);
             -webkit-backdrop-filter: blur(25px) saturate(200%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         /* Mobile Hamburger & Toggler */
@@ -245,38 +255,43 @@
             .navbar-toggler-icon {
                 filter: invert(1) brightness(200%);
             }
+
             .navbar.scrolled .navbar-toggler-icon {
                 filter: none;
             }
+
             .navbar-toggler {
                 border-color: rgba(255, 255, 255, 0.5);
             }
+
             .navbar.scrolled .navbar-toggler {
                 border-color: rgba(0, 0, 0, 0.1);
             }
+
+            .navbar-collapse {
+                background: #ffffff;
+                padding: 1rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                margin-top: 15px;
+            }
+
+            .navbar-collapse .nav-link {
+                color: #0A2540 !important;
+                padding: 12px 20px !important;
+                border-radius: 8px;
+            }
+
+            .navbar-collapse .nav-link:hover {
+                background: rgba(0, 82, 255, 0.05);
+                color: #0052FF !important;
+            }
         }
 
-        /* PC Navbar Thinness & Bookmark Absolute Positioning */
+        /* PC Navbar styles removed thinner overrides to use global thin values */
         @media (min-width: 992px) {
-            .navbar {
-                padding: 12px 0 !important; /* Thinner base */
-            }
-            .navbar.scrolled {
-                padding: 6px 0 !important; /* Thinner scrolled */
-            }
             .navbar .container {
                 position: relative;
-            }
-            .brand-booktag {
-                position: absolute !important;
-                top: -12px !important;
-                right: 12px;
-                margin-top: 0 !important;
-                z-index: 1050; /* Above navbar */
-            }
-            .navbar.scrolled .brand-booktag {
-                top: -6px !important;
-                margin-top: 0 !important;
             }
         }
 
@@ -289,64 +304,116 @@
             gap: 12px;
         }
 
-        .brand-booktag {
-            position: relative;
+        /* Modern Stylish Banner Styling */
+        .brand-banner {
+            position: absolute !important;
+            /* Take out of flow to keep navbar thin */
+            right: 15px;
+            top: 0;
             display: flex;
-            flex-direction: column;
-            /* Vertical stack */
             align-items: center;
+            gap: 16px;
+            padding: 12px 35px 12px 20px;
+            text-decoration: none;
+            margin: 0;
+            z-index: 1050;
+            /* Keep above navbar */
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Base Colored Skewed Shape */
+        .brand-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
             background: #E5E5E5;
-            /* Minimal light grey */
-            padding: 20px 15px 25px 15px;
-            border-radius: 0 0 12px 12px;
-            /* Bookmark shape hanging down */
+            transform: skewX(-15deg);
+            z-index: -2;
+            border-radius: 6px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            margin-top: -20px;
-            /* Attach to top edge */
-            gap: 8px;
-            border: none;
+            transition: all 0.4s ease;
         }
 
-        .brand-booktag::before {
-            display: none;
-            /* Hide accent stripe */
+        /* Offset Wireframe/Outline */
+        .brand-banner::after {
+            content: '';
+            position: absolute;
+            inset: -4px 6px 4px -6px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transform: skewX(-15deg);
+            z-index: -3;
+            border-radius: 6px;
+            transition: all 0.4s ease;
         }
 
-        .brand-booktag:hover {
+        /* Hover Effects */
+        .brand-banner:hover::before {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transform: skewX(-15deg) translateY(-2px);
             background: #D4D4D4;
-            /* Slightly darker on hover */
-            transform: translateY(3px);
-            /* Slide down slightly */
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .brand-banner:hover::after {
+            inset: -6px 8px 6px -8px;
+            border-color: rgba(0, 0, 0, 0.2);
+            transform: skewX(-15deg) translateY(-2px);
+        }
+
+        /* Glassy Overlay Shape inside HTML */
+        .banner-glass {
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 100%);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transform: skewX(-15deg);
+            z-index: -1;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+            border-right-color: rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+        }
+
+        .brand-logo {
+            height: 65px;
+            width: auto;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.4s ease;
+        }
+
+        .brand-banner:hover .brand-logo {
+            transform: scale(1.05);
         }
 
         .brand-text {
             display: flex;
             flex-direction: column;
             line-height: 1.1;
-            text-align: center;
-            /* Center text */
+            text-align: left;
+            position: relative;
+            z-index: 2;
         }
 
         .brand-name {
-            font-size: 18px;
+            font-size: 28px;
             font-weight: 800;
             color: #0A2540;
-            /* Dark text for contrast */
             letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
 
         .brand-sub {
-            font-size: 10px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
             color: #64748B;
-            /* Dark grey sub-text */
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            transition: all 0.3s ease;
         }
 
-        /* Keep text dark on scroll as well */
+        /* Keep text dark on scroll */
         .navbar.scrolled .brand-name {
             color: #0A2540;
         }
@@ -355,19 +422,13 @@
             color: #64748B;
         }
 
-        .navbar.scrolled .brand-booktag {
-            background: #E5E5E5;
-            border: none;
-            margin-top: -12px;
-            /* Adjust for scrolled navbar padding */
-        }
-
         .nav-link {
-            color: var(--text) !important;
+            color: #ffffff !important;
             font-weight: 700;
             font-size: 14px;
             padding: 8px 20px !important;
             position: relative;
+            transition: color 0.3s;
         }
 
         .nav-link::after {
@@ -377,7 +438,7 @@
             left: 20px;
             right: 20px;
             height: 1px;
-            background: var(--text);
+            background: #ffffff;
             transform: scaleX(0);
             transition: all 0.3s;
         }
@@ -388,13 +449,16 @@
 
         @media (min-width: 992px) {
             .navbar:not(.scrolled) .nav-link {
-                color: #ffffff !important;
                 text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
             }
 
-            .navbar:not(.scrolled) .nav-link::after {
-                background: #ffffff;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            .navbar.scrolled .nav-link {
+                color: #0A2540 !important;
+                text-shadow: none;
+            }
+
+            .navbar.scrolled .nav-link::after {
+                background: #0052FF;
             }
         }
 
@@ -738,13 +802,13 @@
 
         .product-card-circle {
             flex-shrink: 0;
-            width: 180px;
+            width: 320px;
             text-align: center;
         }
 
         .product-circle-img {
-            width: 140px;
-            height: 140px;
+            width: 290px;
+            height: 290px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 15px;
@@ -758,8 +822,8 @@
 
         .product-circle-name {
             display: block;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 24px;
             color: var(--text);
         }
 
@@ -912,11 +976,12 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: url('https://img.freepik.com/premium-vector/wheat-field-drawing-rural-landscape-with-harvested-crops-scenic-countryside-views_97843-84800.jpg?semt=ais_hybrid&w=740&q=80');
+            background: url('https://i.ibb.co/Qjm5tR4S/Gemini-Generated-Image-snoa8gsnoa8gsnoa-1.png');
             background-size: cover;
             background-position: center bottom;
             background-repeat: no-repeat;
-            opacity: 0.12; /* Low opacity for subtle background */
+            opacity: 0.12;
+            /* Low opacity for subtle background */
             z-index: 0;
             pointer-events: none;
         }
@@ -1252,12 +1317,12 @@
         <div class="loader-bar">
             <div class="loader-progress"></div>
         </div>
-        <div class="loader-text">TEIOF International</div>
+        <div class="loader-text">TEIOF Impex</div>
     </div>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
-        <div class="container d-flex justify-content-between align-items-center">
+        <div class="container">
             <button class="navbar-toggler order-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -1278,12 +1343,13 @@
                     </li>
                 </ul>
             </div>
-            <a class="navbar-brand ms-auto order-2 order-lg-3 brand-booktag" href="#home">
+            <a class="navbar-brand ms-auto order-2 order-lg-3 brand-banner" href="#home">
+                <div class="banner-glass"></div>
                 <img src="https://i.ibb.co/rGtfQs5T/Whats-App-Image-2026-04-18-at-6-46-36-PM-2-1-removebg-preview.png"
-                    alt="TEIOF Logo" border="0" style="height: 45px; width: auto;">
+                    alt="TEIOF Logo" border="0" class="brand-logo">
                 <div class="brand-text">
                     <span class="brand-name">TEIOF</span>
-                    <span class="brand-sub">International</span>
+                    <span class="brand-sub">Impex</span>
                 </div>
             </a>
         </div>
@@ -1293,7 +1359,7 @@
     <section class="hero" id="home">
         <video class="hero-video" autoplay muted loop playsinline>
             <source
-                src="https://www.shutterstock.com/shutterstock/videos/3782738129/preview/stock-footage-groundnut-or-peanut-arachis-hypogaea-field-weeding-by-farmer-bangladesh.mp4"
+                src="https://www.shutterstock.com/shutterstock/videos/3736249381/preview/stock-footage-crispy-roasted-salted-peanuts-falling-in-super-slow-motion-close-up-hot-delicious-fried-peanuts.mp4"
                 type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -1302,7 +1368,7 @@
             <!-- Slide 1 -->
             <div class="hero-slide active">
                 <p class="hero-subtitle">Welcome to TEIOF</p>
-                <h1 class="hero-title">Welcome to <span>TEIOF International</span></h1>
+                <h1 class="hero-title">Welcome to <span>TEIOF Impex</span></h1>
                 <p class="hero-desc">Premium agro-based products delivered worldwide. Quality, affordability, and
                     expertise define our commitment to excellence.</p>
                 <a href="#products" class="hero-btn">Explore Products <i class="fas fa-arrow-right"></i></a>
@@ -1581,7 +1647,7 @@
                 </div>
                 <div class="about-content gs-reveal">
                     <h3>Building Trust Since 1984</h3>
-                    <p>TEIOF International Trade Private Limited has established itself as a trusted name in the global
+                    <p>TEIOF Impex Trade Private Limited has established itself as a trusted name in the global
                         agro-based product industry. With over four decades of experience, we have built a reputation
                         for delivering premium quality products at competitive prices.</p>
                     <p>We prioritize delivering the best quality products at highly competitive prices, ensuring that
@@ -1622,93 +1688,93 @@
         <div class="products-cards-marquee">
             <div class="products-cards-track">
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Spices">
                     <span class="product-circle-name">Spices</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Oil & Seeds">
                     <span class="product-circle-name">Oil & Seeds</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Raisins">
                     <span class="product-circle-name">Raisins</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Roasted Grams">
                     <span class="product-circle-name">Roasted Grams</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Corn Starch">
                     <span class="product-circle-name">Corn Starch</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Animal Feeds">
                     <span class="product-circle-name">Animal Feeds</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Pulses">
                     <span class="product-circle-name">Pulses</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Dehydrated">
                     <span class="product-circle-name">Dehydrated</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Peanuts">
                     <span class="product-circle-name">Peanuts</span>
                 </div>
                 <!-- Duplicate for seamless loop -->
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Spices">
                     <span class="product-circle-name">Spices</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Oil & Seeds">
                     <span class="product-circle-name">Oil & Seeds</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Raisins">
                     <span class="product-circle-name">Raisins</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Roasted Grams">
                     <span class="product-circle-name">Roasted Grams</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Corn Starch">
                     <span class="product-circle-name">Corn Starch</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Animal Feeds">
                     <span class="product-circle-name">Animal Feeds</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Pulses">
                     <span class="product-circle-name">Pulses</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Dehydrated">
                     <span class="product-circle-name">Dehydrated</span>
                 </div>
                 <div class="product-card-circle gs-reveal">
-                    <img src="https://img.freepik.com/premium-photo/peanuts-bowl-isolated-white-background_29402-488.jpg?semt=ais_hybrid&w=740&q=80"
+                    <img src="https://img.freepik.com/premium-photo/peanuts-wood-bowl-isolated-white-background-top-view_253984-74.jpg"
                         class="product-circle-img" alt="Peanuts">
                     <span class="product-circle-name">Peanuts</span>
                 </div>
@@ -1780,7 +1846,7 @@
                     <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
                     <h3>Quality Assurance</h3>
                     <p>We prioritize quality at every step, from sourcing to packaging. Our products undergo rigorous
-                        quality checks to meet international standards.</p>
+                        quality checks to meet Impex standards.</p>
                 </div>
                 <div class="feature-card gs-reveal">
                     <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
@@ -1809,9 +1875,9 @@
                         <path d="M 20 60 Q 50 50 80 60" stroke="#0052FF" stroke-width="8" fill="none" />
                         <circle cx="80" cy="60" r="15" stroke="#0052FF" stroke-width="3" fill="none" />
                     </svg>
-                    TEIOF <span>International</span>
+                    TEIOF <span>Impex</span>
                 </div>
-                <p class="about-text">TEIOF International is a global source of premium agro-based products. Quality,
+                <p class="about-text">TEIOF Impex is a global source of premium agro-based products. Quality,
                     affordability, and expertise define our commitment to excellence.</p>
 
             </div>
@@ -1861,7 +1927,7 @@
         </div>
         <div class="footer-bottom">
             <div class="footer-bottom-content">
-                <p>© 2024 <strong>TEIOF International Trade Pvt. Ltd.</strong> All rights reserved.</p>
+                <p>© 2024 <strong>TEIOF Impex Trade Pvt. Ltd.</strong> All rights reserved.</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
