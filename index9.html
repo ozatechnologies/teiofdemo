@@ -645,10 +645,11 @@
 
         /* Marquee Section */
         .marquee-section {
-            padding: 60px 0;
-            background: var(--white);
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 12px 0;
+            background: #fdf5e6;
+            /* Pale warm yellow/beige */
+            border-top: 1px solid rgba(75, 44, 32, 0.05);
+            border-bottom: 1px solid rgba(75, 44, 32, 0.05);
             overflow: hidden;
         }
 
@@ -670,18 +671,21 @@
 
         .marquee-item {
             flex-shrink: 0;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            color: var(--text-light);
+            color: #4b2c20;
+            /* Dark Brown */
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
         .marquee-item i {
-            color: var(--accent);
+            color: #4b2c20;
+            /* Dark Brown */
+            font-size: 16px;
         }
 
         /* About */
@@ -1389,7 +1393,7 @@
     <section class="hero" id="home">
         <video class="hero-video" autoplay muted loop playsinline>
             <source
-                src="https://res.cloudinary.com/dvebrppds/video/upload/v1777477524/WhatsApp_Video_2026-04-29_at_9.05.17_PM_qzqypu.mp4"
+                src="https://res.cloudinary.com/dvebrppds/video/upload/v1777483058/WhatsApp_Video_2026-04-29_at_10.24.14_PM_rdv1ls.mp4"
                 type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -1569,7 +1573,6 @@
     " onmouseover="this.style.transform='scale(1.1) rotate(10deg)';this.style.background='rgba(255, 255, 255, 0.4)';this.style.boxShadow='0 12px 40px rgba(31, 38, 135, 0.25)';"
             onmouseout="this.style.transform='scale(1) rotate(0deg)';this.style.background='rgba(255, 255, 255, 0.25)';this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.15)';">
             <i class="fas fa-comment-dots" id="fab-icon" style="transition: transform 0.3s ease;"></i>
-
             <!-- Pulse Ring -->
             <span style="
             position: absolute;
@@ -1613,6 +1616,7 @@
         #contact-fab.active #fab-toggle {
             background: rgba(255, 255, 255, 0.4) !important;
             border-color: rgba(255, 255, 255, 0.6) !important;
+            color: #0052FF !important;
         }
     </style>
 
@@ -1653,16 +1657,103 @@
     <!-- Marquee -->
     <section class="marquee-section">
         <div class="marquee-track">
-            <div class="marquee-item"><i class="fas fa-leaf"></i> Sustainable Sourcing</div>
-            <div class="marquee-item"><i class="fas fa-globe"></i> Global Export</div>
-            <div class="marquee-item"><i class="fas fa-award"></i> Premium Quality</div>
-            <div class="marquee-item"><i class="fas fa-handshake"></i> Trusted Partners</div>
-            <div class="marquee-item"><i class="fas fa-shipping-fast"></i> Timely Delivery</div>
-            <div class="marquee-item"><i class="fas fa-leaf"></i> Sustainable Sourcing</div>
-            <div class="marquee-item"><i class="fas fa-globe"></i> Global Export</div>
-            <div class="marquee-item"><i class="fas fa-award"></i> Premium Quality</div>
-            <div class="marquee-item"><i class="fas fa-handshake"></i> Trusted Partners</div>
-            <div class="marquee-item"><i class="fas fa-shipping-fast"></i> Timely Delivery</div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 8.5C18.5 17 15.5 19 11 20z">
+                    </path>
+                    <line x1="11" y1="20" x2="11" y2="10"></line>
+                </svg>
+                Sustainable Sourcing
+            </div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                </svg>
+                Global Export
+            </div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                </svg>
+                Premium Quality
+            </div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Trusted Partners
+            </div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+                Timely Delivery
+            </div>
+            <!-- Repeat for seamless loop -->
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 8.5C18.5 17 15.5 19 11 20z">
+                    </path>
+                    <line x1="11" y1="20" x2="11" y2="10"></line>
+                </svg>
+                Sustainable Sourcing
+            </div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                </svg>
+                Global Export
+            </div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                </svg>
+                Premium Quality
+            </div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Trusted Partners
+            </div>
+            <div class="marquee-item">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+                Timely Delivery
+            </div>
         </div>
     </section>
 
@@ -1912,7 +2003,7 @@
                 </div>
                 <p class="about-text">TEIOF Impex is a global source of premium agro-based products. Quality,
                     affordability, and expertise define our commitment to excellence.</p>
-
+                <a href="#contact" class="inquiry-btn">Send Inquiry <i class="fas fa-paper-plane"></i></a>
             </div>
             <div class="footer-col">
                 <h4 class="col-title">Quick Links</h4>
