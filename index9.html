@@ -226,8 +226,7 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 8px 0;
-            /* Thinner padding */
+            padding: 4px 0;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
@@ -241,8 +240,8 @@
         }
 
         .navbar.scrolled {
-            padding: 4px 0;
-            /* Even thinner on scroll */
+            padding: 2px 0;
+            /* was 4px */
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(25px) saturate(200%);
             -webkit-backdrop-filter: blur(25px) saturate(200%);
@@ -304,122 +303,44 @@
             gap: 12px;
         }
 
-        /* Modern Stylish Banner Styling */
         .brand-banner {
-            position: absolute !important;
-            /* Take out of flow to keep navbar thin */
-            right: 15px;
-            top: 0;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 12px 35px 12px 20px;
-            text-decoration: none;
-            margin: 0;
-            z-index: 1050;
-            /* Keep above navbar */
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: fixed;
+            top: -35px;
+            right: 20px;
+            z-index: 1100;
+            display: block;
+            text-decoration: none !important;
         }
 
-        /* Base Colored Skewed Shape */
-        .brand-banner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: #E5E5E5;
-            transform: skewX(-15deg);
-            z-index: -2;
-            border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-        }
-
-        /* Offset Wireframe/Outline */
-        .brand-banner::after {
-            content: '';
-            position: absolute;
-            inset: -4px 6px 4px -6px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            transform: skewX(-15deg);
-            z-index: -3;
-            border-radius: 6px;
-            transition: all 0.4s ease;
-        }
-
-        /* Hover Effects */
-        .brand-banner:hover::before {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transform: skewX(-15deg) translateY(-2px);
-            background: #D4D4D4;
-        }
-
-        .brand-banner:hover::after {
-            inset: -6px 8px 6px -8px;
-            border-color: rgba(0, 0, 0, 0.2);
-            transform: skewX(-15deg) translateY(-2px);
-        }
-
-        /* Glassy Overlay Shape inside HTML */
-        .banner-glass {
-            position: absolute;
-            inset: 2px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.1) 100%);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            transform: skewX(-15deg);
-            z-index: -1;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-bottom-color: rgba(255, 255, 255, 0.3);
-            border-right-color: rgba(255, 255, 255, 0.3);
-            pointer-events: none;
-        }
-
-        .brand-logo {
-            height: 65px;
+        .main-logo-img {
+            height: 230px;
             width: auto;
-            position: relative;
-            z-index: 2;
-            transition: transform 0.4s ease;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.22));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .brand-banner:hover .brand-logo {
-            transform: scale(1.05);
+        .brand-banner:hover .main-logo-img {
+            transform: scale(1.04) translateY(-3px);
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.22));
         }
 
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.1;
-            text-align: left;
-            position: relative;
-            z-index: 2;
+        @media (max-width: 1199px) {
+            .main-logo-img {
+                height: 175px;
+            }
         }
 
-        .brand-name {
-            font-size: 28px;
-            font-weight: 800;
-            color: #0A2540;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
+        @media (max-width: 991px) {
+            .main-logo-img {
+                height: 130px;
+            }
         }
 
-        .brand-sub {
-            font-size: 14px;
-            font-weight: 700;
-            color: #64748B;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: all 0.3s ease;
-        }
-
-        /* Keep text dark on scroll */
-        .navbar.scrolled .brand-name {
-            color: #0A2540;
-        }
-
-        .navbar.scrolled .brand-sub {
-            color: #64748B;
+        @media (max-width: 576px) {
+            .main-logo-img {
+                height: 100px;
+            }
         }
 
         .nav-link {
@@ -471,7 +392,7 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            padding: 120px 20px 80px;
+            padding: 230px 20px 80px;
             overflow: hidden;
         }
 
@@ -716,10 +637,12 @@
         }
 
         .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .about-image {
@@ -753,9 +676,22 @@
 
         .about-stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-top: 40px;
+            width: 100%;
+        }
+
+        @media (max-width: 991px) {
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
         }
 
         .stat-item {
@@ -1362,11 +1298,11 @@
             </button>
             <div class="collapse navbar-collapse justify-content-start order-3 order-lg-1" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown ms-lg-3 mt-3 mt-lg-0">
                         <ul class="dropdown-menu border-0 shadow" aria-labelledby="inquiryDropdown">
                             <li><a class="dropdown-item" href="mailto:export@teiof.com"><i
@@ -1377,14 +1313,9 @@
                     </li>
                 </ul>
             </div>
-            <a class="navbar-brand ms-auto order-2 order-lg-3 brand-banner" href="#home">
-                <div class="banner-glass"></div>
-                <img src="https://i.ibb.co/rGtfQs5T/Whats-App-Image-2026-04-18-at-6-46-36-PM-2-1-removebg-preview.png"
-                    alt="TEIOF Logo" border="0" class="brand-logo">
-                <div class="brand-text">
-                    <span class="brand-name">TEIOF</span>
-                    <span class="brand-sub">Impex</span>
-                </div>
+            <a class="brand-banner" href="https://ibb.co/B5Vjk8yb">
+                <img src="https://i.ibb.co/9k92PRb6/Image-To-Stl-com-TEIOF-IMPEXcontainer-copy-1.png" alt="TEIOF Logo"
+                    class="main-logo-img">
             </a>
         </div>
     </nav>
@@ -1762,13 +1693,9 @@
         <div class="container">
             <div class="section-header">
                 <p class="section-label gs-reveal">About Us</p>
-                <h2 class="section-title gs-reveal">Four Decades of Excellence in Agro Trade</h2>
+                <h2 class="section-title gs-reveal">TEIOF Impex</h2>
             </div>
             <div class="about-grid">
-                <div class="about-image gs-reveal">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80"
-                        alt="About TEIOF">
-                </div>
                 <div class="about-content gs-reveal">
                     <h3>Building Trust Since 1984</h3>
                     <p>TEIOF Impex Trade Private Limited has established itself as a trusted name in the global
@@ -1793,6 +1720,10 @@
                             <div class="stat-number" data-count="1000">1000+</div>
                             <div class="stat-label">Happy Clients</div>
                         </div>
+                    </div>
+                    <div class="mt-5 gs-reveal">
+                        <a href="about.html" class="hero-btn" style="background: var(--accent); color: #fff;">Learn More
+                            <i class="fas fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
@@ -2003,7 +1934,7 @@
                 </div>
                 <p class="about-text">TEIOF Impex is a global source of premium agro-based products. Quality,
                     affordability, and expertise define our commitment to excellence.</p>
-                <a href="#contact" class="inquiry-btn">Send Inquiry <i class="fas fa-paper-plane"></i></a>
+
             </div>
             <div class="footer-col">
                 <h4 class="col-title">Quick Links</h4>
