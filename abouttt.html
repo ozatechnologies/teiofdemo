@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Us – TEIOF Impex Trade Pvt. Ltd.</title>
+    <link rel="shortcut icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #0052FF;
+            --primary-light: #EBF2FF;
+            --primary-dark: #003ECC;
+            --accent: #00F0FF;
+            --navy: #0A2540;
+            --text-main: #1A1D23;
+            --text-light: #64748B;
+            --white: #ffffff;
+            --bg-subtle: #F8FAFC;
+            --border: #E2E8F0;
+            --font: 'Poppins', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.05);
+            --shadow-lg: 0 25px 60px -12px rgba(0,0,0,0.1);
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --radius-sm: 12px;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--white);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        section {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* LOADER */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            transition: opacity 0.8s var(--transition);
+        }
+
+        .t-globe-waves {
+            width: 160px;
+            height: 160px;
+        }
+
+        .t-globe-waves svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wave-1 { animation: waveFlow 3s linear infinite; }
+        .wave-2 { animation: waveFlowRight 4s linear infinite; }
+
+        @keyframes waveFlow { 0% { transform: translateX(0); } 100% { transform: translateX(-200px); } }
+        @keyframes waveFlowRight { 0% { transform: translateX(-200px); } 100% { transform: translateX(0); } }
+
+        .globe-spin-1 { transform-origin: center; animation: rotateGlobe1 4s linear infinite; }
+        .globe-spin-2 { transform-origin: center; animation: rotateGlobe2 6s linear infinite; }
+        .globe-dash { transform-origin: center; animation: spinDash 15s linear infinite; }
+
+        @keyframes rotateGlobe1 { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(-1); } }
+        @keyframes rotateGlobe2 { 0%, 100% { transform: rotate(20deg) scaleY(1); } 50% { transform: rotate(20deg) scaleY(-1); } }
+        @keyframes spinDash { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .letter-t-group { animation: floatT 3s ease-in-out infinite; }
+        @keyframes floatT { 0%, 100% { transform: translate(100px, 92px); } 50% { transform: translate(100px, 102px); } }
+
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress {
+            position: absolute;
+            inset: 0;
+            width: 0%;
+            background: var(--primary);
+            transition: width 0.4s ease-out;
+        }
+
+        .loader-text {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--navy);
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 4px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar .container {
+            position: relative;
+            /* Base for absolute brand banner */
+        }
+
+        .navbar.scrolled {
+            padding: 2px 0;
+            /* was 4px */
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mobile Hamburger & Toggler */
+        @media (max-width: 991px) {
+            .navbar-toggler-icon {
+                filter: invert(1) brightness(200%);
+            }
+
+            .navbar.scrolled .navbar-toggler-icon {
+                filter: none;
+            }
+
+            .navbar-toggler {
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .navbar.scrolled .navbar-toggler {
+                border-color: rgba(0, 0, 0, 0.1);
+            }
+
+            .navbar-collapse {
+                background: #ffffff;
+                padding: 1rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                margin-top: 15px;
+            }
+
+            .navbar-collapse .nav-link {
+                color: #0A2540 !important;
+                padding: 12px 20px !important;
+                border-radius: 8px;
+            }
+
+            .navbar-collapse .nav-link:hover {
+                background: rgba(0, 82, 255, 0.05);
+                color: #0052FF !important;
+            }
+        }
+
+        /* PC Navbar styles removed thinner overrides to use global thin values */
+        @media (min-width: 992px) {
+            .navbar .container {
+                position: relative;
+            }
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--text) !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-banner {
+            position: fixed;
+            top: -35px;
+            right: 20px;
+            z-index: 1100;
+            display: block;
+            text-decoration: none !important;
+        }
+
+        .main-logo-img {
+            height: 175px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.22));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .brand-banner:hover .main-logo-img {
+            transform: scale(1.04) translateY(-3px);
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.22));
+        }
+
+        @media (max-width: 1199px) {
+            .main-logo-img {
+                height: 135px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .main-logo-img {
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-logo-img {
+                height: 75px;
+            }
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 18px;
+            /* Increased from 14px */
+            padding: 8px 25px !important;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: #ffffff;
+            transform: scaleX(0);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        @media (min-width: 992px) {
+            .navbar:not(.scrolled) .nav-link {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            }
+
+            .navbar.scrolled .nav-link {
+                color: #0A2540 !important;
+                text-shadow: none;
+            }
+
+            .navbar.scrolled .nav-link::after {
+                background: #0052FF;
+            }
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            background: var(--navy);
+            overflow: hidden;
+            color: var(--white);
+        }
+
+        .page-hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            filter: contrast(1.1) saturate(0.8);
+            transition: transform 12s var(--transition);
+        }
+
+        .page-hero:hover .page-hero-img { transform: scale(1.1); }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            padding-top: 60px;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            letter-spacing: -3px;
+            line-height: 0.9;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .breadcrumb-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        .breadcrumb-bar a { color: var(--white); text-decoration: none; transition: var(--transition); }
+        .breadcrumb-bar a:hover { color: var(--accent); opacity: 1; }
+        .breadcrumb-bar .sep { opacity: 0.4; font-size: 10px; }
+
+        /* SECTIONS */
+        section { position: relative; }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+        }
+
+        .section-divider { width: 60px; height: 4px; background: var(--primary); border-radius: 10px; margin-bottom: 30px; }
+
+        /* ABOUT INTRO */
+        .about-intro { padding: 140px 0; }
+        .ai-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: center; }
+
+        .ai-img-wrap {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 1/1.2;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .ai-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--transition); }
+        .ai-img-wrap:hover img { transform: scale(1.05); }
+
+        .ai-badge {
+            position: absolute;
+            bottom: 40px;
+            right: -30px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            box-shadow: 0 40px 80px rgba(0, 82, 255, 0.3);
+            text-align: center;
+            z-index: 3;
+        }
+
+        .ai-badge strong { font-size: 3.5rem; font-weight: 900; line-height: 1; display: block; margin-bottom: 5px; }
+        .ai-badge span { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9; }
+
+        .ai-text p { font-size: 18px; color: var(--text-light); margin-bottom: 30px; line-height: 1.8; }
+
+        .cert-tags { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 50px; }
+        .cert-tag {
+            padding: 12px 24px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--navy);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cert-tag:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); background: var(--white); }
+
+        /* JOURNEY */
+        .journey-section { padding: 140px 0; background: var(--bg-subtle); }
+        .journey-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+
+        .jcard {
+            background: var(--white);
+            padding: 60px 50px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .jcard:hover { transform: translateY(-15px); box-shadow: var(--shadow-lg); border-color: var(--primary-light); }
+
+        .jcard-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            transition: var(--transition);
+        }
+
+        .jcard:hover .jcard-icon { background: var(--primary); color: var(--white); transform: rotate(-10deg) scale(1.1); }
+
+        .jcard h4 { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .jcard h4 span { color: var(--primary); }
+        .jcard p, .jcard li { font-size: 16px; color: var(--text-light); line-height: 1.8; }
+        .jcard ul { list-style: none; }
+        .jcard li { margin-bottom: 15px; position: relative; padding-left: 25px; }
+        .jcard li::before { content: '→'; position: absolute; left: 0; color: var(--primary); font-weight: 900; }
+
+        /* STATS */
+        .stats-strip { padding: 120px 0; background: var(--white); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; text-align: center; }
+        .stat-num { font-size: 5.5rem; font-weight: 900; color: var(--navy); line-height: 1; letter-spacing: -3px; }
+        .stat-num sup { color: var(--primary); font-size: 2.5rem; margin-left: 5px; }
+        .stat-lbl { font-size: 14px; font-weight: 800; color: var(--text-light); text-transform: uppercase; letter-spacing: 3px; margin-top: 20px; }
+
+        /* SUPPLY CHAIN */
+        .supply-section { padding: 140px 0; }
+        .supply-header { text-align: center; max-width: 900px; margin: 0 auto 100px; }
+        .supply-header .desc { font-size: 18px; color: var(--text-light); margin-top: 20px; }
+
+        .supply-wrap { position: relative; padding-top: 40px; }
+        .supply-line {
+            position: absolute;
+            top: 75px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+            z-index: 1;
+        }
+
+        .supply-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 50px; position: relative; z-index: 2; }
+
+        .sstep { text-align: center; }
+        .sstep-num {
+            width: 70px;
+            height: 70px;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: var(--navy);
+            margin: 0 auto 30px;
+            font-size: 22px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sstep:hover .sstep-num {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 82, 255, 0.3);
+        }
+
+        .sstep h4 { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 20px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .sstep p { font-size: 15px; color: var(--text-light); }
+
+        /* PARALLAX */
+        .parallax-container {
+            height: 650px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--navy);
+        }
+
+        .parallax-img {
+            position: absolute;
+            inset: -100px;
+            width: 120%;
+            height: 140%;
+            background: url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1600&q=80') center/cover no-repeat;
+            opacity: 0.3;
+            filter: grayscale(1);
+        }
+
+        .parallax-content { position: relative; z-index: 2; color: var(--white); padding: 0 30px; }
+        .parallax-content h2 { font-size: 5rem; font-weight: 900; margin-bottom: 25px; letter-spacing: -3px; line-height: 1; }
+        .parallax-content p { font-size: 1.4rem; opacity: 0.8; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+        /* INFRASTRUCTURE */
+        .infra-section { padding: 140px 0; background: var(--bg-subtle); }
+        .infra-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 100px; align-items: center; }
+
+        .infra-feats { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 50px; }
+        .ifeat {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            font-weight: 700;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+        .ifeat i { color: var(--primary); font-size: 24px; }
+        .ifeat:hover { border-color: var(--primary); transform: translateX(15px); box-shadow: var(--shadow-md); }
+
+        .infra-imgs { display: flex; flex-direction: column; gap: 25px; }
+        .infra-imgs .top { border-radius: var(--radius-lg); overflow: hidden; height: 350px; box-shadow: var(--shadow-lg); }
+        .infra-imgs .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .infra-imgs .row2 div { border-radius: var(--radius-md); overflow: hidden; height: 220px; box-shadow: var(--shadow-md); }
+        .infra-imgs img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s var(--transition); }
+        .infra-imgs div:hover img { transform: scale(1.1); }
+
+        /* WHY US */
+        .why-section { padding: 140px 0; background: var(--white); }
+        .why-header { text-align: center; margin-bottom: 80px; }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; }
+
+        .wcard {
+            padding: 60px 50px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .wcard:hover { border-color: var(--primary); transform: translateY(-15px); box-shadow: var(--shadow-lg); }
+
+        .wicon {
+            width: 90px;
+            height: 90px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 40px;
+            transition: var(--transition);
+        }
+
+        .wcard:hover .wicon { background: var(--primary); color: var(--white); transform: rotateY(180deg); }
+
+        .wcard h3 { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 25px; }
+        .wcard p { font-size: 16px; color: var(--text-light); line-height: 1.8; }
+
+        /* Footer */
+        .site-footer {
+            position: relative;
+            background-color: var(--white);
+            border-top: 4px solid #0052FF;
+            padding: 6rem 2rem 2rem;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 100% 100%, rgba(0, 82, 255, 0.05) 0%, transparent 60%),
+                radial-gradient(circle at 0% 0%, rgba(10, 37, 64, 0.03) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .site-footer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://i.ibb.co/Qjm5tR4S/Gemini-Generated-Image-snoa8gsnoa8gsnoa-1.png');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            opacity: 0.12;
+            /* Low opacity for subtle background */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0A2540;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo span {
+            color: #0052FF;
+        }
+
+        .about-text {
+            color: #64748B;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .col-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0A2540;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .col-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #0052FF;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-links a {
+            color: #64748B;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            font-size: 1.05rem;
+        }
+
+        .footer-links a i {
+            font-size: 0.75rem;
+            color: #0052FF;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .footer-links a:hover {
+            color: #0052FF;
+            transform: translateX(5px);
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0052FF;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 82, 255, 0.08);
+            flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 82, 255, 0.1);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: #0052FF;
+            color: #fff;
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .contact-text strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #0A2540;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-text p,
+        .contact-text a {
+            color: #64748B;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-text a:hover {
+            color: #0052FF;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 5rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #E2E8F0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: #64748B;
+            font-size: 1rem;
+        }
+
+        .footer-bottom strong {
+            color: #0A2540;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            color: #0A2540;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #E2E8F0;
+            font-size: 1rem;
+        }
+
+        .social-links a:hover {
+            background: #0052FF;
+            color: #fff;
+            border-color: #0052FF;
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0, 82, 255, 0.2);
+        }
+
+        #globe-container {
+            position: absolute;
+            bottom: -50px;
+            right: -80px;
+            width: 450px;
+            height: 450px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        /* Floating Action Button - Contact Bubble (Synced with index.html) */
+        #contact-fab {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9999;
+            font-family: var(--font);
+        }
+
+        #fab-menu {
+            position: absolute;
+            bottom: 70px;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .fab-link-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            color: var(--navy);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0, 82, 255, 0.15);
+            border: 1px solid rgba(0, 82, 255, 0.1);
+            white-space: nowrap;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .fab-link-item span.icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .fab-link-item:hover {
+            transform: translateX(0) scale(1.05);
+            box-shadow: 0 12px 40px rgba(0, 82, 255, 0.25);
+            color: var(--primary);
+        }
+
+        #fab-toggle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 82, 255, 0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 28px;
+            box-shadow: 0 8px 32px 0 rgba(0, 82, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            outline: none;
+        }
+
+        #fab-toggle:hover {
+            transform: scale(1.1) rotate(10deg);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 40px rgba(0, 82, 255, 0.25);
+        }
+
+        #contact-fab.active #fab-menu {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+            pointer-events: all !important;
+        }
+
+        #contact-fab.active #fab-menu .fab-link-item {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        #contact-fab.active #fab-icon {
+            transform: rotate(45deg);
+        }
+
+        .pulse-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 82, 255, 0.3);
+            animation: fabPulse 2s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fabPulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        @media (max-width: 1200px) {
+            .ai-grid, .infra-grid { gap: 60px; }
+            .journey-cards, .why-grid { gap: 30px; }
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem 2rem;
+            }
+
+            #globe-container {
+                width: 350px;
+                height: 350px;
+                right: -50px;
+                bottom: -50px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .ai-grid, .infra-grid { grid-template-columns: 1fr; text-align: center; }
+            .section-divider { margin: 0 auto 30px; }
+            .ai-img-wrap, .infra-imgs { max-width: 600px; margin: 0 auto; }
+            .ai-badge { right: 0; left: 0; bottom: -30px; max-width: 250px; margin: 0 auto; }
+            .journey-cards, .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .ifeat { justify-content: center; transform: none !important; }
+        }
+
+        @media (max-width: 991px) {
+            .journey-cards, .why-grid, .stats-grid, .supply-steps { grid-template-columns: 1fr; gap: 30px; }
+            .supply-line { display: none; }
+            .navbar { position: absolute !important; }
+            .page-hero { height: 400px; padding-top: 100px; }
+            .page-hero h1 { font-size: clamp(2.5rem, 8vw, 3.5rem); letter-spacing: -1px; }
+            .parallax-content h2 { font-size: clamp(2.2rem, 10vw, 4rem); }
+            .footer-bottom-content { flex-direction: column; gap: 25px; text-align: center; }
+            .about-grid, .features-grid { grid-template-columns: 1fr; }
+            #contact-fab { bottom: 20px; left: 20px; }
+            #fab-toggle { width: 60px; height: 60px; font-size: 24px; }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
+            .section-title { font-size: 2.2rem; }
+            .container { padding-left: 20px; padding-right: 20px; }
+            .site-footer { padding: 4rem 1rem 2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 1.8rem; }
+            .journey-card, .wcard, .ifeat { padding: 30px 20px; }
+            .brand-banner { right: 10px; top: -25px; }
+            .main-logo-img { height: 65px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="t-globe-waves">
+            <svg viewBox="0 0 200 200" width="140" height="140">
+                <g opacity="0.6">
+                    <path class="wave-1"
+                        d="M -200 130 Q -150 100,-100 130 T 0 130 T 100 130 T 200 130 T 300 130 T 400 130"
+                        stroke="#0052FF" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                    <path class="wave-2"
+                        d="M -200 145 Q -150 175,-100 145 T 0 145 T 100 145 T 200 145 T 300 145 T 400 145"
+                        stroke="#00F0FF" stroke-width="2" fill="none" stroke-linecap="round" />
+                </g>
+                <g transform="translate(100,100)">
+                    <circle r="46" fill="none" stroke="#0A2540" stroke-width="1.5" stroke-opacity="0.15" />
+                    <circle r="46" fill="none" stroke="#0052FF" stroke-width="1" stroke-dasharray="4 4"
+                        class="globe-dash" />
+                    <g class="globe-spin-1">
+                        <ellipse rx="22" ry="46" fill="none" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.5" />
+                    </g>
+                    <g class="globe-spin-2">
+                        <ellipse rx="46" ry="22" fill="none" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.5" />
+                    </g>
+                </g>
+                <g class="letter-t-group" transform="translate(100,95)">
+                    <path d="M -16 -16 L 16 -16 M 0 -16 L 0 20" stroke="#0A2540" stroke-width="4.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="0" cy="30" r="3.5" fill="#00F0FF" />
+                </g>
+            </svg>
+        </div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+        <div class="loader-text">TEIOF Impex</div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler order-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-start order-3 order-lg-1" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item dropdown ms-lg-3 mt-3 mt-lg-0">
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="inquiryDropdown">
+                            <li><a class="dropdown-item" href="mailto:export@teiof.com"><i
+                                        class="fas fa-envelope text-primary me-2"></i>Email</a></li>
+                            <li><a class="dropdown-item" href="https://wa.me/919820589131"><i
+                                        class="fab fa-whatsapp text-success me-2"></i>WhatsApp</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <a class="brand-banner" href="index.html">
+                <img src="https://i.ibb.co/3m70dyGB/main-large-removebg-preview.png" alt="TEIOF Logo"
+                    class="main-logo-img">
+            </a>
+        </div>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <img class="page-hero-img" src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1400&q=70"
+            alt="Agriculture background" loading="eager">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>About Us</h1>
+                <div class="breadcrumb-bar">
+                    <a href="index9.html"><i class="fas fa-home me-1"></i> Home</a>
+                    <span class="sep"><i class="fas fa-chevron-right"></i></span>
+                    <span>About Us</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT INTRO -->
+    <section class="about-intro">
+        <div class="container">
+            <div class="ai-grid">
+                <div class="ai-img-wrap reveal">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=700&q=80"
+                        alt="Premium Agro Products">
+                    <div class="ai-badge">
+                        <strong>40+</strong>
+                        Years of Excellence
+                    </div>
+                </div>
+                <div class="reveal">
+                    <span class="section-label">Who We Are</span>
+                    <div class="section-divider"></div>
+                    <h2 class="section-title">About TEIOF<br>International Impex</h2>
+                    <p>We prioritize quality and safety at every stage of our operations. Established in 1984, TEIOF
+                        Impex Trade Pvt. Ltd. has grown into a trusted name in the global agro-export industry,
+                        delivering premium agricultural products to over 50 countries worldwide.</p>
+                    <p>Our ISO 22000:2018, GVCS, and HALAL certifications ensure that our products meet the highest
+                        standards of food safety and adhere to the strictest of quality requirements, giving our
+                        customers complete peace of mind.</p>
+                    <p>Further, our USFDA, FFRMS, REX, and GMP registrations underscore our commitment to delivering
+                        products that meet international standards — backed by four decades of expertise and a passion
+                        for agricultural excellence.</p>
+                    <div class="cert-tags">
+                        <span class="cert-tag"><i class="fas fa-certificate me-1"></i> ISO 22000:2018</span>
+                        <span class="cert-tag"><i class="fas fa-check-circle me-1"></i> HALAL Certified</span>
+                        <span class="cert-tag"><i class="fas fa-shield-alt me-1"></i> USFDA Registered</span>
+                        <span class="cert-tag"><i class="fas fa-leaf me-1"></i> GMP Compliant</span>
+                        <span class="cert-tag"><i class="fas fa-globe me-1"></i> REX Certified</span>
+                        <span class="cert-tag"><i class="fas fa-award me-1"></i> GVCS Approved</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section class="journey-section">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Our Mission</span>
+                <div class="section-divider"></div>
+                <h2 class="section-title">Defining Our <span>Journey</span></h2>
+            </div>
+            <div class="journey-cards">
+                <div class="jcard reveal">
+                    <div class="jcard-icon"><i class="fas fa-bullseye"></i></div>
+                    <h4><span>CORPORATE</span> GOAL</h4>
+                    <p>Create long-term value by serving our clients, taking appropriate risks and leveraging our
+                        capabilities and strategic growth across global agricultural markets.</p>
+                </div>
+                <div class="jcard reveal">
+                    <div class="jcard-icon"><i class="fas fa-eye"></i></div>
+                    <h4><span>STRATEGIC</span> VISION</h4>
+                    <p>Deliver substantially more value than the competition by reinventing the quality of commodities
+                        in the global world — connecting farms to markets seamlessly.</p>
+                </div>
+                <div class="jcard reveal">
+                    <div class="jcard-icon"><i class="fas fa-cogs"></i></div>
+                    <h4><span>OPERATING</span> PRINCIPLES</h4>
+                    <ul>
+                        <li>Put the customer at the centre of all our actions.</li>
+                        <li>Use consumer insights, data and needs to generate growth.</li>
+                        <li>Execute well-considered decisions with precision and speed.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-strip">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat gs-reveal"><span class="stat-num" data-count="40">0</span><span class="stat-lbl">Years
+                        of Experience</span></div>
+                <div class="stat gs-reveal"><span class="stat-num" data-count="50">0</span><span
+                        class="stat-lbl">Countries Served</span></div>
+                <div class="stat gs-reveal"><span class="stat-num" data-count="200">0</span><span
+                        class="stat-lbl">Products Exported</span></div>
+                <div class="stat gs-reveal"><span class="stat-num" data-count="500">0</span><span class="stat-lbl">Happy
+                        Clients</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPLY CHAIN -->
+    <section class="supply-section">
+        <div class="container">
+            <div class="supply-header reveal">
+                <span class="section-label">Our Process</span>
+                <div class="section-divider" style="margin:0 auto 14px;"></div>
+                <h2 class="section-title">Supply Chain Management Process</h2>
+                <p class="desc">Our supply chain management is a seamless orchestration, ensuring efficiency from farm
+                    to global markets. We prioritize transparency, traceability, and reliability for a robust and agile
+                    process.</p>
+            </div>
+            <div class="supply-wrap">
+                <div class="supply-line"></div>
+                <div class="supply-steps">
+                    <div class="sstep reveal">
+                        <div class="sstep-num">01</div>
+                        <h4>Sourcing and Harvesting</h4>
+                        <p>Identify reliable farms and growers. Coordinate harvesting schedules to meet export demands.
+                        </p>
+                    </div>
+                    <div class="sstep reveal">
+                        <div class="sstep-num">02</div>
+                        <h4>Processing and Packaging</h4>
+                        <p>Ensure efficient processing facilities. Implement quality control in packaging for
+                            international standards.</p>
+                    </div>
+                    <div class="sstep reveal">
+                        <div class="sstep-num">03</div>
+                        <h4>Export Logistics</h4>
+                        <p>Plan and manage transportation for timely export. Coordinate with customs and regulatory
+                            authorities.</p>
+                    </div>
+                    <div class="sstep reveal">
+                        <div class="sstep-num">04</div>
+                        <h4>International Distribution</h4>
+                        <p>Collaborate with global distributors. Implement traceability measures for quality assurance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX SECTION -->
+    <section class="parallax-container">
+        <div class="parallax-img" id="aboutParallax"></div>
+        <div class="parallax-content">
+            <h2 class="gs-reveal">Bridging Global Markets</h2>
+            <p class="gs-reveal">From fertile lands to international borders, we ensure the finest agricultural heritage
+                reaches your doorstep.</p>
+        </div>
+    </section>
+
+    <!-- INFRASTRUCTURE -->
+    <section class="infra-section">
+        <div class="container">
+            <div class="infra-grid">
+                <div class="reveal">
+                    <span class="section-label">Our Capabilities</span>
+                    <div class="section-divider"></div>
+                    <h2 class="section-title">Infrastructure<br>and Facilities</h2>
+                    <p>At TEIOF, our infrastructure is a cornerstone of efficiency and excellence in agro-export. Our
+                        state-of-the-art facilities encompass advanced processing units, quality control laboratories,
+                        and strategic distribution centres.</p>
+                    <p>With cutting-edge technology and adherence to international standards, we ensure that our
+                        agro-based products maintain their premium quality from cultivation to global delivery.</p>
+                    <div class="infra-feats">
+                        <div class="ifeat"><i class="fas fa-industry"></i> Processing Units</div>
+                        <div class="ifeat"><i class="fas fa-flask"></i> QC Laboratories</div>
+                        <div class="ifeat"><i class="fas fa-warehouse"></i> Cold Storage</div>
+                        <div class="ifeat"><i class="fas fa-shipping-fast"></i> Distribution Hubs</div>
+                        <div class="ifeat"><i class="fas fa-microscope"></i> Testing Facilities</div>
+                        <div class="ifeat"><i class="fas fa-solar-panel"></i> Eco Processing</div>
+                    </div>
+                </div>
+                <div class="infra-imgs reveal">
+                    <div class="top"><img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=700&q=80"
+                            alt="Facility"></div>
+                    <div class="row2">
+                        <div><img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80"
+                                alt="Processing"></div>
+                        <div><img src="https://images.unsplash.com/photo-1596591606975-97ee5cef3a1e?w=400&q=80"
+                                alt="Storage"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="why-section">
+        <div class="container">
+            <div class="why-header reveal">
+                <span class="section-label">Why Choose TEIOF</span>
+                <div class="section-divider" style="margin:0 auto 14px;"></div>
+                <h2 class="section-title">Excellence in Every Detail</h2>
+            </div>
+            <div class="why-grid">
+                <div class="wcard reveal">
+                    <div class="wicon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Quality Assurance</h3>
+                    <p>We prioritize quality at every step, from sourcing to packaging. Products undergo rigorous
+                        quality checks to meet the highest international standards.</p>
+                </div>
+                <div class="wcard reveal">
+                    <div class="wicon"><i class="fas fa-globe-americas"></i></div>
+                    <h3>Global Reach</h3>
+                    <p>A robust global network to seamlessly deliver our agriculture products to your doorstep across
+                        continents — 50+ countries and counting.</p>
+                </div>
+                <div class="wcard reveal">
+                    <div class="wicon"><i class="fas fa-users"></i></div>
+                    <h3>Customer First</h3>
+                    <p>Your satisfaction is our priority. Our dedicated team is always ready to assist with personalized
+                        service and transparent communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="contact">
+        <div id="globe-container"></div>
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <svg width="40" height="40" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="25" y="20" width="30" height="80" fill="#0052FF" />
+                        <path d="M 20 60 Q 50 50 80 60" stroke="#0052FF" stroke-width="8" fill="none" />
+                        <circle cx="80" cy="60" r="15" stroke="#0052FF" stroke-width="3" fill="none" />
+                    </svg>
+                    TEIOF <span>Impex</span>
+                </div>
+                <p class="about-text">TEIOF Impex is a global source of premium agro-based products. Quality,
+                    affordability, and expertise define our commitment to excellence.</p>
+
+            </div>
+            <div class="footer-col">
+                <h4 class="col-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#products"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="col-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Spices</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Oil & Seeds</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Raisins</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Pulses</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Animal Feeds</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="col-title">Contact Us</h4>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-text">
+                        <strong>Address</strong>
+                        <p>Survey No 207, Behind Sathanuman Temple, Rajkot 360 001, Gujarat, India</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-text">
+                        <strong>Email</strong>
+                        <a href="mailto:export@teiof.com">export@teiof.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <div class="contact-text">
+                        <strong>Phone</strong>
+                        <a href="tel:+919820589131">+91 98205 89131</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>© 2024 <strong>TEIOF Impex Trade Pvt. Ltd.</strong> All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button - Contact Bubble (Synced with index.html) -->
+    <div id="contact-fab">
+        <!-- Dropdown Menu -->
+        <div id="fab-menu">
+            <!-- Email Button -->
+            <a href="mailto:export@teiof.com" class="fab-link-item">
+                <span class="icon" style="background: linear-gradient(135deg, #0052FF, #003ECC);">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                Email Us
+            </a>
+
+            <!-- WhatsApp Button -->
+            <a href="https://wa.me/919820589131" target="_blank" class="fab-link-item">
+                <span class="icon" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+                    <i class="fab fa-whatsapp"></i>
+                </span>
+                WhatsApp
+            </a>
+        </div>
+
+        <!-- Main Toggle Button -->
+        <button id="fab-toggle">
+            <i class="fas fa-comment-dots" id="fab-icon"></i>
+            <span class="pulse-ring"></span>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                const progress = document.querySelector('.loader-progress');
+                if (progress) progress.style.width = '100%';
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.remove(), 500);
+                }, 500);
+            }
+        });
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                if (window.scrollY > 100) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // --- 1. FAB Menu Toggle (Synced with index.html) ---
+            const fabContainer = document.getElementById('contact-fab');
+            const fabToggle = document.getElementById('fab-toggle');
+            if (fabToggle && fabContainer) {
+                fabToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    fabContainer.classList.toggle('active');
+                });
+
+                // Close when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!fabContainer.contains(e.target)) {
+                        fabContainer.classList.remove('active');
+                    }
+                });
+            }
+
+            // --- 2. GSAP Animations ---
+            if (typeof gsap !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+
+                // General reveals
+                gsap.utils.toArray('.reveal, .gs-reveal').forEach(elem => {
+                    const isStaggered = elem.closest('.journey-cards, .supply-steps, .why-grid, .infra-feats, .ai-grid, .infra-grid, .stats-grid');
+                    if (isStaggered) return;
+
+                    gsap.fromTo(elem,
+                        { y: 50, opacity: 0 },
+                        {
+                            scrollTrigger: {
+                                trigger: elem,
+                                start: 'top 85%',
+                                once: true
+                            },
+                            y: 0,
+                            opacity: 1,
+                            duration: 1,
+                            ease: 'power3.out'
+                        }
+                    );
+                });
+
+                // Staggered reveals
+                const staggerSections = ['.journey-cards', '.supply-steps', '.why-grid', '.infra-feats', '.ai-grid', '.infra-grid', '.stats-grid'];
+                staggerSections.forEach(section => {
+                    const container = document.querySelector(section);
+                    if (container) {
+                        const children = container.children;
+                        gsap.fromTo(children,
+                            { y: 40, opacity: 0 },
+                            {
+                                scrollTrigger: {
+                                    trigger: container,
+                                    start: 'top 80%',
+                                    once: true
+                                },
+                                y: 0,
+                                opacity: 1,
+                                duration: 0.8,
+                                stagger: 0.2,
+                                ease: 'power2.out'
+                            }
+                        );
+                    }
+                });
+
+                // Magnetic FAB Effect
+                if (fabBtn) {
+                    fabBtn.addEventListener('mousemove', (e) => {
+                        const rect = fabBtn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        gsap.to(fabBtn, {
+                            x: x * 0.4,
+                            y: y * 0.4,
+                            duration: 0.3,
+                            ease: 'power2.out'
+                        });
+                    });
+                    fabBtn.addEventListener('mouseleave', () => {
+                        gsap.to(fabBtn, {
+                            x: 0,
+                            y: 0,
+                            duration: 0.5,
+                            ease: 'elastic.out(1, 0.3)'
+                        });
+                    });
+                }
+
+                // Parallax Effect
+                gsap.to("#aboutParallax", {
+                    yPercent: 30,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".parallax-container",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+
+                // Counter Animation
+                const stats = document.querySelectorAll('.stat-num');
+                stats.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-count'));
+                    ScrollTrigger.create({
+                        trigger: stat,
+                        start: 'top 90%',
+                        once: true,
+                        onEnter: () => {
+                            let obj = { val: 0 };
+                            gsap.to(obj, {
+                                val: target,
+                                duration: 2,
+                                ease: "power2.out",
+                                onUpdate: () => {
+                                    stat.innerHTML = Math.floor(obj.val) + '<sup>+</sup>';
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+
+            // --- 3. 3D Globe Animation Logic ---
+            const container = document.getElementById('globe-container');
+            if (container && typeof THREE !== 'undefined') {
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+                camera.position.z = 16;
+
+                const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+                renderer.setSize(container.clientWidth, container.clientHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                container.appendChild(renderer.domElement);
+
+                const pointsData = [];
+                const samples = 1200;
+                const radius = 6;
+                const phi = Math.PI * (3 - Math.sqrt(5));
+
+                const colors = [];
+                const color1 = new THREE.Color(0x0052FF);
+                const color2 = new THREE.Color(0x0A2540);
+                const color3 = new THREE.Color(0x00F0FF);
+
+                for (let i = 0; i < samples; i++) {
+                    const y = 1 - (i / (samples - 1)) * 2;
+                    const r = Math.sqrt(1 - y * y);
+                    const theta = phi * i;
+                    const x = Math.cos(theta) * r;
+                    const z = Math.sin(theta) * r;
+                    pointsData.push(x * radius, y * radius, z * radius);
+
+                    const rand = Math.random();
+                    if (rand > 0.85) colors.push(color3.r, color3.g, color3.b);
+                    else if (rand > 0.4) colors.push(color1.r, color1.g, color1.b);
+                    else colors.push(color2.r, color2.g, color2.b);
+                }
+
+                const geometry = new THREE.BufferGeometry();
+                geometry.setAttribute('position', new THREE.Float32BufferAttribute(pointsData, 3));
+                geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+                const material = new THREE.PointsMaterial({
+                    size: 0.12,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.85,
+                    sizeAttenuation: true
+                });
+
+                const globe = new THREE.Points(geometry, material);
+                globe.rotation.x = 0.41;
+                scene.add(globe);
+
+                const innerGeo = new THREE.IcosahedronGeometry(radius * 0.95, 2);
+                const innerMat = new THREE.MeshBasicMaterial({ color: 0x0A2540, transparent: true, opacity: 0.05, wireframe: true });
+                const innerSphere = new THREE.Mesh(innerGeo, innerMat);
+                globe.add(innerSphere);
+
+                const clock = new THREE.Clock();
+                function animate() {
+                    requestAnimationFrame(animate);
+                    const delta = clock.getDelta();
+                    const time = clock.getElapsedTime();
+                    globe.rotation.y += 0.2 * delta;
+                    globe.position.y = Math.sin(time * 0.8) * 0.15;
+                    renderer.render(scene, camera);
+                }
+                animate();
+
+                window.addEventListener('resize', () => {
+                    if (!container || container.clientWidth === 0) return;
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
