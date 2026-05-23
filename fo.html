@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEIOF IMPEX - Floating Footer Demo</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* ===== CSS Custom Properties ===== */
+        :root {
+            --primary: #0052FF;
+            --primary-light: #3375FF;
+            --navy: #0A2540;
+            --footer-bg: #111111;
+            --footer-card-bg: #111111;
+            --footer-text: #B0B0B0;
+            --footer-text-light: #6B6B6B;
+            --footer-heading: #FFFFFF;
+            --footer-link: #B0B0B0;
+            --footer-link-hover: #0052FF;
+            --footer-border: rgba(255, 255, 255, 0.06);
+            --footer-social-bg: rgba(255, 255, 255, 0.06);
+            --footer-social-hover: #0052FF;
+            --footer-bottom-bg: #0A0A0A;
+            --footer-radius: 24px 24px 0 0;
+            --footer-max-width: 1200px;
+            --footer-glow: rgba(0, 82, 255, 0.08);
+        }
+
+        /* ===== Reset & Base ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background: #F5F5F5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== Demo Page Content (to show spacing above footer) ===== */
+        .demo-page-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px 80px;
+            text-align: center;
+        }
+
+        .demo-page-content h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .demo-page-content p {
+            font-size: 1.05rem;
+            color: #666;
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           CARD-STYLE / FLOATING FOOTER
+           ========================================================= */
+
+        /* Outer wrapper: full-width, provides the "ground" for the card */
+        .floating-footer-wrapper {
+            width: 100%;
+            padding: 0 16px;
+            /* side margin so card doesn't touch edges */
+            padding-bottom: 0;
+            display: flex;
+            justify-content: center;
+            /* Optional: subtle gradient behind the card for depth */
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.03) 100%);
+        }
+
+        /* The floating card itself */
+        .floating-footer {
+            width: 100%;
+            max-width: var(--footer-max-width);
+            background: var(--footer-card-bg);
+            border-radius: var(--footer-radius);
+            overflow: hidden;
+            position: relative;
+
+            /* Card depth effects */
+            box-shadow:
+                0 -4px 40px rgba(0, 0, 0, 0.12),
+                0 -1px 6px rgba(0, 0, 0, 0.06),
+                0 0 80px var(--footer-glow);
+
+            /* Subtle top glow line */
+            border-top: 1px solid rgba(0, 82, 255, 0.15);
+        }
+
+        /* ---- Ambient glow inside the card ---- */
+        .floating-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 200px;
+            background: radial-gradient(ellipse at center top,
+                    rgba(0, 82, 255, 0.07) 0%,
+                    transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ---- 3-Column Grid ---- */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1.2fr;
+            gap: 40px;
+            padding: 56px 48px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- Brand Column ---- */
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .footer-logo img {
+            height: 42px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            /* white logo on dark bg */
+            transition: filter 0.3s ease;
+        }
+
+        .footer-logo:hover img {
+            filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(0, 82, 255, 0.4));
+        }
+
+        .footer-logo-text {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--footer-heading);
+            letter-spacing: 0.5px;
+        }
+
+        .footer-description {
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: var(--footer-text);
+            max-width: 340px;
+        }
+
+        /* ---- Social Links ---- */
+        .footer-social {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--footer-social-bg);
+            color: var(--footer-text);
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .footer-social a:hover {
+            background: var(--footer-social-hover);
+            color: #FFFFFF;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(0, 82, 255, 0.35);
+            border-color: transparent;
+        }
+
+        .footer-social a[title="WhatsApp"]:hover {
+            background: #25D366;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+        }
+
+        .footer-social a[title="LinkedIn"]:hover {
+            background: #0A66C2;
+            box-shadow: 0 4px 16px rgba(10, 102, 194, 0.35);
+        }
+
+        .footer-social a[title="Facebook"]:hover {
+            background: #1877F2;
+            box-shadow: 0 4px 16px rgba(24, 119, 242, 0.35);
+        }
+
+        .footer-social a[title="Instagram"]:hover {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            box-shadow: 0 4px 16px rgba(225, 48, 108, 0.35);
+        }
+
+        .footer-social a[title="YouTube"]:hover {
+            background: #FF0000;
+            box-shadow: 0 4px 16px rgba(255, 0, 0, 0.35);
+        }
+
+        .footer-social a[title="Google"]:hover {
+            background: #4285F4;
+            box-shadow: 0 4px 16px rgba(66, 133, 244, 0.35);
+        }
+
+        /* ---- Quick Links Column ---- */
+        .footer-links-column h4,
+        .footer-contact-column h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--footer-heading);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-links-column h4::after,
+        .footer-contact-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 28px;
+            height: 2.5px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links-list li a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: var(--footer-link);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 0;
+        }
+
+        .footer-links-list li a::before {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 1.5px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            margin-right: 0;
+        }
+
+        .footer-links-list li a:hover {
+            color: var(--footer-link-hover);
+            padding-left: 4px;
+        }
+
+        .footer-links-list li a:hover::before {
+            width: 14px;
+            margin-right: 6px;
+        }
+
+        /* ---- Contact Column ---- */
+        .footer-contact-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .footer-contact-list li .contact-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 8px;
+            background: var(--footer-social-bg);
+            color: var(--primary);
+            font-size: 0.85rem;
+            margin-top: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-contact-list li:hover .contact-icon {
+            background: var(--primary);
+            color: #FFFFFF;
+            transform: scale(1.08);
+        }
+
+        .footer-contact-list li .contact-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .footer-contact-list li .contact-label {
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--footer-text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .footer-contact-list li .contact-value {
+            font-size: 0.88rem;
+            color: var(--footer-text);
+            line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact-list li .contact-value a {
+            color: var(--footer-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact-list li .contact-value a:hover {
+            color: var(--primary);
+        }
+
+        /* ---- Divider ---- */
+        .footer-divider {
+            height: 1px;
+            background: var(--footer-border);
+            margin: 0 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- Footer Bottom Bar ---- */
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 48px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: var(--footer-text-light);
+            margin: 0;
+        }
+
+        .footer-bottom p a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom p a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-bottom-right a {
+            font-size: 0.78rem;
+            color: var(--footer-text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-right a:hover {
+            color: var(--primary);
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 991.98px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 36px;
+                padding: 44px 36px 32px;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+
+            .footer-divider {
+                margin: 0 36px;
+            }
+
+            .footer-bottom {
+                padding: 18px 36px;
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .floating-footer-wrapper {
+                padding: 0 8px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 24px 28px;
+            }
+
+            .footer-brand {
+                grid-column: auto;
+            }
+
+            .footer-description {
+                max-width: 100%;
+            }
+
+            .footer-divider {
+                margin: 0 24px;
+            }
+
+            .footer-bottom {
+                padding: 16px 24px;
+                flex-direction: column;
+                gap: 6px;
+                text-align: center;
+            }
+
+            .footer-bottom-right {
+                gap: 14px;
+            }
+        }
+
+        /* =========================================================
+           OPTIONAL: GSAP ENTRANCE ANIMATION
+           ========================================================= */
+        .floating-footer {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .floating-footer.footer-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== Demo Page Content (Replace with your actual page) ===== -->
+    <div class="demo-page-content">
+        <div>
+            <h1>Your Page Content Here</h1>
+            <p>This is a demo area representing your existing page. The floating card footer sits below, contained and
+                centered with rounded top corners.</p>
+        </div>
+    </div>
+    <!-- ===== End Demo Content ===== -->
+
+
+    <!-- =========================================================
+         CARD-STYLE / FLOATING FOOTER
+         ========================================================= -->
+    <div class="floating-footer-wrapper">
+        <footer class="floating-footer" id="floatingFooter">
+
+            <!-- 3-Column Grid -->
+            <div class="footer-grid">
+
+                <!-- Column 1: Brand -->
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <img src="tlogo.png" alt="TEIOF IMPEX Logo">
+                        <span class="footer-logo-text">TEIOF IMPEX</span>
+                    </a>
+                    <p class="footer-description">
+                        Harvested by hands that know the land, TEIOF Impex delivers premium
+                        agro-based products to global markets with a commitment to quality,
+                        reliability, and trusted expertise.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://wa.me/917435912528" target="_blank" title="WhatsApp" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" target="_blank" title="LinkedIn" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" target="_blank" title="Facebook" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" target="_blank" title="Instagram" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" title="YouTube" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" target="_blank" title="Google" aria-label="Google">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-links-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact -->
+                <div class="footer-contact-column">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact-list">
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
+                            <div class="contact-text">
+                                <span class="contact-label">Phone / WhatsApp</span>
+                                <span class="contact-value"><a href="tel:+917435912528">+91 74359 12528</a></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                            <div class="contact-text">
+                                <span class="contact-label">Email</span>
+                                <span class="contact-value"><a
+                                        href="mailto:export@teiof.com">export@teiof.com</a></span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <div class="contact-text">
+                                <span class="contact-label">Address</span>
+                                <span class="contact-value">Sardar Patel Arcade,<br>Canal Road, Morbi,<br>Gujarat,
+                                    India</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="footer-divider"></div>
+
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 TEIOF IMPEX. All rights reserved. Designed by <a href="#">TEIOF</a></p>
+                <div class="footer-bottom-right">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+    <!-- =========================================================
+         END FLOATING FOOTER
+         ========================================================= -->
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+
+    <script>
+        // GSAP: Fade-in + slide-up on scroll
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to('#floatingFooter', {
+            scrollTrigger: {
+                trigger: '#floatingFooter',
+                start: 'top 95%',
+                toggleClass: { targets: '#floatingFooter', className: 'footer-visible' },
+                once: true
+            }
+        });
+
+        // Fallback: If GSAP doesn't fire (short pages), show footer
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const footer = document.getElementById('floatingFooter');
+                if (!footer.classList.contains('footer-visible')) {
+                    footer.classList.add('footer-visible');
+                }
+            }, 500);
+        });
+    </script>
+
+</body>
+
+</html>
