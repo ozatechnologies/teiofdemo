@@ -1,0 +1,2736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Products – TEIOF Impex Trade Pvt. Ltd.</title>
+    <link rel="shortcut icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #0052FF;
+            --primary-light: #EBF2FF;
+            --primary-dark: #003ECC;
+            --primary-soft: rgba(0, 82, 255, 0.06);
+            --primary-glow: rgba(0, 82, 255, 0.15);
+            --accent: #00F0FF;
+            --navy: #0A2540;
+            --navy-light: #1E3A5F;
+            --text-main: #1A1D23;
+            --text-light: #64748B;
+            --text-muted: #94A3B8;
+            --white: #ffffff;
+            --bg-subtle: #F8FAFC;
+            --border: #E2E8F0;
+            --border-light: #F1F5F9;
+            --font: 'Poppins', sans-serif;
+            --font-display: 'Poppins', sans-serif;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 25px 60px -12px rgba(0, 0, 0, 0.1);
+            --shadow-blue: 0 20px 50px -12px rgba(0, 82, 255, 0.15);
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --radius-sm: 12px;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--white);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        section {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* LOADER */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 3px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .loader-progress {
+            height: 100%;
+            width: 0%;
+            background: var(--primary);
+            transition: width 0.4s ease-out;
+        }
+
+        .loader-text {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--navy);
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 4px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar .container {
+            position: relative;
+        }
+
+        
+
+        @media (max-width: 991px) {
+            .navbar-toggler-icon {
+                filter: invert(1) brightness(200%);
+            }
+
+            
+
+            .navbar-toggler {
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            
+
+            .navbar-collapse {
+                background: #ffffff;
+                padding: 1rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                margin-top: 15px;
+            }
+
+            .navbar-collapse .nav-link {
+                color: #0A2540 !important;
+                padding: 12px 20px !important;
+                border-radius: 8px;
+            }
+
+            .navbar-collapse .nav-link:hover {
+                background: rgba(0, 82, 255, 0.05);
+                color: #0052FF !important;
+            }
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--text) !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-banner {
+            position: absolute;
+            top: 5px;
+            left: 15px;
+            z-index: 1100;
+            display: block;
+            text-decoration: none !important;
+        }
+
+        .main-logo-img {
+            height: 120px;
+            width: auto !important;
+            max-width: none !important;
+            object-fit: contain;
+            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.35));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .brand-banner:hover .main-logo-img {
+            transform: scale(1.04) translateY(-3px);
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.22));
+        }
+
+        @media (max-width: 1199px) {
+            .main-logo-img {
+                height: 110px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .main-logo-img {
+                height: 90px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-logo-img {
+                height: 70px;
+            }
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 8px 25px !important;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: #ffffff;
+            transform: scaleX(0);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        @media (min-width: 992px) {
+            .navbar:not(.scrolled) .nav-link {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            }
+
+            
+
+            
+        }
+
+        /* ========== PAGE HERO ========== */
+        .page-hero {
+            position: relative;
+            height: 480px;
+            display: flex;
+            align-items: center;
+            background: var(--navy);
+            overflow: hidden;
+            color: var(--white);
+        }
+
+        .page-hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            filter: contrast(1.1) saturate(0.7);
+            transition: transform 12s var(--transition);
+        }
+
+        .page-hero:hover .page-hero-img {
+            transform: scale(1.08);
+        }
+
+        /* Subtle hero grid overlay */
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            padding-top: 60px;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            letter-spacing: -3px;
+            line-height: 0.9;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .breadcrumb-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        .breadcrumb-bar a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-bar a:hover {
+            color: var(--accent);
+            opacity: 1;
+        }
+
+        .breadcrumb-bar .sep {
+            opacity: 0.4;
+            font-size: 10px;
+        }
+
+        /* SECTION LABELS */
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        /* =========================================================
+   IMPROVED FILTER SECTION
+   ========================================================= */
+        .category-filter {
+            padding: 72px 0 56px;
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .filter-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -1.5px;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .filter-header p {
+            font-size: 16px;
+            color: var(--text-light);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 26px;
+            background: var(--white);
+            border: 1.5px solid var(--border);
+            border-radius: 50px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.35s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-tab .tab-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            opacity: 0.4;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .filter-tab.active,
+        .filter-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 82, 255, 0.15);
+        }
+
+        .filter-tab.active .tab-dot {
+            opacity: 1;
+            background: var(--primary);
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .filter-tab.active .tab-dot {
+            background: #fff;
+        }
+
+        /* =========================================================
+   PRODUCTS GRID — MAGAZINE/EDITORIAL LAYOUT
+   ========================================================= */
+        .products-section {
+            padding: 64px 0 120px;
+            background: var(--bg-subtle);
+        }
+
+        /* Count strip */
+        .results-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1.5px solid var(--border);
+        }
+
+        .results-count {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .results-count span {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 6px;
+        }
+
+        .view-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1.5px solid var(--border);
+            background: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 14px;
+            transition: all 0.25s;
+        }
+
+        .view-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* The grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 50px 30px;
+            transition: all 0.4s var(--ease);
+        }
+
+        .product-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+        }
+
+        .product-item-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy);
+            text-align: center;
+            margin: 0;
+            transition: color 0.3s var(--ease);
+        }
+
+        .product-item:hover .product-item-title {
+            color: var(--primary);
+        }
+
+        .products-grid.view-list {
+            grid-template-columns: 1fr;
+        }
+
+        /* ---- PRODUCT CARD ---- */
+        .product-card {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            background: var(--white);
+            border-radius: 50%;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            border: 1.5px solid rgba(255, 255, 255, 0.8);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all 0.6s var(--ease);
+            display: flex;
+            flex-direction: column;
+            clip-path: circle(50% at 50% 50%);
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 82, 255, 0.15);
+        }
+
+        /* Card image wrapper */
+        .card-img-wrap {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .card-img-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(10, 37, 64, 0.6) 100%);
+            opacity: 0.7;
+            transition: opacity 0.4s;
+            z-index: 1;
+        }
+
+        .product-card:hover .card-img-wrap::after {
+            opacity: 1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s var(--ease);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.15);
+        }
+
+        /* Badge ribbon */
+        .card-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--navy);
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s var(--ease);
+        }
+
+        .card-badge .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .product-card:hover .card-badge {
+            transform: translateY(-2px);
+        }
+
+        /* Number tag */
+        .card-num {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 3;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(0, 82, 255, 0.4);
+            transition: all 0.4s var(--ease);
+        }
+
+        .product-card:hover .card-num {
+            background: #fff;
+            color: var(--primary);
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 82, 255, 0.25);
+        }
+
+        /* Hover CTA overlay on image */
+        .card-img-cta {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 24px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .product-card:hover .card-img-cta {
+            opacity: 1;
+        }
+
+        .quick-view-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            color: var(--navy);
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .quick-view-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Card body reveal */
+        .card-body-inner {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: rgba(10, 37, 64, 0.6);
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            opacity: 0;
+            transition: all 0.5s var(--ease);
+            color: #fff;
+        }
+
+        .product-card:hover .card-body-inner {
+            opacity: 1;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(10, 37, 64, 0.75);
+        }
+
+        .card-meta {
+            display: none;
+        }
+
+        .card-category {
+            display: none;
+        }
+
+        .card-badge {
+            display: none;
+        }
+
+        .card-num {
+            display: none;
+        }
+
+        .card-rating {
+            display: none;
+        }
+
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+            transform: translateY(20px);
+            transition: transform 0.5s var(--ease) 0.15s;
+        }
+
+        .product-card:hover .card-title {
+            transform: translateY(0);
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            transform: translateY(20px);
+            transition: all 0.5s var(--ease) 0.2s;
+            opacity: 0;
+        }
+
+        .product-card:hover .card-desc {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Spec pills simplified for circular */
+        .card-specs {
+            display: none;
+        }
+
+        .spec-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        .spec-pill i {
+            font-size: 10px;
+            color: var(--primary);
+        }
+
+        .product-card:hover .spec-pill {
+            border-color: rgba(0, 82, 255, 0.2);
+            background: var(--primary-light);
+        }
+
+        /* Card footer reveal */
+        .card-footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            transform: translateY(20px);
+            transition: all 0.5s var(--ease) 0.25s;
+            opacity: 0;
+        }
+
+        .product-card:hover .card-footer-inner {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .card-availability {
+            display: none;
+        }
+
+        .avail-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.85);
+            }
+        }
+
+        .card-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.35s var(--ease);
+            box-shadow: 0 6px 18px rgba(0, 82, 255, 0.25);
+        }
+
+        .card-action-btn i {
+            transition: transform 0.3s;
+        }
+
+        .card-action-btn:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 10px 28px rgba(0, 82, 255, 0.38);
+        }
+
+        .card-action-btn:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Disable List View for Circular Grid */
+        .view-toggle {
+            display: none;
+        }
+
+        .products-grid.view-list {
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        }
+
+        /* ---- FEATURED CARD ---- */
+        .product-card.featured {
+            grid-column: auto;
+        }
+
+        .product-card.featured .card-title {
+            font-size: 28px;
+        }
+
+        /* Color accents per category */
+        .badge-dot.spices {
+            background: #f59e0b;
+        }
+
+        .badge-dot.herbs {
+            background: #10b981;
+        }
+
+        .badge-dot.grains {
+            background: #f97316;
+        }
+
+        .badge-dot.oils {
+            background: #8b5cf6;
+        }
+
+        /* ---- SKELETON STATE (hidden, just in case) ---- */
+        .product-card.hidden {
+            display: none;
+        }
+
+        /* =========================================================
+   MODAL — REDESIGNED
+   ========================================================= */
+        .product-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(10, 37, 64, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-inner {
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            max-width: 960px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(40px) scale(0.96);
+            transition: transform 0.4s var(--ease);
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-modal.active .modal-inner {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-subtle);
+            border: none;
+            font-size: 18px;
+            color: var(--navy);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s var(--ease);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .modal-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .modal-img-side {
+            position: relative;
+            overflow: hidden;
+            min-height: 480px;
+            border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+        }
+
+        .modal-img-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .modal-img-side::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 82, 255, 0.15) 0%, transparent 60%);
+        }
+
+        .modal-img-badge {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--navy);
+        }
+
+        .modal-info-side {
+            padding: 52px 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .modal-cat {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .modal-desc {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+        .modal-specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .modal-spec-item {
+            padding: 14px 16px;
+            background: var(--bg-subtle);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .modal-spec-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .modal-spec-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-modal-primary {
+            flex: 1;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-family: var(--font);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s var(--ease);
+            box-shadow: 0 8px 24px rgba(0, 82, 255, 0.3);
+        }
+
+        .btn-modal-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 36px rgba(0, 82, 255, 0.4);
+        }
+
+        .btn-modal-secondary {
+            padding: 16px 24px;
+            background: transparent;
+            color: var(--navy);
+            border: 1.5px solid var(--border);
+            border-radius: 50px;
+            font-family: var(--font);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-modal-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        @media(max-width:768px) {
+            .modal-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-img-side {
+                min-height: 260px;
+                border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            }
+
+            .modal-info-side {
+                padding: 32px 28px;
+            }
+
+            .modal-title {
+                font-size: 26px;
+            }
+
+            .modal-specs-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* =========================================================
+   CTA
+   ========================================================= */
+        .products-cta {
+            padding: 120px 0;
+            background: linear-gradient(140deg, var(--navy) 0%, #1a3a6e 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .products-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><g fill="none"><g fill="%23ffffff" fill-opacity="0.04"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/></g></g></svg>');
+        }
+
+        .cta-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-badge {
+            display: inline-block;
+            padding: 8px 22px;
+            background: rgba(0, 240, 255, 0.12);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .cta-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            letter-spacing: -1.5px;
+            line-height: 1.05;
+        }
+
+        .cta-desc {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.65);
+            max-width: 520px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 48px;
+            background: #fff;
+            color: var(--primary);
+            border-radius: 50px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.4s var(--ease);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+            color: var(--primary);
+        }
+
+        .cta-btn i {
+            transition: transform 0.3s;
+        }
+
+        .cta-btn:hover i {
+            transform: translateX(6px);
+        }
+
+        /* FOOTER */
+        .site-footer {
+            position: relative;
+            background-color: #2A3132;
+            padding: 5rem 2rem 3rem;
+            z-index: 1;
+            overflow: hidden;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        
+
+        /* Footer */
+        .site-footer {
+            position: relative;
+            background-color: #2A3132;
+            padding: 6rem 2rem 4rem;
+            z-index: 1;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        
+
+        
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1.2fr;
+            gap: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo span {
+            color: #fff;
+        }
+
+        .about-text {
+            color: #fff;
+            line-height: 1.9;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .col-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 0.4rem;
+        }
+
+        .contact-title {
+            color: #ffffff !important;
+        }
+
+        .col-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a i {
+            font-size: 0.75rem;
+            color: #fff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: #fff;
+            color: #2A3132;
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .contact-text strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-text p,
+        .contact-text a {
+            color: #fff;
+            font-size: 0.82rem;
+            line-height: 1.4;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-text a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #fff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem;
+        }
+
+        .social-links a:hover {
+            background: #fff;
+            color: #2A3132;
+            border-color: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0, 82, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .site-footer {
+                padding: 4rem 1rem 2rem;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+
+        @media(max-width:640px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .product-card .card-title {
+                font-size: 18px;
+            }
+
+            .product-card .card-desc {
+                display: none;
+            }
+
+            .product-card .card-body-inner {
+                padding: 20px;
+            }
+        }
+
+        /* FAB */
+        @keyframes fabPulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        #contact-fab.active #fab-menu {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+            pointer-events: all !important;
+        }
+
+        #contact-fab.active #fab-menu a {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        #contact-fab.active #fab-icon {
+            transform: rotate(45deg);
+        }
+    </style>
+
+    <style>
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 100% 100%, rgba(0, 82, 255, 0.05) 0%, transparent 60%),
+                radial-gradient(circle at 0% 0%, rgba(10, 37, 64, 0.03) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .site-footer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('f2.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+            transform: scale(1.1);
+        }
+    </style>
+
+    
+    
+
+    <style>
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <svg viewBox="0 0 200 200" width="120" height="120">
+            <g opacity="0.6">
+                <path d="M -200 130 Q -150 100,-100 130 T 0 130 T 100 130 T 200 130 T 300 130 T 400 130"
+                    stroke="#0052FF" stroke-width="2.5" fill="none" stroke-linecap="round"
+                    style="animation:waveFlow 3s linear infinite" />
+                <path d="M -200 145 Q -150 175,-100 145 T 0 145 T 100 145 T 200 145 T 300 145 T 400 145"
+                    stroke="#00F0FF" stroke-width="2" fill="none" stroke-linecap="round"
+                    style="animation:waveFlowRight 4s linear infinite" />
+            </g>
+            <g transform="translate(100,100)">
+                <circle r="46" fill="none" stroke="#0A2540" stroke-width="1.5" stroke-opacity="0.15" />
+                <circle r="46" fill="none" stroke="#0052FF" stroke-width="1" stroke-dasharray="4 4"
+                    style="animation:spinDash 15s linear infinite;transform-origin:center" />
+                <ellipse rx="22" ry="46" fill="none" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.5"
+                    style="animation:rotateGlobe1 4s linear infinite;transform-origin:center" />
+                <ellipse rx="46" ry="22" fill="none" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.5"
+                    style="animation:rotateGlobe2 6s linear infinite;transform-origin:center" />
+            </g>
+            <g style="animation:floatT 3s ease-in-out infinite;transform:translate(100px,95px)">
+                <path d="M -16 -16 L 16 -16 M 0 -16 L 0 20" stroke="#0A2540" stroke-width="4.5"
+                    stroke-linecap="round" />
+                <circle cx="0" cy="30" r="3.5" fill="#00F0FF" />
+            </g>
+        </svg>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+        <div class="loader-text">TEIOF Impex</div>
+    </div>
+    <style>
+        @keyframes waveFlow {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-200px)
+            }
+        }
+
+        @keyframes waveFlowRight {
+            0% {
+                transform: translateX(-200px)
+            }
+
+            100% {
+                transform: translateX(0)
+            }
+        }
+
+        @keyframes spinDash {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes rotateGlobe1 {
+
+            0%,
+            100% {
+                transform: scaleX(1)
+            }
+
+            50% {
+                transform: scaleX(-1)
+            }
+        }
+
+        @keyframes rotateGlobe2 {
+
+            0%,
+            100% {
+                transform: rotate(20deg) scaleY(1)
+            }
+
+            50% {
+                transform: rotate(20deg) scaleY(-1)
+            }
+        }
+
+        @keyframes floatT {
+
+            0%,
+            100% {
+                transform: translate(100px, 95px)
+            }
+
+            50% {
+                transform: translate(100px, 105px)
+            }
+        }
+    </style>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler ms-auto order-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end order-3 order-lg-1" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <a class="brand-banner" href="index.html">
+                <img src="logo.png" alt="TEIOF Logo" class="main-logo-img">
+            </a>
+        </div>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <img class="page-hero-img" src="abt.png" alt="Products background" loading="eager">
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Our Products</h1>
+                <div class="breadcrumb-bar">
+                    <a href="index.html">Home</a>
+                    <span class="sep">/</span>
+                    <span>Products</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORY FILTER -->
+    <section class="category-filter">
+        <div class="container">
+            <div class="filter-header">
+                <span class="section-label">Browse By Category</span>
+                <h2>Premium Agro Products</h2>
+                <p>Sourced from the finest farms across India, delivered to global markets.</p>
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">
+                    <span class="tab-dot" style="background:#0052FF;"></span>
+                    <span>All Products</span>
+                </button>
+                <button class="filter-tab" data-filter="spices">
+                    <span class="tab-dot badge-dot spices"></span>
+                    <span>Whole Spices</span>
+                </button>
+                <button class="filter-tab" data-filter="herbs">
+                    <span class="tab-dot badge-dot herbs"></span>
+                    <span>Herbal Products</span>
+                </button>
+                <button class="filter-tab" data-filter="grains">
+                    <span class="tab-dot badge-dot grains"></span>
+                    <span>Grains &amp; Pulses</span>
+                </button>
+                <button class="filter-tab" data-filter="oils">
+                    <span class="tab-dot badge-dot oils"></span>
+                    <span>Essential Oils</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS GRID -->
+    <section class="products-section">
+        <div class="container">
+            <div class="results-strip">
+                <div class="results-count">Showing <span id="productCount">9</span> products</div>
+                <div class="view-toggle">
+                    <button class="view-btn active" id="gridViewBtn" title="Grid view"><i
+                            class="fas fa-th-large"></i></button>
+                    <button class="view-btn" id="listViewBtn" title="List view"><i class="fas fa-list"></i></button>
+                </div>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+
+                <!-- Product 1 -->
+                <div class="product-item reveal" onclick="openModal('ajwain')">
+                    <div class="product-card" data-category="spices">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80"
+                                alt="Ajwain Carom Seeds" class="product-image">
+                            <div class="card-badge"><span class="badge-dot spices"></span> Whole Spices</div>
+                            <div class="card-num">01</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Whole Spices</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    5.0
+                                </div>
+                            </div>
+                            <h3 class="card-title">Ajwain Carom Seeds</h3>
+                            <p class="card-desc">Premium quality carom seeds with exceptional aroma and distinct thymol
+                                flavor.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Ajwain Carom Seeds</h3>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-item reveal" onclick="openModal('ashwagandha')">
+                    <div class="product-card" data-category="herbs">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1620916566398-3f81e5e7ac94?w=600&q=80"
+                                alt="Ashwagandha" class="product-image">
+                            <div class="card-badge"><span class="badge-dot herbs"></span> Herbal</div>
+                            <div class="card-num">02</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Herbal Products</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star-half-alt"></i> 4.8</div>
+                            </div>
+                            <h3 class="card-title">Ashwagandha</h3>
+                            <p class="card-desc">Organic ashwagandha roots and powder — the ancient adaptogen for stress
+                                relief.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Ashwagandha</h3>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-item reveal" onclick="openModal('blackpepper')">
+                    <div class="product-card" data-category="spices">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80"
+                                alt="Black Pepper" class="product-image">
+                            <div class="card-badge"><span class="badge-dot spices"></span> Whole Spices</div>
+                            <div class="card-num">03</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Whole Spices</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    5.0
+                                </div>
+                            </div>
+                            <h3 class="card-title">Black Pepper</h3>
+                            <p class="card-desc">Bold, aromatic black pepper corns from premium plantations. Superior
+                                pungency.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Black Pepper</h3>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-item reveal" onclick="openModal('cardamom')">
+                    <div class="product-card" data-category="spices">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1599909687489-8016987d498b?w=600&q=80"
+                                alt="Green Cardamom" class="product-image">
+                            <div class="card-badge"><span class="badge-dot spices"></span> Whole Spices</div>
+                            <div class="card-num">04</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Whole Spices</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    5.0
+                                </div>
+                            </div>
+                            <h3 class="card-title">Green Cardamom</h3>
+                            <p class="card-desc">Queen of spices — intense aromatic pods with sweet, spicy notes.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Green Cardamom</h3>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-item reveal" onclick="openModal('cinnamon')">
+                    <div class="product-card" data-category="spices">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&q=80"
+                                alt="Cinnamon Sticks" class="product-image">
+                            <div class="card-badge"><span class="badge-dot spices"></span> Whole Spices</div>
+                            <div class="card-num">05</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Whole Spices</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star-half-alt"></i> 4.9</div>
+                            </div>
+                            <h3 class="card-title">Cinnamon Sticks</h3>
+                            <p class="card-desc">Premium Ceylon cinnamon with sweet, warm flavor. Ideal for baking.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Cinnamon Sticks</h3>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-item reveal" onclick="openModal('cloves')">
+                    <div class="product-card" data-category="spices">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600&q=80"
+                                alt="Cloves" class="product-image">
+                            <div class="card-badge"><span class="badge-dot spices"></span> Whole Spices</div>
+                            <div class="card-num">06</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Whole Spices</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    5.0
+                                </div>
+                            </div>
+                            <h3 class="card-title">Cloves</h3>
+                            <p class="card-desc">Hand-picked premium cloves with strong pungent aroma.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Cloves</h3>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-item reveal" onclick="openModal('rice')">
+                    <div class="product-card" data-category="grains">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&q=80"
+                                alt="Basmati Rice" class="product-image">
+                            <div class="card-badge"><span class="badge-dot grains"></span> Grains</div>
+                            <div class="card-num">07</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Grains &amp; Pulses</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    5.0
+                                </div>
+                            </div>
+                            <h3 class="card-title">Basmati Rice</h3>
+                            <p class="card-desc">Aged premium basmati with extra-long grains and exceptional aroma.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Basmati Rice</h3>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-item reveal" onclick="openModal('turmeric')">
+                    <div class="product-card" data-category="oils">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&q=80"
+                                alt="Turmeric" class="product-image">
+                            <div class="card-badge"><span class="badge-dot oils"></span> Spice / Oil</div>
+                            <div class="card-num">08</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Essential Oils</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                    5.0
+                                </div>
+                            </div>
+                            <h3 class="card-title">Turmeric</h3>
+                            <p class="card-desc">Pure turmeric powder and fingers with high curcumin content.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Turmeric</h3>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="product-item reveal" onclick="openModal('cumin')">
+                    <div class="product-card" data-category="spices">
+                        <div class="card-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80"
+                                alt="Cumin Seeds" class="product-image">
+                            <div class="card-badge"><span class="badge-dot spices"></span> Whole Spices</div>
+                            <div class="card-num">09</div>
+                            <div class="card-img-cta">
+                                <button class="quick-view-btn"><i class="fas fa-eye"></i> Quick View</button>
+                            </div>
+                        </div>
+                        <div class="card-body-inner">
+                            <div class="card-meta">
+                                <span class="card-category">Whole Spices</span>
+                                <div class="card-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star-half-alt"></i> 4.9</div>
+                            </div>
+                            <h3 class="card-title">Cumin Seeds</h3>
+                            <p class="card-desc">Aromatic cumin seeds with earthy, warm flavor. Essential spice.</p>
+                            <div class="card-footer-inner">
+                                <button class="card-action-btn">Request Quote <i
+                                        class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="product-item-title">Cumin Seeds</h3>
+                </div>
+
+            </div><!-- /products-grid -->
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="products-cta">
+        <div class="container cta-inner">
+            <div class="cta-badge">Custom Sourcing Available</div>
+            <h2 class="cta-title">Can't Find What You're<br>Looking For?</h2>
+            <p class="cta-desc">We offer custom sourcing and private labeling services. Contact us for your specific
+                product requirements.</p>
+            <a href="contact.html" class="cta-btn">Get In Touch <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-inner">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-layout">
+                <div class="modal-img-side">
+                    <img src="" alt="" id="modalImage">
+                    <div class="modal-img-badge" id="modalBadge">Whole Spices</div>
+                </div>
+                <div class="modal-info-side">
+                    <div class="modal-cat" id="modalCategory">Category</div>
+                    <h2 class="modal-title" id="modalTitle">Product Name</h2>
+                    <p class="modal-desc" id="modalDescription">Description...</p>
+                    <div class="modal-specs-grid" id="modalSpecs"></div>
+                    <div class="modal-btns">
+                        <button class="btn-modal-primary" onclick="window.location.href='contact.html'">Request a
+                            Quote</button>
+                        <button class="btn-modal-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <!-- Floating Action Button - Contact Bubble -->
+    <div id="contact-fab" style="
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+">
+        <!-- Dropdown Menu -->
+        <div id="fab-menu" style="
+        position: absolute;
+        bottom: 95px;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+        pointer-events: none;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    ">
+            <!-- Email Button -->
+            <a href="mailto:export@teiof.com" style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            color: #0A2540;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0, 82, 255, 0.15);
+            border: 1px solid rgba(0, 82, 255, 0.1);
+            white-space: nowrap;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        " onmouseover="this.style.transform='translateX(0) scale(1.05)';this.style.boxShadow='0 12px 40px rgba(0, 82, 255, 0.25)';"
+                onmouseout="this.style.transform='translateX(0) scale(1)';this.style.boxShadow='0 8px 30px rgba(0, 82, 255, 0.15)';">
+                <span style="
+                width: 36px;
+                height: 36px;
+                background: linear-gradient(135deg, #0052FF, #003ECC);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 14px;
+            "><i class="fas fa-envelope"></i></span>
+                Email Us
+            </a>
+
+            <!-- WhatsApp Button -->
+            <a href="https://wa.me/917435912528" target="_blank" style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            color: #0A2540;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0, 82, 255, 0.15);
+            border: 1px solid rgba(0, 82, 255, 0.1);
+            white-space: nowrap;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition-delay: 0.05s;
+        " onmouseover="this.style.transform='translateX(0) scale(1.05)';this.style.boxShadow='0 12px 40px rgba(0, 82, 255, 0.25)';"
+                onmouseout="this.style.transform='translateX(0) scale(1)';this.style.boxShadow='0 8px 30px rgba(0, 82, 255, 0.15)';">
+                <span style="
+                width: 36px;
+                height: 36px;
+                background: linear-gradient(135deg, #25D366, #128C7E);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 14px;
+            "><i class="fab fa-whatsapp"></i></span>
+                WhatsApp
+            </a>
+        </div>
+
+        <!-- Main Bubble Button -->
+        <button id="fab-toggle" style="
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0A2540;
+        font-size: 30px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        outline: none;
+    " onmouseover="this.style.transform='scale(1.1) rotate(10deg)';this.style.background='rgba(255, 255, 255, 0.4)';this.style.boxShadow='0 12px 40px rgba(31, 38, 135, 0.25)';"
+            onmouseout="this.style.transform='scale(1) rotate(0deg)';this.style.background='rgba(255, 255, 255, 0.25)';this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.15)';">
+            <i class="fas fa-comment-dots" id="fab-icon" style="transition: transform 0.3s ease;"></i>
+            <!-- Pulse Ring -->
+            <span style="
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: fabPulse 2s ease-out infinite;
+            pointer-events: none;
+        "></span>
+        </button>
+    </div>
+
+    <style>
+        @keyframes fabPulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        #contact-fab.active #fab-menu {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+            pointer-events: all !important;
+        }
+
+        #contact-fab.active #fab-menu a {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        #contact-fab.active #fab-icon {
+            transform: rotate(45deg);
+        }
+
+        #contact-fab.active #fab-toggle {
+            background: rgba(255, 255, 255, 0.4) !important;
+            border-color: rgba(255, 255, 255, 0.6) !important;
+            color: #0052FF !important;
+        }
+    </style>
+
+    <script>
+            (function () {
+                const fab = document.getElementById('contact-fab');
+                const toggle = document.getElementById('fab-toggle');
+                let isOpen = false;
+
+                toggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    isOpen = !isOpen;
+                    fab.classList.toggle('active', isOpen);
+                });
+
+                // Close when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (isOpen && !fab.contains(e.target)) {
+                        isOpen = false;
+                        fab.classList.remove('active');
+                    }
+                });
+
+                // Entrance animation
+                setTimeout(function () {
+                    fab.style.opacity = '0';
+                    fab.style.transform = 'translateY(30px) scale(0.8)';
+                    fab.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+                    requestAnimationFrame(function () {
+                        fab.style.opacity = '1';
+                        fab.style.transform = 'translateY(0) scale(1)';
+                    });
+                }, 100);
+            })();
+    </script>
+
+    <footer class="site-footer" id="contact"
+        style="background-color: #000000; padding: 7rem 0 3.5rem; position: relative;">
+        <div class="container" style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;" style="max-width: 1200px;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr; gap: 4rem; color: #ffffff; position: relative;"
+                style="align-items: start;">
+
+                <!-- Left: Logo & Brand Text -->
+                <div>
+                    <div class="footer-logo" style="display: flex; align-items: center; margin-bottom: 24px;">
+                        <img src="tlogo.png" alt="TEIOF Logo" class="footer-brand-logo"
+                            style="height: 80px; filter: brightness(0) invert(1);">
+                        <span class="footer-brand-title"
+                            style="font-size: 2.8rem; font-weight: 800; color: #ffffff; margin-left: 18px; font-family: 'Poppins', sans-serif; letter-spacing: 1.5px; opacity: 1; white-space: nowrap;">TEIOF
+                            IMPEX</span>
+                    </div>
+                    <div class="" style="color: #ffffff; font-size: 17.5px; line-height: 1.8; color: #d1d5db; margin-bottom: 32px; font-weight: 400;">
+                        Harvested by hands that know the land, TEIOF Impex delivers premium agro-based products to
+                        global markets with a commitment to quality, reliability, and trusted expertise.
+                    </div>
+
+                    <!-- Social Media Icons placed under brand text -->
+                    <div class="footer-social-icons" style="display: flex; gap: 16px; margin-top: 25px;">
+                        <style>
+                            .social-icon-link {
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                                border: 1.5px solid #4b5563;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: #d1d5db;
+                                font-size: 18px;
+                                text-decoration: none;
+                                transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            }
+
+                            .social-icon-link:hover {
+                                transform: scale(1.15) translateY(-3px);
+                                border-color: #ffffff;
+                                color: #ffffff;
+                                box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+                            }
+
+                            .social-icon-link:active {
+                                transform: scale(0.9);
+                                transition-duration: 0.1s;
+                            }
+
+                            .social-icon-link.social-wa:hover {
+                                color: #25D366;
+                                border-color: #25D366;
+                                box-shadow: 0 0 15px rgba(37, 211, 102, 0.25);
+                            }
+
+                            .social-icon-link.social-li:hover {
+                                color: #0A66C2;
+                                border-color: #0A66C2;
+                                box-shadow: 0 0 15px rgba(10, 102, 194, 0.25);
+                            }
+
+                            .social-icon-link.social-fb:hover {
+                                color: #1877F2;
+                                border-color: #1877F2;
+                                box-shadow: 0 0 15px rgba(24, 119, 242, 0.25);
+                            }
+
+                            .social-icon-link.social-ig:hover {
+                                color: #E1306C;
+                                border-color: #E1306C;
+                                box-shadow: 0 0 15px rgba(225, 48, 108, 0.25);
+                            }
+
+                            .social-icon-link.social-yt:hover {
+                                color: #FF0000;
+                                border-color: #FF0000;
+                                box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
+                            }
+
+                            .social-icon-link.social-g:hover {
+                                color: #4285F4;
+                                border-color: #4285F4;
+                                box-shadow: 0 0 15px rgba(66, 133, 244, 0.25);
+                            }
+
+                            @media (max-width: 768px) {
+                                .site-footer {
+                                    padding: 4rem 0 2.5rem !important;
+                                }
+
+                                .footer-grid {
+                                    gap: 2.5rem !important;
+                                }
+
+                                .footer-brand-logo {
+                                    height: 55px !important;
+                                }
+
+                                .footer-brand-title {
+                                    font-size: 2rem !important;
+                                    margin-left: 12px !important;
+                                    white-space: normal !important;
+                                }
+
+                                .footer-col-quicklinks {
+                                    text-align: left !important;
+                                    padding-top: 0 !important;
+                                }
+
+                                .footer-col-quicklinks ul {
+                                    margin: 0 !important;
+                                }
+
+                                .footer-col-contact {
+                                    padding-left: 0 !important;
+                                    padding-top: 0 !important;
+                                }
+
+                                .footer-copyright-wrap {
+                                    margin-top: 3rem !important;
+                                    padding-top: 1.5rem !important;
+                                }
+                            }
+                        </style>
+                        <a href="https://wa.me/917435912528" target="_blank" class="social-icon-link social-wa">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/teiof-impex?originalSubdomain=in" target="_blank"
+                            class="social-icon-link social-li">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://facebook.com/teiof.impex" target="_blank" class="social-icon-link social-fb">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/teiof_impex/" target="_blank"
+                            class="social-icon-link social-ig">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@teiofimpex" target="_blank" class="social-icon-link social-yt">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.google.co.in/search?q=TEIOF+IMPEX&ludocid=9607118112606186426&lsig=AB86z5WNwrQbfMZ76Jh-fs1gMPhd"
+                            target="_blank" class="social-icon-link social-g">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Centre: Quick Links -->
+                <div class="footer-col-quicklinks" style="text-align: center; padding-top: 10px;">
+                    <h4 class="" style="margin-bottom: 2rem;"
+                        style="font-size: 1.85rem; font-weight: 700; font-family: 'Poppins', sans-serif; color: #fff; letter-spacing: 1.5px;">
+                        Quick Links</h4>
+                    <ul
+                        style="list-style: none; padding: 0; margin: 0 auto; display: inline-flex; flex-direction: column; gap: 16px; text-align: left;">
+                        <li><a href="#home"
+                                style="color: #d1d5db; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; transition: all 0.3s; padding: 4px 0;"
+                                onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280;"></i> Home</a>
+                        </li>
+                        <li><a href="#about"
+                                style="color: #d1d5db; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; transition: all 0.3s; padding: 4px 0;"
+                                onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280;"></i> About
+                                Us</a></li>
+                        <li><a href="#products"
+                                style="color: #d1d5db; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; transition: all 0.3s; padding: 4px 0;"
+                                onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280;"></i>
+                                Products</a></li>
+                        <li><a href="#gallery"
+                                style="color: #d1d5db; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; transition: all 0.3s; padding: 4px 0;"
+                                onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280;"></i>
+                                Gallery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Right: Get In Touch -->
+                <div class="footer-col-contact md:justify-self-end" style="padding-left: 40px; padding-top: 10px;">
+                    <style>
+                        .footer-contact-item {
+                            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            cursor: default;
+                            padding: 6px 0;
+                        }
+
+                        .footer-contact-item:hover {
+                            transform: translateX(6px);
+                            color: #fff !important;
+                        }
+
+                        .footer-contact-link {
+                            color: #e5e7eb;
+                            text-decoration: none;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 12px;
+                            font-size: 17px;
+                            font-weight: 500;
+                            padding: 8px 0;
+                            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            border-bottom: 1px solid transparent;
+                        }
+
+                        .footer-contact-link:hover {
+                            color: #fff;
+                            transform: translateX(6px) scale(1.03);
+                            border-bottom-color: rgba(255, 255, 255, 0.3);
+                        }
+
+                        .footer-contact-link:active {
+                            transform: translateX(6px) scale(0.97);
+                            transition-duration: 0.1s;
+                        }
+
+                        .footer-contact-link i,
+                        .footer-contact-item i {
+                            transition: all 0.3s ease;
+                        }
+
+                        .footer-contact-link:hover i,
+                        .footer-contact-item:hover i {
+                            color: #ffffff !important;
+                            transform: scale(1.2);
+                        }
+                    </style>
+                    <h4 class="" style="margin-bottom: 2rem;"
+                        style="font-size: 1.85rem; font-weight: 700; font-family: 'Poppins', sans-serif; color: #fff; letter-spacing: 1.5px;">
+                        Get In Touch</h4>
+                    <div class="footer-contact-item"
+                        style="font-size: 17px; line-height: 1.8; padding: 2px 0; display: flex; align-items: flex-start; gap: 14px; color: #d1d5db;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 18px; color: #ffffff; margin-top: 6px;"></i>
+                        <span>
+                            Sardar Patel Arcade, Canal Road<br>
+                            Morbi - Gujarat - India<br>
+                            ZIP Code 363641
+                        </span>
+                    </div>
+                    <p class="" style="margin-bottom: 0.75rem;">
+                        <a href="tel:+917435912528" class="footer-contact-link">
+                            <i class="fas fa-phone-alt"
+                                style="font-size: 18px; color: #ffffff; display: inline-block; transform: scaleX(-1);"></i>+91
+                            74359 12528
+                        </a>
+                    </p>
+                    <p class="" style="margin-bottom: 0.25rem;">
+                        <a href="mailto:export@teiof.com" class="footer-contact-link">
+                            <i class="fas fa-envelope" style="font-size: 18px; color: #ffffff;"></i>export@teiof.com
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dedicated Copyright Footer -->
+    <footer class="footer-copyright-section"
+        style="background-color: #000000; border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; text-align: center; position: relative; z-index: 10;">
+        <div class="container" style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;" style="max-width: 1200px;">
+        <div class="container" style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;">
+            <p
+                style="font-size: 15px; color: #9ca3af; margin: 0; font-family: 'Poppins', sans-serif; font-weight: 500;">
+                © 2024 <strong style="color: #d1d5db; font-family: 'Poppins', sans-serif; font-weight: 700;">TEIOF
+                    IMPEX</strong> All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                const progress = document.querySelector('.loader-progress');
+                if (progress) progress.style.width = '100%';
+                setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 500); }, 500);
+            }
+        });
+
+        // Product Data
+        const productData = {
+            ajwain: {
+                title: 'Ajwain Carom Seeds',
+                category: 'Whole Spices',
+                image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=800&q=80',
+                description: 'Premium quality carom seeds with exceptional aroma and distinct thymol flavor. Sourced from the finest farms of Rajasthan and Gujarat.',
+                specs: [
+                    { label: 'Origin', value: 'India (Rajasthan/Gujarat)' },
+                    { label: 'Grade', value: 'Export Quality' },
+                    { label: 'Packaging', value: '25kg / 50kg Bags' },
+                    { label: 'Shelf Life', value: '24 months' }
+                ]
+            },
+            ashwagandha: {
+                title: 'Ashwagandha',
+                category: 'Herbal Products',
+                image: 'https://images.unsplash.com/photo-1620916566398-3f81e5e7ac94?w=600&q=80',
+                description: 'Organic ashwagandha roots and powder — the ancient adaptogen for stress relief and vitality.',
+                specs: [
+                    { label: 'Origin', value: 'India (Madhya Pradesh)' },
+                    { label: 'Grade', value: 'Organic Certified' },
+                    { label: 'Packaging', value: '10kg / 25kg Bags' },
+                    { label: 'Shelf Life', value: '24 months' }
+                ]
+            },
+            blackpepper: {
+                title: 'Black Pepper',
+                category: 'Whole Spices',
+                image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80',
+                description: 'Bold, aromatic black pepper corns from premium plantations. Superior pungency and rich flavor.',
+                specs: [
+                    { label: 'Origin', value: 'India (Kerala/Karnataka)' },
+                    { label: 'Grade', value: 'TGEB / FAQ' },
+                    { label: 'Packaging', value: '25kg / 50kg Bags' },
+                    { label: 'Shelf Life', value: '24 months' }
+                ]
+            },
+            cardamom: {
+                title: 'Green Cardamom',
+                category: 'Whole Spices',
+                image: 'https://images.unsplash.com/photo-1599909687489-8016987d498b?w=600&q=80',
+                description: 'Queen of spices — intense aromatic pods with sweet, spicy notes. Premium quality export grade.',
+                specs: [
+                    { label: 'Origin', value: 'India (Kerala)' },
+                    { label: 'Grade', value: '8mm Bold Green' },
+                    { label: 'Packaging', value: '5kg / 10kg / 25kg' },
+                    { label: 'Shelf Life', value: '18 months' }
+                ]
+            },
+            cinnamon: {
+                title: 'Cinnamon Sticks',
+                category: 'Whole Spices',
+                image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&q=80',
+                description: 'Premium Ceylon cinnamon with sweet, warm flavor. Ideal for baking and culinary use.',
+                specs: [
+                    { label: 'Origin', value: 'India / Sri Lanka' },
+                    { label: 'Grade', value: 'C5 Special' },
+                    { label: 'Packaging', value: '10kg / 25kg Bags' },
+                    { label: 'Shelf Life', value: '24 months' }
+                ]
+            },
+            cloves: {
+                title: 'Cloves',
+                category: 'Whole Spices',
+                image: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=600&q=80',
+                description: 'Hand-picked premium cloves with strong pungent aroma. Rich in essential oils.',
+                specs: [
+                    { label: 'Origin', value: 'India (Kerala)' },
+                    { label: 'Grade', value: 'Premium Bold' },
+                    { label: 'Packaging', value: '10kg / 25kg Bags' },
+                    { label: 'Shelf Life', value: '24 months' }
+                ]
+            },
+            rice: {
+                title: 'Basmati Rice',
+                category: 'Grains & Pulses',
+                image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&q=80',
+                description: 'Aged premium basmati with extra-long grains and exceptional aroma. Naturally aged for superior taste.',
+                specs: [
+                    { label: 'Origin', value: 'India (Punjab/Haryana)' },
+                    { label: 'Grade', value: '1121 Sella / Steam' },
+                    { label: 'Packaging', value: '25kg / 50kg Bags' },
+                    { label: 'Shelf Life', value: '24 months' }
+                ]
+            },
+            turmeric: {
+                title: 'Turmeric',
+                category: 'Essential Oils',
+                image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600&q=80',
+                description: 'Pure turmeric powder and fingers with high curcumin content. Premium Alleppey variety.',
+                specs: [
+                    { label: 'Origin', value: 'India (Andhra Pradesh)' },
+                    { label: 'Grade', value: 'Alleppey Finger' },
+                    { label: 'Packaging', value: '25kg / 50kg Bags' },
+                    { label: 'Shelf Life', value: '24 months' }
+                ]
+            },
+            cumin: {
+                title: 'Cumin Seeds',
+                category: 'Whole Spices',
+                image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&q=80',
+                description: 'Aromatic cumin seeds with earthy, warm flavor. Essential spice for global cuisines.',
+                specs: [
+                    { label: 'Origin', value: 'India (Gujarat/Rajasthan)' },
+                    { label: 'Grade', value: 'Singapore / Europe Quality' },
+                    { label: 'Packaging', value: '25kg / 50kg Bags' },
+                    { label: 'Shelf Life', value: '24 months' }
+                ]
+            }
+        };
+
+        // Modal Functions
+        function openModal(id) {
+            const data = productData[id];
+            if (!data) return;
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalCategory').textContent = data.category;
+            document.getElementById('modalDescription').textContent = data.description;
+            document.getElementById('modalImage').src = data.image;
+            document.getElementById('modalImage').alt = data.title;
+            document.getElementById('modalBadge').textContent = data.category;
+            const specsGrid = document.getElementById('modalSpecs');
+            specsGrid.innerHTML = data.specs.map(s => `<div class="spec-item"><div class="spec-label">${s.label}</div><div class="spec-value">${s.value}</div></div>`).join('');
+            document.getElementById('productModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('productModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Filter Tabs
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const filter = this.dataset.filter;
+                const items = document.querySelectorAll('.product-item');
+                let count = 0;
+                items.forEach(item => {
+                    const card = item.querySelector('.product-card');
+                    const cat = card ? card.dataset.category : '';
+                    if (filter === 'all' || cat === filter) {
+                        item.style.display = '';
+                        count++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                document.getElementById('productCount').textContent = count;
+            });
+        });
+
+        // Grid / List View Toggle
+        const gridBtn = document.getElementById('gridViewBtn');
+        const listBtn = document.getElementById('listViewBtn');
+        const grid = document.getElementById('productsGrid');
+        if (gridBtn && listBtn && grid) {
+            gridBtn.addEventListener('click', () => {
+                grid.classList.remove('list-view');
+                gridBtn.classList.add('active');
+                listBtn.classList.remove('active');
+            });
+            listBtn.addEventListener('click', () => {
+                grid.classList.add('list-view');
+                listBtn.classList.add('active');
+                gridBtn.classList.remove('active');
+            });
+        }
+
+        // GSAP
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.reveal').forEach(elem => {
+                gsap.from(elem, { scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none reverse' }, y: 40, opacity: 0, duration: 0.6, ease: 'power2.out' });
+            });
+        }
+
+        // FAB logic
+        (function () {
+            const fab = document.getElementById('contact-fab');
+            const toggle = document.getElementById('fab-toggle');
+            if (!fab || !toggle) return;
+            let isOpen = false;
+            toggle.addEventListener('click', (e) => { e.stopPropagation(); isOpen = !isOpen; fab.classList.toggle('active', isOpen); });
+            document.addEventListener('click', (e) => { if (isOpen && !fab.contains(e.target)) { isOpen = false; fab.classList.remove('active'); } });
+        })();
+    </script>
+
+    </body>
+
+</html>

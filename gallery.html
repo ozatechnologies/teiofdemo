@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gallery | TEIOF Impex Trade Pvt. Ltd.</title>
+    <link rel="shortcut icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --bg: #fafafa;
+            --white: #fff;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --accent: #2563eb;
+            --font: 'Poppins', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            font-weight: bold;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            transition: opacity 0.6s cubic-bezier(0.8, 0, 0.2, 1);
+        }
+
+        .t-globe-waves {
+            position: relative;
+            width: 140px;
+            height: 140px;
+        }
+
+        .t-globe-waves svg {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .wave-1 {
+            animation: waveFlow 3s linear infinite;
+        }
+
+        .wave-2 {
+            animation: waveFlowRight 4s linear infinite;
+        }
+
+        @keyframes waveFlow {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-200px);
+            }
+        }
+
+        @keyframes waveFlowRight {
+            0% {
+                transform: translateX(-200px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .globe-spin-1 {
+            transform-origin: center;
+            animation: rotateGlobe1 4s linear infinite;
+        }
+
+        .globe-spin-2 {
+            transform-origin: center;
+            animation: rotateGlobe2 6s linear infinite;
+        }
+
+        .globe-dash {
+            transform-origin: center;
+            animation: spinDash 15s linear infinite;
+        }
+
+        @keyframes rotateGlobe1 {
+            0% {
+                transform: scaleX(1);
+            }
+
+            25% {
+                transform: scaleX(0);
+            }
+
+            50% {
+                transform: scaleX(-1);
+            }
+
+            75% {
+                transform: scaleX(0);
+            }
+
+            100% {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes rotateGlobe2 {
+            0% {
+                transform: rotate(20deg) scaleY(1);
+            }
+
+            25% {
+                transform: rotate(20deg) scaleY(0);
+            }
+
+            50% {
+                transform: rotate(20deg) scaleY(-1);
+            }
+
+            75% {
+                transform: rotate(20deg) scaleY(0);
+            }
+
+            100% {
+                transform: rotate(20deg) scaleY(1);
+            }
+        }
+
+        @keyframes spinDash {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .letter-t-group {
+            animation: floatT 3s ease-in-out infinite;
+        }
+
+        @keyframes floatT {
+
+            0%,
+            100% {
+                transform: translate(100px, 92px);
+            }
+
+            50% {
+                transform: translate(100px, 102px);
+            }
+        }
+
+        .loader-bar {
+            width: 180px;
+            height: 3px;
+            background: rgba(10, 37, 64, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #0052FF, #00F0FF);
+            border-radius: 3px;
+            transition: width 0.4s ease-out;
+            box-shadow: 0 0 10px rgba(0, 82, 255, 0.4);
+        }
+
+        .loader-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #0A2540;
+            text-transform: uppercase;
+            opacity: 0.7;
+            animation: pulseText 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseText {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 4px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar .container {
+            position: relative;
+        }
+
+        
+
+        @media (max-width: 991px) {
+            .navbar-toggler-icon {
+                filter: invert(1) brightness(200%);
+            }
+
+            
+
+            .navbar-toggler {
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            
+
+            .navbar-collapse {
+                background: #ffffff;
+                padding: 1rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                margin-top: 15px;
+            }
+
+            .navbar-collapse .nav-link {
+                color: #0A2540 !important;
+                padding: 12px 20px !important;
+                border-radius: 8px;
+            }
+
+            .navbar-collapse .nav-link:hover {
+                background: rgba(0, 82, 255, 0.05);
+                color: #0052FF !important;
+            }
+        }
+
+        .brand-banner {
+            position: absolute;
+            top: 5px;
+            left: 15px;
+            z-index: 1100;
+            display: block;
+            text-decoration: none !important;
+        }
+
+        .main-logo-img {
+            height: 120px;
+            width: auto !important;
+            max-width: none !important;
+            object-fit: contain;
+            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.35));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .brand-banner:hover .main-logo-img {
+            transform: scale(1.04) translateY(-3px);
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.22));
+        }
+
+        @media (max-width: 1199px) {
+            .main-logo-img {
+                height: 110px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .main-logo-img {
+                height: 90px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-logo-img {
+                height: 70px;
+            }
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 8px 25px !important;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: #ffffff;
+            transform: scaleX(0);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        @media (min-width: 992px) {
+            .navbar:not(.scrolled) .nav-link {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            }
+
+            
+
+            
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 230px 20px 80px;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -3;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -2;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: #fff;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .hero-subtitle {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            color: #fff;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-desc {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        /* Bento Gallery */
+        .bento-section {
+            padding: 120px 0;
+            background: #fff;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 300px;
+            gap: 20px;
+        }
+
+        .bento-item {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: #f0f0f0;
+        }
+
+        .bento-item img,
+        .bento-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bento-item:hover img,
+        .bento-item:hover video {
+            transform: scale(1.08);
+        }
+
+        .bento-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: #fff;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .bento-item:hover .bento-overlay {
+            opacity: 1;
+        }
+
+        .bento-overlay h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            transform: translateY(10px);
+            transition: transform 0.4s ease;
+        }
+
+        .bento-overlay span {
+            font-size: 14px;
+            opacity: 0.8;
+            transform: translateY(10px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .bento-item:hover .bento-overlay h4,
+        .bento-item:hover .bento-overlay span {
+            transform: translateY(0);
+        }
+
+        .bento-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-item.wide {
+            grid-column: span 2;
+        }
+
+        .bento-item.tall {
+            grid-row: span 2;
+        }
+
+        @media (max-width: 991px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bento-item.large,
+            .bento-item.wide,
+            .bento-item.tall {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        /* Parallax */
+        .parallax-container {
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .parallax-img {
+            width: 100%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Features */
+        .features-section {
+            padding: 120px 0;
+            background: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: var(--bg);
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Master Footer Styles */
+        .site-footer {
+            position: relative;
+            background-color: #2A3132;
+            padding: 6rem 2rem 4rem;
+            z-index: 1;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        
+
+        
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1.2fr;
+            gap: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo span {
+            color: #fff;
+        }
+
+        .about-text {
+            color: #fff;
+            line-height: 1.9;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .col-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 0.4rem;
+        }
+
+        .contact-title {
+            color: #ffffff !important;
+        }
+
+        .col-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a i {
+            font-size: 0.75rem;
+            color: #fff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .contact-item:last-child {
+            margin-top: 1.2rem;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: #fff;
+            color: #2A3132;
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .contact-text strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-text p,
+        .contact-text a {
+            color: #fff;
+            font-size: 0.82rem;
+            line-height: 1.4;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-text a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #fff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom strong {
+            color: #fff;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem;
+        }
+
+        .social-links a:hover {
+            background: #fff;
+            color: #2A3132;
+            border-color: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0, 82, 255, 0.2);
+        }
+
+
+
+        @media (max-width: 1200px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+
+            #globe-container {
+                bottom: auto;
+                top: 0;
+                right: -100px;
+                width: 350px;
+                height: 350px;
+                opacity: 0.15;
+            }
+
+            .site-footer {
+                padding: 1rem 1rem 0.5rem;
+            }
+        }
+    </style>
+
+    <style>
+        .site-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 100% 100%, rgba(0, 82, 255, 0.05) 0%, transparent 60%),
+                radial-gradient(circle at 0% 0%, rgba(10, 37, 64, 0.03) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .site-footer::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('f2.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+            transform: scale(1.1);
+        }
+    </style>
+
+    
+    
+
+    <style>
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="t-globe-waves">
+            <svg viewBox="0 0 200 200" width="140" height="140">
+                <g class="wave-group" opacity="0.6">
+                    <path class="wave-1"
+                        d="M -200 130 Q -150 100, -100 130 T 0 130 T 100 130 T 200 130 T 300 130 T 400 130"
+                        stroke="#0052FF" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                    <path class="wave-2"
+                        d="M -200 145 Q -150 175, -100 145 T 0 145 T 100 145 T 200 145 T 300 145 T 400 145"
+                        stroke="#00F0FF" stroke-width="2" fill="none" stroke-linecap="round" />
+                </g>
+                <g class="globe-element" transform="translate(100, 100)">
+                    <circle r="46" fill="none" stroke="#0A2540" stroke-width="1.5" stroke-opacity="0.15" />
+                    <circle r="46" fill="none" stroke="#0052FF" stroke-width="1" stroke-dasharray="4 4"
+                        class="globe-dash" />
+                    <g class="globe-spin-1">
+                        <ellipse rx="22" ry="46" fill="none" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.5" />
+                    </g>
+                    <g class="globe-spin-2">
+                        <ellipse rx="46" ry="22" fill="none" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.5" />
+                    </g>
+                </g>
+                <g class="letter-t-group" transform="translate(100, 95)">
+                    <path d="M -16 -16 L 16 -16 M 0 -16 L 0 20" stroke="#0A2540" stroke-width="4.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="0" cy="30" r="3.5" fill="#00F0FF" />
+                </g>
+            </svg>
+        </div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+        <div class="loader-text">TEIOF Impex</div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler ms-auto order-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end order-3 order-lg-1" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <a class="brand-banner" href="index.html">
+                <img src="logo.png" alt="TEIOF Logo" class="main-logo-img">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source
+                src="https://res.cloudinary.com/dvebrppds/video/upload/v1777483058/WhatsApp_Video_2026-04-29_at_10.24.14_PM_rdv1ls.mp4"
+                type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Our Visual Journey</p>
+            <h1 class="hero-title">Explore <span>Our World</span></h1>
+            <p class="hero-desc">Quality in every grain, excellence in every export. Witness our commitment to global
+                agricultural standards through our premium gallery.</p>
+        </div>
+    </section>
+
+    <!-- Bento Gallery -->
+    <section class="bento-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label gs-reveal">Portfolio</p>
+                <h2 class="section-title gs-reveal">TEIOF in Action</h2>
+            </div>
+            <div class="bento-grid">
+                <div class="bento-item large gs-reveal">
+                    <video autoplay muted loop playsinline
+                        src="https://cdn.pixabay.com/video/2021/08/30/86887-594991366_large.mp4"></video>
+                    <div class="bento-overlay">
+                        <h4>Sustainable Farming</h4><span>Quality from the source</span>
+                    </div>
+                </div>
+                <div class="bento-item gs-reveal">
+                    <video autoplay muted loop playsinline
+                        src="https://cdn.pixabay.com/video/2019/05/12/23544-335833111_large.mp4"></video>
+                </div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://somnathagriimpex.com/wp-content/uploads/2025/08/WhatsApp-Image-2025-08-05-at-09.16.13-768x1024.jpeg">
+                </div>
+                <div class="bento-item wide gs-reveal">
+                    <img src="https://i.pinimg.com/736x/9d/ff/82/9dff8202c1ebc5b5bb4a4f07719adfe8.jpg">
+                    <div class="bento-overlay">
+                        <h4>Premium Harvest</h4><span>Handpicked with care</span>
+                    </div>
+                </div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://i.pinimg.com/736x/c0/8c/08/c08c084922ce16e7611c8292cc76274f.jpg"></div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://i.pinimg.com/1200x/fe/fd/48/fefd488f82b5dd45d1d110ddc3be62a9.jpg"></div>
+                <div class="bento-item tall gs-reveal">
+                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=600&q=80">
+                    <div class="bento-overlay">
+                        <h4>Global Export</h4><span>Worldwide delivery</span>
+                    </div>
+                </div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://plus.unsplash.com/premium_photo-1661884103227-61eee389cf2f?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                </div>
+                <div class="bento-item gs-reveal"><img
+                        src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&q=80"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax -->
+    <section class="parallax-container">
+        <div class="parallax-img" id="parallaxBg" style="background-image: url('bg1.jpg');">
+        </div>
+    </section>
+
+
+    <footer class="site-footer" id="contact"
+        style="background-color: #000000; padding: 7rem 0 3.5rem; position: relative;">
+        <div class="container" style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;" style="max-width: 1200px;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr; gap: 4rem; color: #ffffff; position: relative;"
+                style="align-items: start;">
+
+                <!-- Left: Logo & Brand Text -->
+                <div>
+                    <div class="footer-logo" style="display: flex; align-items: center; margin-bottom: 24px;">
+                        <img src="tlogo.png" alt="TEIOF Logo" class="footer-brand-logo"
+                            style="height: 80px; filter: brightness(0) invert(1);">
+                        <span class="footer-brand-title"
+                            style="font-size: 2.8rem; font-weight: 800; color: #ffffff; margin-left: 18px; font-family: 'Poppins', sans-serif; letter-spacing: 1.5px; opacity: 1; white-space: nowrap;">TEIOF
+                            IMPEX</span>
+                    </div>
+                    <div class="" style="color: #ffffff; font-size: 17.5px; line-height: 1.8; color: #d1d5db; margin-bottom: 32px; font-weight: 400;">
+                        Harvested by hands that know the land, TEIOF Impex delivers premium agro-based products to
+                        global markets with a commitment to quality, reliability, and trusted expertise.
+                    </div>
+
+                    <!-- Social Media Icons placed under brand text -->
+                    <div class="footer-social-icons" style="display: flex; gap: 16px; margin-top: 25px;">
+                        <style>
+                            .social-icon-link {
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                                border: 1.5px solid #4b5563;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: #d1d5db;
+                                font-size: 18px;
+                                text-decoration: none;
+                                transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            }
+
+                            .social-icon-link:hover {
+                                transform: scale(1.15) translateY(-3px);
+                                border-color: #ffffff;
+                                color: #ffffff;
+                                box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+                            }
+
+                            .social-icon-link:active {
+                                transform: scale(0.9);
+                                transition-duration: 0.1s;
+                            }
+
+                            .social-icon-link.social-wa:hover {
+                                color: #25D366;
+                                border-color: #25D366;
+                                box-shadow: 0 0 15px rgba(37, 211, 102, 0.25);
+                            }
+
+                            .social-icon-link.social-li:hover {
+                                color: #0A66C2;
+                                border-color: #0A66C2;
+                                box-shadow: 0 0 15px rgba(10, 102, 194, 0.25);
+                            }
+
+                            .social-icon-link.social-fb:hover {
+                                color: #1877F2;
+                                border-color: #1877F2;
+                                box-shadow: 0 0 15px rgba(24, 119, 242, 0.25);
+                            }
+
+                            .social-icon-link.social-ig:hover {
+                                color: #E1306C;
+                                border-color: #E1306C;
+                                box-shadow: 0 0 15px rgba(225, 48, 108, 0.25);
+                            }
+
+                            .social-icon-link.social-yt:hover {
+                                color: #FF0000;
+                                border-color: #FF0000;
+                                box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
+                            }
+
+                            .social-icon-link.social-g:hover {
+                                color: #4285F4;
+                                border-color: #4285F4;
+                                box-shadow: 0 0 15px rgba(66, 133, 244, 0.25);
+                            }
+
+                            @media (max-width: 768px) {
+                                .site-footer {
+                                    padding: 4rem 0 2.5rem !important;
+                                }
+
+                                .footer-grid {
+                                    gap: 2.5rem !important;
+                                }
+
+                                .footer-brand-logo {
+                                    height: 55px !important;
+                                }
+
+                                .footer-brand-title {
+                                    font-size: 2rem !important;
+                                    margin-left: 12px !important;
+                                    white-space: normal !important;
+                                }
+
+                                .footer-col-quicklinks {
+                                    text-align: left !important;
+                                    padding-top: 0 !important;
+                                }
+
+                                .footer-col-quicklinks ul {
+                                    margin: 0 !important;
+                                }
+
+                                .footer-col-contact {
+                                    padding-left: 0 !important;
+                                    padding-top: 0 !important;
+                                }
+
+                                .footer-copyright-wrap {
+                                    margin-top: 3rem !important;
+                                    padding-top: 1.5rem !important;
+                                }
+                            }
+                        </style>
+                        <a href="https://wa.me/917435912528" target="_blank" class="social-icon-link social-wa">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/teiof-impex?originalSubdomain=in" target="_blank"
+                            class="social-icon-link social-li">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://facebook.com/teiof.impex" target="_blank" class="social-icon-link social-fb">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/teiof_impex/" target="_blank"
+                            class="social-icon-link social-ig">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@teiofimpex" target="_blank" class="social-icon-link social-yt">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.google.co.in/search?q=TEIOF+IMPEX&ludocid=9607118112606186426&lsig=AB86z5WNwrQbfMZ76Jh-fs1gMPhd"
+                            target="_blank" class="social-icon-link social-g">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Centre: Quick Links -->
+                <div class="footer-col-quicklinks" style="text-align: center; padding-top: 10px;">
+                    <h4 class="" style="margin-bottom: 2rem;"
+                        style="font-size: 1.85rem; font-weight: 700; font-family: 'Poppins', sans-serif; color: #fff; letter-spacing: 1.5px;">
+                        Quick Links</h4>
+                    <ul
+                        style="list-style: none; padding: 0; margin: 0 auto; display: inline-flex; flex-direction: column; gap: 16px; text-align: left;">
+                        <li><a href="#home"
+                                style="color: #d1d5db; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; transition: all 0.3s; padding: 4px 0;"
+                                onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280;"></i> Home</a>
+                        </li>
+                        <li><a href="#about"
+                                style="color: #d1d5db; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; transition: all 0.3s; padding: 4px 0;"
+                                onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280;"></i> About
+                                Us</a></li>
+                        <li><a href="#products"
+                                style="color: #d1d5db; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; transition: all 0.3s; padding: 4px 0;"
+                                onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280;"></i>
+                                Products</a></li>
+                        <li><a href="#gallery"
+                                style="color: #d1d5db; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 500; transition: all 0.3s; padding: 4px 0;"
+                                onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280;"></i>
+                                Gallery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Right: Get In Touch -->
+                <div class="footer-col-contact md:justify-self-end" style="padding-left: 40px; padding-top: 10px;">
+                    <style>
+                        .footer-contact-item {
+                            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            cursor: default;
+                            padding: 6px 0;
+                        }
+
+                        .footer-contact-item:hover {
+                            transform: translateX(6px);
+                            color: #fff !important;
+                        }
+
+                        .footer-contact-link {
+                            color: #e5e7eb;
+                            text-decoration: none;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 12px;
+                            font-size: 17px;
+                            font-weight: 500;
+                            padding: 8px 0;
+                            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            border-bottom: 1px solid transparent;
+                        }
+
+                        .footer-contact-link:hover {
+                            color: #fff;
+                            transform: translateX(6px) scale(1.03);
+                            border-bottom-color: rgba(255, 255, 255, 0.3);
+                        }
+
+                        .footer-contact-link:active {
+                            transform: translateX(6px) scale(0.97);
+                            transition-duration: 0.1s;
+                        }
+
+                        .footer-contact-link i,
+                        .footer-contact-item i {
+                            transition: all 0.3s ease;
+                        }
+
+                        .footer-contact-link:hover i,
+                        .footer-contact-item:hover i {
+                            color: #ffffff !important;
+                            transform: scale(1.2);
+                        }
+                    </style>
+                    <h4 class="" style="margin-bottom: 2rem;"
+                        style="font-size: 1.85rem; font-weight: 700; font-family: 'Poppins', sans-serif; color: #fff; letter-spacing: 1.5px;">
+                        Get In Touch</h4>
+                    <div class="footer-contact-item"
+                        style="font-size: 17px; line-height: 1.8; padding: 2px 0; display: flex; align-items: flex-start; gap: 14px; color: #d1d5db;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 18px; color: #ffffff; margin-top: 6px;"></i>
+                        <span>
+                            Sardar Patel Arcade, Canal Road<br>
+                            Morbi - Gujarat - India<br>
+                            ZIP Code 363641
+                        </span>
+                    </div>
+                    <p class="" style="margin-bottom: 0.75rem;">
+                        <a href="tel:+917435912528" class="footer-contact-link">
+                            <i class="fas fa-phone-alt"
+                                style="font-size: 18px; color: #ffffff; display: inline-block; transform: scaleX(-1);"></i>+91
+                            74359 12528
+                        </a>
+                    </p>
+                    <p class="" style="margin-bottom: 0.25rem;">
+                        <a href="mailto:export@teiof.com" class="footer-contact-link">
+                            <i class="fas fa-envelope" style="font-size: 18px; color: #ffffff;"></i>export@teiof.com
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dedicated Copyright Footer -->
+    <footer class="footer-copyright-section"
+        style="background-color: #000000; border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; text-align: center; position: relative; z-index: 10;">
+        <div class="container" style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem;" style="max-width: 1200px;">
+            <p
+                style="font-size: 15px; color: #9ca3af; margin: 0; font-family: 'Poppins', sans-serif; font-weight: 500;">
+                © 2024 <strong style="color: #d1d5db; font-family: 'Poppins', sans-serif; font-weight: 700;">TEIOF
+                    IMPEX</strong> All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button - Contact Bubble -->
+    <div id="contact-fab" style="
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+">
+        <!-- Dropdown Menu -->
+        <div id="fab-menu" style="
+        position: absolute;
+        bottom: 95px;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        opacity: 0;
+        transform: translateY(20px) scale(0.8);
+        pointer-events: none;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    ">
+            <!-- Email Button -->
+            <a href="mailto:export@teiof.com" style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            color: #0A2540;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0, 82, 255, 0.15);
+            border: 1px solid rgba(0, 82, 255, 0.1);
+            white-space: nowrap;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        " onmouseover="this.style.transform='translateX(0) scale(1.05)';this.style.boxShadow='0 12px 40px rgba(0, 82, 255, 0.25)';"
+                onmouseout="this.style.transform='translateX(0) scale(1)';this.style.boxShadow='0 8px 30px rgba(0, 82, 255, 0.15)';">
+                <span style="
+                width: 36px;
+                height: 36px;
+                background: linear-gradient(135deg, #0052FF, #003ECC);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 14px;
+            "><i class="fas fa-envelope"></i></span>
+                Email Us
+            </a>
+
+            <!-- WhatsApp Button -->
+            <a href="https://wa.me/917435912528" target="_blank" style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            color: #0A2540;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0, 82, 255, 0.15);
+            border: 1px solid rgba(0, 82, 255, 0.1);
+            white-space: nowrap;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition-delay: 0.05s;
+        " onmouseover="this.style.transform='translateX(0) scale(1.05)';this.style.boxShadow='0 12px 40px rgba(0, 82, 255, 0.25)';"
+                onmouseout="this.style.transform='translateX(0) scale(1)';this.style.boxShadow='0 8px 30px rgba(0, 82, 255, 0.15)';">
+                <span style="
+                width: 36px;
+                height: 36px;
+                background: linear-gradient(135deg, #25D366, #128C7E);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 14px;
+            "><i class="fab fa-whatsapp"></i></span>
+                WhatsApp
+            </a>
+        </div>
+
+        <!-- Main Bubble Button -->
+        <button id="fab-toggle" style="
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0A2540;
+        font-size: 30px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        outline: none;
+    " onmouseover="this.style.transform='scale(1.1) rotate(10deg)';this.style.background='rgba(255, 255, 255, 0.4)';this.style.boxShadow='0 12px 40px rgba(31, 38, 135, 0.25)';"
+            onmouseout="this.style.transform='scale(1) rotate(0deg)';this.style.background='rgba(255, 255, 255, 0.25)';this.style.boxShadow='0 8px 32px 0 rgba(31, 38, 135, 0.15)';">
+            <i class="fas fa-comment-dots" id="fab-icon" style="transition: transform 0.3s ease;"></i>
+            <!-- Pulse Ring -->
+            <span style="
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: fabPulse 2s ease-out infinite;
+            pointer-events: none;
+        "></span>
+        </button>
+    </div>
+
+    <style>
+        @keyframes fabPulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        #contact-fab.active #fab-menu {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+            pointer-events: all !important;
+        }
+
+        #contact-fab.active #fab-menu a {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        #contact-fab.active #fab-icon {
+            transform: rotate(45deg);
+        }
+
+        #contact-fab.active #fab-toggle {
+            background: rgba(255, 255, 255, 0.4) !important;
+            border-color: rgba(255, 255, 255, 0.6) !important;
+            color: #0052FF !important;
+        }
+    </style>
+
+    <script>
+            (function () {
+                const fab = document.getElementById('contact-fab');
+                const toggle = document.getElementById('fab-toggle');
+                let isOpen = false;
+
+                toggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    isOpen = !isOpen;
+                    fab.classList.toggle('active', isOpen);
+                });
+
+                // Close when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (isOpen && !fab.contains(e.target)) {
+                        isOpen = false;
+                        fab.classList.remove('active');
+                    }
+                });
+
+                // Entrance animation
+                setTimeout(function () {
+                    fab.style.opacity = '0';
+                    fab.style.transform = 'translateY(30px) scale(0.8)';
+                    fab.style.transition = 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+                    requestAnimationFrame(function () {
+                        fab.style.opacity = '1';
+                        fab.style.transform = 'translateY(0) scale(1)';
+                    });
+                }, 100);
+            })();
+    </script>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                const progress = document.querySelector('.loader-progress');
+                if (progress) progress.style.width = '100%';
+                setTimeout(() => { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 500); }, 500);
+            }
+        });
+
+        // Navbar scroll
+        
+
+        // GSAP
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.gs-reveal').forEach(elem => {
+                gsap.from(elem, { scrollTrigger: { trigger: elem, start: 'top 80%', toggleActions: 'play none none reverse' }, y: 30, opacity: 0, duration: 0.8, ease: 'power2.out' });
+            });
+        }
+
+        // FAB logic
+        (function () {
+            const fab = document.getElementById('contact-fab');
+            const toggle = document.getElementById('fab-toggle');
+            let isOpen = false;
+            toggle.addEventListener('click', (e) => { e.stopPropagation(); isOpen = !isOpen; fab.classList.toggle('active', isOpen); });
+            document.addEventListener('click', (e) => { if (isOpen && !fab.contains(e.target)) { isOpen = false; fab.classList.remove('active'); } });
+        })();
+
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+

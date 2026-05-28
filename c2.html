@@ -1,0 +1,2287 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact Us – TEIOF Impex Trade Pvt. Ltd.</title>
+    <link rel="shortcut icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌾</text></svg>" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false,
+                visibility: false
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #0052ff;
+            --primary-light: #ebf2ff;
+            --primary-dark: #003ecc;
+            --primary-soft: rgba(0, 82, 255, 0.06);
+            --primary-glow: rgba(0, 82, 255, 0.15);
+            --accent: #00f0ff;
+            --navy: #0a2540;
+            --navy-light: #1e3a5f;
+            --text-main: #1a1d23;
+            --text-light: #64748b;
+            --text-muted: #94a3b8;
+            --white: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border: #e2e8f0;
+            --border-light: #f1f5f9;
+            --font: "Poppins", sans-serif;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 25px 60px -12px rgba(0, 0, 0, 0.1);
+            --shadow-blue: 0 20px 50px -12px rgba(0, 82, 255, 0.15);
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --radius-sm: 12px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--white);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        section {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ========== LOADER ========== */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            transition: opacity 0.8s var(--transition);
+        }
+
+        .t-globe-waves {
+            width: 160px;
+            height: 160px;
+        }
+
+        .t-globe-waves svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wave-1 {
+            animation: waveFlow 3s linear infinite;
+        }
+
+        .wave-2 {
+            animation: waveFlowRight 4s linear infinite;
+        }
+
+        @keyframes waveFlow {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-200px);
+            }
+        }
+
+        @keyframes waveFlowRight {
+            0% {
+                transform: translateX(-200px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .globe-spin-1 {
+            transform-origin: center;
+            animation: rotateGlobe1 4s linear infinite;
+        }
+
+        .globe-spin-2 {
+            transform-origin: center;
+            animation: rotateGlobe2 6s linear infinite;
+        }
+
+        .globe-dash {
+            transform-origin: center;
+            animation: spinDash 15s linear infinite;
+        }
+
+        @keyframes rotateGlobe1 {
+
+            0%,
+            100% {
+                transform: scaleX(1);
+            }
+
+            50% {
+                transform: scaleX(-1);
+            }
+        }
+
+        @keyframes rotateGlobe2 {
+
+            0%,
+            100% {
+                transform: rotate(20deg) scaleY(1);
+            }
+
+            50% {
+                transform: rotate(20deg) scaleY(-1);
+            }
+        }
+
+        @keyframes spinDash {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .letter-t-group {
+            animation: floatT 3s ease-in-out infinite;
+        }
+
+        @keyframes floatT {
+
+            0%,
+            100% {
+                transform: translate(100px, 92px);
+            }
+
+            50% {
+                transform: translate(100px, 102px);
+            }
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--primary-light);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-progress {
+            position: absolute;
+            inset: 0;
+            width: 0%;
+            background: linear-gradient(90deg,
+                    var(--primary),
+                    var(--accent));
+            transition: width 0.4s ease-out;
+        }
+
+        .loader-text {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: var(--navy);
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 4px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar .container {
+            position: relative;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-toggler-icon {
+                filter: invert(1) brightness(200%);
+            }
+
+            .navbar-toggler {
+                border-color: rgba(255, 255, 255, 0.5);
+            }
+
+            .navbar-collapse {
+                background: #ffffff;
+                padding: 1rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+                margin-top: 15px;
+            }
+
+            .navbar-collapse .nav-link {
+                color: #0a2540 !important;
+                padding: 12px 20px !important;
+                border-radius: 8px;
+            }
+
+            .navbar-collapse .nav-link:hover {
+                background: rgba(0, 82, 255, 0.05);
+                color: #0052ff !important;
+            }
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--text) !important;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-banner {
+            position: absolute;
+            top: 5px;
+            left: 15px;
+            z-index: 1100;
+            display: block;
+            text-decoration: none !important;
+        }
+
+        .main-logo-img {
+            height: 120px;
+            width: auto !important;
+            max-width: none !important;
+            object-fit: contain;
+            filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.35));
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .brand-banner:hover .main-logo-img {
+            transform: scale(1.04) translateY(-3px);
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.22));
+        }
+
+        @media (max-width: 1199px) {
+            .main-logo-img {
+                height: 110px;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .main-logo-img {
+                height: 90px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-logo-img {
+                height: 70px;
+            }
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 8px 25px !important;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 1px;
+            background: #ffffff;
+            transform: scaleX(0);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        @media (min-width: 992px) {
+            .navbar:not(.scrolled) .nav-link {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        /* ========== PAGE HERO ========== */
+        .page-hero {
+            position: relative;
+            height: 480px;
+            display: flex;
+            align-items: center;
+            background: var(--navy);
+            overflow: hidden;
+            color: var(--white);
+        }
+
+        .page-hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            filter: contrast(1.1) saturate(0.7);
+            transition: transform 12s var(--transition);
+        }
+
+        .page-hero:hover .page-hero-img {
+            transform: scale(1.08);
+        }
+
+        .page-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 1px 1px,
+                    rgba(255, 255, 255, 0.03) 1px,
+                    transparent 0);
+            background-size: 40px 40px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            padding-top: 60px;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 900;
+            margin-bottom: 25px;
+            letter-spacing: -3px;
+            line-height: 0.9;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .breadcrumb-bar {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.7;
+        }
+
+        .breadcrumb-bar a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb-bar a:hover {
+            color: var(--accent);
+            opacity: 1;
+        }
+
+        .breadcrumb-bar .sep {
+            opacity: 0.4;
+            font-size: 10px;
+        }
+
+        /* ========== CONTACT INFO CARDS ========== */
+        .contact-cards-section {
+            position: relative;
+            z-index: 10;
+            margin-top: -70px;
+            padding: 0 0 80px;
+        }
+
+        .contact-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .cinfo-card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 18px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cinfo-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cinfo-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cinfo-card::after {
+            content: "";
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle,
+                    rgba(0, 82, 255, 0.04) 0%,
+                    transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .cinfo-card:hover::after {
+            opacity: 1;
+        }
+
+        .cinfo-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-blue);
+            border-color: var(--primary-glow);
+        }
+
+        .cinfo-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            background: var(--primary-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .cinfo-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: var(--transition-fast);
+        }
+
+        .cinfo-card:hover .cinfo-icon {
+            background: var(--primary);
+            transform: rotate(-5deg) scale(1.08);
+        }
+
+        .cinfo-card:hover .cinfo-icon svg {
+            stroke: var(--white);
+        }
+
+        .cinfo-card:hover .cinfo-icon::after {
+            content: "";
+            position: absolute;
+            inset: -5px;
+            border-radius: 22px;
+            border: 1.5px solid var(--primary);
+            opacity: 0;
+            animation: iconPulseRing 0.7s ease-out;
+        }
+
+        @keyframes iconPulseRing {
+            0% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+        }
+
+        .cinfo-body {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cinfo-body h3 {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .cinfo-body p,
+        .cinfo-body a {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .cinfo-body a:hover {
+            color: var(--primary);
+        }
+
+        /* ========== CONTACT MAP SECTION ========== */
+        .contact-map-section {
+            position: relative;
+            width: 100%;
+        }
+
+        .map-wrapper {
+            position: relative;
+            min-height: 600px;
+            height: 100%;
+            width: 100%;
+            background: var(--bg-subtle);
+        }
+
+        .map-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(0.15) contrast(1.05) saturate(0.9);
+            transition: filter 0.5s ease;
+        }
+
+        .map-wrapper:hover iframe {
+            filter: grayscale(0) contrast(1) saturate(1);
+        }
+
+        /* ========== CONTACT FORM SECTION ========== */
+        .contact-form-section {
+            padding: 0;
+            position: relative;
+            background: var(--white);
+            width: 100%;
+        }
+
+        .map-badge {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            background: var(--white);
+            padding: 12px 20px;
+            border-radius: 14px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 5;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .map-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: livePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.7);
+            }
+        }
+
+        .form-wrapper {
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+            padding: 60px 80px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            border-top: 1px solid rgba(0, 82, 255, 0.08);
+            border-bottom: 1px solid rgba(0, 82, 255, 0.08);
+            max-width: 100%;
+            width: 100%;
+            margin: 0;
+            z-index: 10;
+        }
+
+        .form-header {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .form-iframe-wrap {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .form-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 1px 1px,
+                    rgba(0, 82, 255, 0.05) 1px,
+                    transparent 0);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .form-wrapper::after {
+            content: "";
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle,
+                    rgba(14, 165, 233, 0.2) 0%,
+                    transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .form-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .form-label-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: livePulse 2s ease-in-out infinite;
+        }
+
+        .form-header h2 {
+            font-size: 32px;
+            font-weight: 900;
+            color: #0a2540;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .form-header p {
+            font-size: 14px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .form-iframe-wrap {
+            position: relative;
+            z-index: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            flex: 1;
+            min-height: 700px;
+        }
+
+        .form-iframe-wrap iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 700px;
+            border: none;
+            border-radius: 16px;
+            background: transparent;
+        }
+
+        /* ========== SECTION HEADER ========== */
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* ========== RECOGNITION ========== */
+        .recognition-section {
+            padding: 60px 0;
+            background: var(--white);
+            overflow: hidden;
+        }
+
+        .recognition-title {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0a2540;
+            margin-bottom: 40px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .logo-marquee {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: 60px;
+            position: relative;
+        }
+
+        .logo-track {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+            width: max-content;
+            animation: marquee 40s linear infinite;
+        }
+
+        .logo-track:hover {
+            animation-play-state: paused;
+        }
+
+        .logo-track img {
+            height: 110px;
+            width: auto;
+            transition: all 0.4s ease;
+        }
+
+        .logo-track img.logo-fssai {
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .logo-track img {
+                height: 80px;
+            }
+
+            .logo-track {
+                gap: 40px;
+            }
+        }
+
+        .logo-track img:hover {
+            filter: grayscale(0);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ========== FOOTER GRID ========== */
+        .footer-inner-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr 0.8fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .footer-inner-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-inner-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        .site-footer {
+            position: relative;
+            background-color: #000000;
+            padding: 6rem 2rem 4rem;
+            z-index: 1;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .mailbox-decoration {
+            position: relative;
+            z-index: 5;
+            margin-top: -100px;
+            margin-bottom: -150px;
+            pointer-events: none;
+        }
+
+        .mailbox-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+            gap: 0;
+            opacity: 0.9;
+            transition: var(--transition);
+            pointer-events: auto;
+        }
+
+        .mailbox-wrap:hover {
+            opacity: 1;
+        }
+
+        .thin-mailbox {
+            width: 280px;
+            height: auto;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr 1.2fr;
+            gap: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo span {
+            color: #fff;
+        }
+
+        .about-text {
+            color: #fff;
+            line-height: 1.9;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .col-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 0.4rem;
+        }
+
+        .contact-title {
+            color: #ffffff !important;
+        }
+
+        .col-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a i {
+            font-size: 0.75rem;
+            color: #fff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        .footer-links a:hover i {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 0.1rem;
+        }
+
+        .contact-item:last-child {
+            margin-top: 1.2rem;
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-item:hover .contact-icon {
+            background: #fff;
+            color: #2a3132;
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .contact-text strong {
+            display: block;
+            font-size: 0.85rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-text p,
+        .contact-text a {
+            color: #fff;
+            font-size: 0.82rem;
+            line-height: 1.4;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-text a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid #fff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom strong {
+            color: #fff;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem;
+        }
+
+        .social-links a:hover {
+            background: #fff;
+            color: #2a3132;
+            border-color: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0, 82, 255, 0.2);
+        }
+
+        /* ========== FAB — matches index page style ========== */
+        #contact-fab {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9999;
+            font-family: var(--font);
+        }
+
+        #fab-menu {
+            position: absolute;
+            bottom: 95px;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(20px) scale(0.8);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .fab-link-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            color: var(--navy);
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 8px 30px rgba(0, 82, 255, 0.15);
+            border: 1px solid rgba(0, 82, 255, 0.1);
+            white-space: nowrap;
+            transform: translateX(-20px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .fab-link-item span.icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .fab-link-item:hover {
+            transform: translateX(0) scale(1.05);
+            box-shadow: 0 12px 40px rgba(0, 82, 255, 0.25);
+            color: var(--primary);
+        }
+
+        #fab-toggle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            outline: none;
+        }
+
+        #fab-toggle:hover {
+            transform: scale(1.1) rotate(10deg);
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
+        }
+
+        #contact-fab.active #fab-menu {
+            opacity: 1 !important;
+            transform: translateY(0) scale(1) !important;
+            pointer-events: all !important;
+        }
+
+        #contact-fab.active #fab-menu .fab-link-item {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+        }
+
+        #contact-fab.active #fab-icon {
+            transform: rotate(45deg);
+        }
+
+        #contact-fab.active #fab-toggle {
+            background: rgba(255, 255, 255, 0.4) !important;
+            border-color: rgba(255, 255, 255, 0.6) !important;
+            color: #0052ff !important;
+        }
+
+        .pulse-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: fabPulse 2s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fabPulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .thin-mailbox path:not([stroke-dasharray="4, 5"]),
+        .thin-mailbox rect,
+        .thin-mailbox circle {
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+            animation: drawMailbox 4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes drawMailbox {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* ========== GSAP ANIMATION STATES ========== */
+        .gs-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .cinfo-card {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .map-wrapper {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .form-wrapper {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1199px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .map-wrapper {
+                min-height: 480px;
+                width: 100%;
+            }
+
+            .form-wrapper {
+                margin-top: 0;
+                padding: 40px 20px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .contact-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .cinfo-card {
+                padding: 32px 24px;
+            }
+
+            .navbar {
+                position: absolute !important;
+            }
+
+            .page-hero {
+                height: 400px;
+                padding-top: 100px;
+            }
+
+            .page-hero h1 {
+                font-size: clamp(2.5rem, 8vw, 3.5rem);
+                letter-spacing: -1px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 25px;
+            }
+
+            .site-footer {
+                padding: 1rem 1rem 0.5rem;
+            }
+
+            .mailbox-wrap {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 2rem;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: flex-end;
+                gap: 0;
+                opacity: 0.9;
+                transition: var(--transition);
+            }
+
+            .form-header h2 {
+                font-size: 26px;
+            }
+
+            .map-badge {
+                top: 16px;
+                left: 16px;
+                padding: 8px 14px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .contact-cards-section {
+                margin-top: -50px;
+            }
+
+            .cinfo-card {
+                padding: 28px 20px;
+                gap: 18px;
+            }
+
+            .cinfo-icon {
+                width: 50px;
+                height: 50px;
+                border-radius: 14px;
+            }
+
+            .cinfo-icon svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .form-wrapper {
+                padding: 28px 20px;
+            }
+
+            .form-iframe-wrap {
+                min-height: 700px;
+            }
+
+            .form-iframe-wrap iframe {
+                min-height: 700px;
+            }
+
+            #contact-fab {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            #fab-toggle {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+
+    <style>
+        .site-footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 100% 100%,
+                    rgba(0, 82, 255, 0.05) 0%,
+                    transparent 60%),
+                radial-gradient(circle at 0% 0%,
+                    rgba(10, 37, 64, 0.03) 0%,
+                    transparent 50%);
+            z-index: 0;
+        }
+
+        .site-footer::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("f2.png");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+            transform: scale(1.1);
+        }
+    </style>
+
+    <style>
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="t-globe-waves">
+            <svg viewBox="0 0 200 200" width="140" height="140">
+                <g opacity="0.6">
+                    <path class="wave-1"
+                        d="M -200 130 Q -150 100,-100 130 T 0 130 T 100 130 T 200 130 T 300 130 T 400 130"
+                        stroke="#0052FF" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                    <path class="wave-2"
+                        d="M -200 145 Q -150 175,-100 145 T 0 145 T 100 145 T 200 145 T 300 145 T 400 145"
+                        stroke="#00F0FF" stroke-width="2" fill="none" stroke-linecap="round" />
+                </g>
+                <g transform="translate(100,100)">
+                    <circle r="46" fill="none" stroke="#0A2540" stroke-width="1.5" stroke-opacity="0.15" />
+                    <circle r="46" fill="none" stroke="#0052FF" stroke-width="1" stroke-dasharray="4 4"
+                        class="globe-dash" />
+                    <g class="globe-spin-1">
+                        <ellipse rx="22" ry="46" fill="none" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.5" />
+                    </g>
+                    <g class="globe-spin-2">
+                        <ellipse rx="46" ry="22" fill="none" stroke="#0052FF" stroke-width="1.2" stroke-opacity="0.5" />
+                    </g>
+                </g>
+                <g class="letter-t-group" transform="translate(100,95)">
+                    <path d="M -16 -16 L 16 -16 M 0 -16 L 0 20" stroke="#0A2540" stroke-width="4.5"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="0" cy="30" r="3.5" fill="#00F0FF" />
+                </g>
+            </svg>
+        </div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+        <div class="loader-text">TEIOF Impex</div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler ms-auto order-1" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end order-3 order-lg-1" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="product.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <a class="brand-banner" href="index.html">
+                <img src="logo.png" alt="TEIOF Logo" class="main-logo-img" />
+            </a>
+        </div>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+        <img class="page-hero-img" src="https://i.pinimg.com/1200x/28/c2/3e/28c23e084fa394a7508c286405a970f3.jpg"
+            alt=" Agriculture background" loading="eager" />
+        <div class="container">
+            <div class="page-hero-content">
+                <h1>Contact Us</h1>
+                <div class="breadcrumb-bar gs-reveal">
+                    <a href="index.html">Home</a>
+                    <span class="sep">/</span>
+                    <span>Contact Us</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT INFO CARDS -->
+    <section class="contact-cards-section">
+        <div class="container">
+            <div class="contact-cards-grid">
+                <!-- Location Card -->
+                <div class="cinfo-card">
+                    <div class="cinfo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                    </div>
+                    <div class="cinfo-body">
+                        <h3>Our Location</h3>
+                        <p>Morbi, Gujarat, India</p>
+                    </div>
+                </div>
+
+                <!-- Phone Card -->
+                <div class="cinfo-card">
+                    <div class="cinfo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </div>
+                    <div class="cinfo-body">
+                        <h3>Phone Number</h3>
+                        <p>
+                            <a href="tel:+917435912528">+91 74359 12528</a><br />
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Email Card -->
+                <div class="cinfo-card">
+                    <div class="cinfo-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="4" width="20" height="16" rx="2" />
+                            <polyline points="22,4 12,13 2,4" />
+                        </svg>
+                    </div>
+                    <div class="cinfo-body">
+                        <h3>Email Address</h3>
+                        <p>
+                            <a href="mailto:export@teiof.com">export@teiof.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section class="contact-form-section">
+        <div class="container-fluid px-0">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <div class="form-label">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                            stroke-width="1.2" style="margin-right: 8px" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M7 6H17.2C18.8802 6 19.7202 6 20.362 6.32698C20.9265 6.6146 21.3854 7.07354 21.673 7.63803C22 8.27976 22 9.11984 22 10.8V18H11M7 6C9.20914 6 11 7.79086 11 10V18M7 6C4.79086 6 3 7.79086 3 10V18H11M17 3H14V12M10 18V21H14V18M7 12H7.01" />
+                        </svg>
+                        Get in Touch
+                    </div>
+                    <h2>Have a Question?</h2>
+                    <p>
+                        Drop us a message. We're here to assist with product
+                        details, pricing, packaging, and global shipping
+                        support.
+                    </p>
+                </div>
+                <div class="form-iframe-wrap">
+                    <iframe src="https://app.youform.com/forms/xg9vnlsb" loading="lazy" title="Contact Form"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAP SECTION -->
+    <section class="contact-map-section">
+        <div class="container-fluid px-0">
+            <div class="map-wrapper" style="overflow: hidden; touch-action: pan-x pan-y">
+                <iframe src="https://www.google.com/maps?q=Morbi,Gujarat&output=embed&z=11"
+                    style="width: 100%; height: 100%; border: 0" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <div class="mailbox-decoration">
+        <div class="mailbox-wrap">
+            <svg class="thin-mailbox" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 336 284">
+                <image
+                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVAAAAEcCAYAAACRcuzOAAAQAElEQVR4AeydBYBVRRfH331ve+lulu7uBkFAQlpFRUXs7vo+OzBpbEkJBSWklS7p7u7Ohe197/v9h777LUgs6S5cuGenz8ycO/OfM2fuvc/tcv45EnAk4EjAkcAVScAB0CsSm1PIkYAjAUcCLpcDoM4ocCTgSMCRwBVK4KoA9ArrdIo5EnAk4EjgppCAA6A3xW10OuFIwJHAvyEBB0D/Dak7dToScCRwU0jg3wPQm0J8TiccCTgSuJUl4ADorXz3nb47EnAkcFUScAD0qsTnFHYk4EjgVpZAKgXQW/mWOX13JOBIIKVIwAHQlHInnHY4EnAk4EjgppCAA6A3xW10OuFIwJHAvyEBB0D/Dak7dToScCRwU0jg3wPQm0J8TiccCTgSuJUl4ADorXz3nb47EnAkcFUScAD0qsTnFHYk4EjgVpZAKgXQW/mWOX13JOBIIKVIwAHQlHInnHY4EnAk4EjgppCAA6A3xW10OuFIwJHAvyEBB0D/Dak7dToScCRwU0jg3wPQm0J8TiccCTgSuJUl4ADorXz3nb47EnAkcFUScAD0qsTnFHYk4EjgVpZAKgXQW/mWOX13JOBIIKVIwAHQlHInnHY4EnAk4EjgppCAA6A3xW10OuFIwJHAvyEBB0D/Dak7dToScCRwU0jg3wPQm0J8TiccCTgSuJUl4ADorXz3nb47EnAkcFUScAD0qsTnFHYk4EjgVpZAKgXQW/mWOX13JOBIIKVIwAHQlHInnHY4EnAk4EjgppCAA6A3xW10OuFIwJHAvyEBB0D/Dak7dToScCRwU0jg3wPQm0J8TiccCTgSuJUl4ADorXz3nb47EnAkcFUScAD0qsTnFHYk4EjgVpZAKgXQW/mWOX13JOBIIKVIwAHQlHInnHY4EnAk4EjgppCAA6A3xW10OuFIwJHAvyEBB0D/Dak7dToScCRwU0jg3wPQm0J8TiccCTgSuJUl4ADorXz3nb47EnAkcFUScAD0qsTnFHYk4EjgVpZAKgXQW/mWOX13JOBIIKVIwAHQlHInnHY4EnAk4EjgppCAA6A3xW10OuFIwJHAvyEBB0D/Dak7dToScCRwU0jg3wPQm0J8TiccCTgSuJUl4ADorXz3nb47"
+                    x="0" y="0" width="336" height="284" />
+            </svg>
+        </div>
+    </div>
+
+    <footer class="site-footer" id="contact" style="
+                background-color: #000000;
+                padding: 7rem 0 3.5rem;
+                position: relative;
+            ">
+        <div class="container mx-auto px-4" style="max-width: 1200px">
+            <div class="footer-inner-grid text-white relative footer-grid" style="">
+                <!-- Left: Logo & Brand Text -->
+                <div>
+                    <div class="footer-logo" style="
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 24px;
+                            ">
+                        <img src="tlogo.png" alt="TEIOF Logo" class="footer-brand-logo" style="
+                                    height: 80px;
+                                    filter: brightness(0) invert(1);
+                                " />
+                        <span class="footer-brand-title" style="
+                                    font-size: 2.8rem;
+                                    font-weight: 800;
+                                    color: #ffffff;
+                                    margin-left: 18px;
+                                    font-family:
+                                        &quot;Poppins&quot;, sans-serif;
+                                    letter-spacing: 1.5px;
+                                    opacity: 1;
+                                    white-space: nowrap;
+                                ">TEIOF IMPEX</span>
+                    </div>
+                    <div class="text-white" style="
+                                font-size: 17.5px;
+                                line-height: 1.8;
+                                color: #d1d5db;
+                                margin-bottom: 32px;
+                                font-weight: 400;
+                            ">
+                        Harvested by hands that know the land, TEIOF Impex
+                        delivers premium agro-based products to global
+                        markets with a commitment to quality, reliability,
+                        and trusted expertise.
+                    </div>
+
+                    <!-- Social Media Icons -->
+                    <div class="footer-social-icons" style="display: flex; gap: 16px; margin-top: 25px">
+                        <style>
+                            .social-icon-link {
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                                border: 1.5px solid #4b5563;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: #d1d5db;
+                                font-size: 18px;
+                                text-decoration: none;
+                                transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            }
+
+                            .social-icon-link:hover {
+                                transform: scale(1.15) translateY(-3px);
+                                border-color: #ffffff;
+                                color: #ffffff;
+                                box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+                            }
+
+                            .social-icon-link:active {
+                                transform: scale(0.9);
+                                transition-duration: 0.1s;
+                            }
+
+                            .social-icon-link.social-wa:hover {
+                                color: #25d366;
+                                border-color: #25d366;
+                                box-shadow: 0 0 15px rgba(37, 211, 102, 0.25);
+                            }
+
+                            .social-icon-link.social-li:hover {
+                                color: #0a66c2;
+                                border-color: #0a66c2;
+                                box-shadow: 0 0 15px rgba(10, 102, 194, 0.25);
+                            }
+
+                            .social-icon-link.social-fb:hover {
+                                color: #1877f2;
+                                border-color: #1877f2;
+                                box-shadow: 0 0 15px rgba(24, 119, 242, 0.25);
+                            }
+
+                            .social-icon-link.social-ig:hover {
+                                color: #e1306c;
+                                border-color: #e1306c;
+                                box-shadow: 0 0 15px rgba(225, 48, 108, 0.25);
+                            }
+
+                            .social-icon-link.social-yt:hover {
+                                color: #ff0000;
+                                border-color: #ff0000;
+                                box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
+                            }
+
+                            .social-icon-link.social-g:hover {
+                                color: #4285f4;
+                                border-color: #4285f4;
+                                box-shadow: 0 0 15px rgba(66, 133, 244, 0.25);
+                            }
+
+                            @media (max-width: 768px) {
+                                .site-footer {
+                                    padding: 4rem 0 2.5rem !important;
+                                }
+
+                                .footer-grid {
+                                    gap: 2.5rem !important;
+                                }
+
+                                .footer-brand-logo {
+                                    height: 55px !important;
+                                }
+
+                                .footer-brand-title {
+                                    font-size: 2rem !important;
+                                    margin-left: 12px !important;
+                                    white-space: normal !important;
+                                }
+
+                                .footer-col-quicklinks {
+                                    text-align: left !important;
+                                    padding-top: 0 !important;
+                                }
+
+                                .footer-col-quicklinks ul {
+                                    margin: 0 !important;
+                                }
+
+                                .footer-col-contact {
+                                    padding-left: 0 !important;
+                                    padding-top: 0 !important;
+                                }
+
+                                .footer-copyright-wrap {
+                                    margin-top: 3rem !important;
+                                    padding-top: 1.5rem !important;
+                                }
+                            }
+                        </style>
+                        <a href="https://wa.me/917435912528" target="_blank" class="social-icon-link social-wa">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/teiof-impex?originalSubdomain=in" target="_blank"
+                            class="social-icon-link social-li">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://facebook.com/teiof.impex" target="_blank" class="social-icon-link social-fb">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/teiof_impex/" target="_blank"
+                            class="social-icon-link social-ig">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@teiofimpex" target="_blank" class="social-icon-link social-yt">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.google.co.in/search?q=TEIOF+IMPEX&ludocid=9607118112606186426&lsig=AB86z5WNwrQbfMZ76Jh-fs1gMPhd"
+                            target="_blank" class="social-icon-link social-g">
+                            <i class="fab fa-google"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Centre: Quick Links -->
+                <div class="footer-col-quicklinks" style="text-align: center; padding-top: 10px">
+                    <h4 class="mb-8" style="
+                                font-size: 1.85rem;
+                                font-weight: 700;
+                                font-family: &quot;Poppins&quot;, sans-serif;
+                                color: #fff;
+                                letter-spacing: 1.5px;
+                            ">
+                        Quick Links
+                    </h4>
+                    <ul style="
+                                list-style: none;
+                                padding: 0;
+                                margin: 0 auto;
+                                display: inline-flex;
+                                flex-direction: column;
+                                gap: 16px;
+                                text-align: left;
+                            ">
+                        <li>
+                            <a href="index.html" style="
+                                        color: #d1d5db;
+                                        text-decoration: none;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 8px;
+                                        font-size: 17px;
+                                        font-weight: 500;
+                                        transition: all 0.3s;
+                                        padding: 4px 0;
+                                    " onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280"></i>
+                                Home</a>
+                        </li>
+                        <li>
+                            <a href="about.html" style="
+                                        color: #d1d5db;
+                                        text-decoration: none;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 8px;
+                                        font-size: 17px;
+                                        font-weight: 500;
+                                        transition: all 0.3s;
+                                        padding: 4px 0;
+                                    " onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280"></i>
+                                About Us</a>
+                        </li>
+                        <li>
+                            <a href="product.html" style="
+                                        color: #d1d5db;
+                                        text-decoration: none;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 8px;
+                                        font-size: 17px;
+                                        font-weight: 500;
+                                        transition: all 0.3s;
+                                        padding: 4px 0;
+                                    " onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280"></i>
+                                Products</a>
+                        </li>
+                        <li>
+                            <a href="gallery.html" style="
+                                        color: #d1d5db;
+                                        text-decoration: none;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 8px;
+                                        font-size: 17px;
+                                        font-weight: 500;
+                                        transition: all 0.3s;
+                                        padding: 4px 0;
+                                    " onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280"></i>
+                                Gallery</a>
+                        </li>
+                        <li>
+                            <a href="contact.html" style="
+                                        color: #d1d5db;
+                                        text-decoration: none;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 8px;
+                                        font-size: 17px;
+                                        font-weight: 500;
+                                        transition: all 0.3s;
+                                        padding: 4px 0;
+                                    " onmouseover="this.style.color='#fff'; this.style.paddingLeft='6px'"
+                                onmouseout="this.style.color='#d1d5db'; this.style.paddingLeft='0'"><i
+                                    class="fas fa-chevron-right" style="font-size: 11px; color: #6b7280"></i>
+                                Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right: Get In Touch -->
+                <div class="footer-col-contact md:justify-self-end" style="padding-left: 40px; padding-top: 10px">
+                    <style>
+                        .footer-contact-item {
+                            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            cursor: default;
+                            padding: 6px 0;
+                        }
+
+                        .footer-contact-item:hover {
+                            transform: translateX(6px);
+                            color: #fff !important;
+                        }
+
+                        .footer-contact-link {
+                            color: #e5e7eb;
+                            text-decoration: none;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 12px;
+                            font-size: 17px;
+                            font-weight: 500;
+                            padding: 8px 0;
+                            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                            border-bottom: 1px solid transparent;
+                        }
+
+                        .footer-contact-link:hover {
+                            color: #fff;
+                            transform: translateX(6px) scale(1.03);
+                            border-bottom-color: rgba(255, 255, 255, 0.3);
+                        }
+
+                        .footer-contact-link:active {
+                            transform: translateX(6px) scale(0.97);
+                            transition-duration: 0.1s;
+                        }
+
+                        .footer-contact-link i,
+                        .footer-contact-item i {
+                            transition: all 0.3s ease;
+                        }
+
+                        .footer-contact-link:hover i,
+                        .footer-contact-item:hover i {
+                            color: #ffffff !important;
+                            transform: scale(1.2);
+                        }
+                    </style>
+                    <h4 class="mb-8" style="
+                                font-size: 1.85rem;
+                                font-weight: 700;
+                                font-family: &quot;Poppins&quot;, sans-serif;
+                                color: #fff;
+                                letter-spacing: 1.5px;
+                            ">
+                        Get In Touch
+                    </h4>
+                    <div class="mb-6 footer-contact-item" style="
+                                font-size: 17px;
+                                line-height: 1.8;
+                                padding: 2px 0;
+                                display: flex;
+                                align-items: flex-start;
+                                gap: 14px;
+                                color: #d1d5db;
+                            ">
+                        <i class="fas fa-map-marker-alt" style="
+                                    font-size: 18px;
+                                    color: #ffffff;
+                                    margin-top: 6px;
+                                "></i>
+                        <span>
+                            Sardar Patel Arcade, Canal Road<br />
+                            Morbi - Gujarat - India<br />
+                            ZIP Code 363641
+                        </span>
+                    </div>
+                    <p class="mb-3">
+                        <a href="tel:+917435912528" class="footer-contact-link">
+                            <i class="fas fa-phone-alt" style="
+                                        font-size: 18px;
+                                        color: #ffffff;
+                                        display: inline-block;
+                                        transform: scaleX(-1);
+                                    "></i>+91 74359 12528
+                        </a>
+                    </p>
+                    <p class="mb-1">
+                        <a href="mailto:export@teiof.com" class="footer-contact-link">
+                            <i class="fas fa-envelope" style="font-size: 18px; color: #ffffff"></i>export@teiof.com
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Copyright Footer -->
+    <footer class="footer-copyright-section" style="
+                background-color: #000000;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 2rem 0;
+                text-align: center;
+                position: relative;
+                z-index: 10;
+            ">
+        <div class="container mx-auto px-4" style="max-width: 1200px">
+            <p style="
+                        font-size: 15px;
+                        color: #9ca3af;
+                        margin: 0;
+                        font-family: &quot;Poppins&quot;, sans-serif;
+                        font-weight: 500;
+                    ">
+                © 2024
+                <strong style="
+                            color: #d1d5db;
+                            font-family: &quot;Poppins&quot;, sans-serif;
+                            font-weight: 700;
+                        ">TEIOF IMPEX</strong>
+                All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div id="contact-fab">
+        <div id="fab-menu">
+            <a href="mailto:export@teiof.com" class="fab-link-item">
+                <span class="icon" style="
+                            background: linear-gradient(
+                                135deg,
+                                #0052ff,
+                                #003ecc
+                            );
+                        "><i class="fas fa-envelope"></i></span>
+                Email Us
+            </a>
+            <a href="https://wa.me/917435912528" target="_blank" class="fab-link-item">
+                <span class="icon" style="
+                            background: linear-gradient(
+                                135deg,
+                                #25d366,
+                                #128c7e
+                            );
+                        "><i class="fab fa-whatsapp"></i></span>
+                WhatsApp
+            </a>
+        </div>
+        <button id="fab-toggle">
+            <i class="fas fa-comment-dots" id="fab-icon" style="transition: transform 0.3s ease"></i>
+            <span class="pulse-ring"></span>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ===== LOADER =====
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("loader");
+            if (loader) {
+                const progress = document.querySelector(".loader-progress");
+                if (progress) progress.style.width = "100%";
+                setTimeout(() => {
+                    loader.style.opacity = "0";
+                    setTimeout(() => loader.remove(), 500);
+                }, 500);
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // ===== FAB TOGGLE =====
+            const fab = document.getElementById("contact-fab");
+            const fabBtn = document.getElementById("fab-toggle");
+            let fabOpen = false;
+
+            if (fabBtn && fab) {
+                fabBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    fabOpen = !fabOpen;
+                    fab.classList.toggle("active", fabOpen);
+                });
+
+                document.addEventListener("click", (e) => {
+                    if (fabOpen && !fab.contains(e.target)) {
+                        fabOpen = false;
+                        fab.classList.remove("active");
+                    }
+                });
+            }
+
+            // ===== FAB ENTRANCE ANIMATION =====
+            if (fab) {
+                fab.style.opacity = "0";
+                fab.style.transform = "translateY(30px) scale(0.8)";
+                fab.style.transition =
+                    "all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)";
+                setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        fab.style.opacity = "1";
+                        fab.style.transform = "translateY(0) scale(1)";
+                    });
+                }, 100);
+            }
+
+            // ===== GSAP ANIMATIONS =====
+            if (typeof gsap !== "undefined") {
+                gsap.registerPlugin(ScrollTrigger);
+
+                gsap.utils.toArray(".gs-reveal").forEach((elem) => {
+                    gsap.fromTo(
+                        elem,
+                        { y: 30, opacity: 0 },
+                        {
+                            scrollTrigger: {
+                                trigger: elem,
+                                start: "top 85%",
+                                once: true,
+                            },
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.8,
+                            ease: "power3.out",
+                        },
+                    );
+                });
+
+                // Contact cards stagger
+                const cinfoCards = document.querySelectorAll(".cinfo-card");
+                if (cinfoCards.length) {
+                    gsap.to(cinfoCards, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.7,
+                        stagger: 0.12,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: ".contact-cards-grid",
+                            start: "top 80%",
+                            once: true,
+                        },
+                    });
+                }
+
+                // Map section animation
+                const mapWrapper = document.querySelector(".map-wrapper");
+                if (mapWrapper) {
+                    gsap.to(mapWrapper, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.9,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: mapWrapper,
+                            start: "top 80%",
+                            once: true,
+                        },
+                    });
+                }
+
+                // Form section animation
+                const formWrapper = document.querySelector(".form-wrapper");
+                if (formWrapper) {
+                    gsap.to(formWrapper, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.9,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: formWrapper,
+                            start: "top 80%",
+                            once: true,
+                        },
+                    });
+                }
+
+                // Form header children stagger
+                const formHeader = document.querySelector(".form-header");
+                if (formHeader) {
+                    gsap.fromTo(
+                        formHeader.children,
+                        { y: 20, opacity: 0 },
+                        {
+                            scrollTrigger: {
+                                trigger: formHeader,
+                                start: "top 85%",
+                                once: true,
+                            },
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.6,
+                            stagger: 0.1,
+                            ease: "power3.out",
+                        },
+                    );
+                }
+
+                // Magnetic FAB effect
+                if (fabBtn) {
+                    fabBtn.addEventListener("mousemove", (e) => {
+                        const rect = fabBtn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        gsap.to(fabBtn, {
+                            x: x * 0.35,
+                            y: y * 0.35,
+                            duration: 0.3,
+                            ease: "power2.out",
+                        });
+                    });
+                    fabBtn.addEventListener("mouseleave", () => {
+                        gsap.to(fabBtn, {
+                            x: 0,
+                            y: 0,
+                            duration: 0.5,
+                            ease: "elastic.out(1, 0.3)",
+                        });
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
